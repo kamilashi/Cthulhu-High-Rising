@@ -986,7 +986,7 @@ Transform:
   m_GameObject: {fileID: 1154896165}
   serializedVersion: 2
   m_LocalRotation: {x: -0.6390586, y: -0, z: -0, w: 0.7691581}
-  m_LocalPosition: {x: 1.61, y: 0.18000007, z: -1.25}
+  m_LocalPosition: {x: 1.61, y: 0, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1190,14 +1190,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1550454814}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0.7294463, z: -0, w: -0.6840381}
-  m_LocalPosition: {x: -4.0077977, y: -5.653504, z: -1.584133}
+  m_LocalRotation: {x: -0, y: -0.18309326, z: 0, w: -0.9830956}
+  m_LocalPosition: {x: -4.0077977, y: 0, z: -1.584133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1154896169}
   m_Father: {fileID: 1976464923}
-  m_LocalEulerAnglesHint: {x: 0, y: -453.68, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 381.1, z: 0}
 --- !u!1 &1618970394
 GameObject:
   m_ObjectHideFlags: 0
@@ -1517,6 +1517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1976464923}
+  - component: {fileID: 1976464924}
   m_Layer: 0
   m_Name: Perspective Camera Setup
   m_TagString: Untagged
@@ -1533,7 +1534,7 @@ Transform:
   m_GameObject: {fileID: 1976464922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.0077977, y: 5.51, z: 1.584133}
+  m_LocalPosition: {x: 4.0077977, y: 0, z: 1.584133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1541,6 +1542,26 @@ Transform:
   - {fileID: 1550454815}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1976464924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1976464922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515da75e03abcda438f7c264495548d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraHeight: {fileID: 1976464923}
+  cameraRotation: {fileID: 1550454815}
+  maxHeight: 20
+  mouseDeltaModifier: {x: 0.3, y: 0.02}
+  click: 0
+  mouseInputLast: {x: 0, y: 0, z: 0}
+  mouseInputCurrent: {x: 0, y: 0, z: 0}
+  mouseDelta: {x: 0, y: 0, z: 0}
 --- !u!1001 &2035028705
 PrefabInstance:
   m_ObjectHideFlags: 0
