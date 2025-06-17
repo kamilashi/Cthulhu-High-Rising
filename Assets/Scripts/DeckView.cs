@@ -65,7 +65,20 @@ public class DeckView : MonoBehaviour
 
             cardObject.nameText.text = cards[i].type.ToString();
             cardObject.descriptionText.text = GetDescriptionText(cards[i]);
+
+            cardObjects.Add(cardObject);
         }
+    }
+
+    public void DespawnCard(CardObject cardObject)
+    {
+        int index = cardObjects.IndexOf(cardObject);
+
+        // might need special handling since some cards need to stay around for a second action,
+        // or destroying the card might have to be delegated to the deck logic
+
+        DespawnCard(index);
+        cardObjects.Remove(cardObject);
     }
 
     public void DespawnCards()
@@ -126,19 +139,6 @@ public class DeckView : MonoBehaviour
         }
 
         return text;
-    }
-
-    public void OnCardClicked(CardObject cardObject)
-    {
-        int index = cardObjects.IndexOf(cardObject);
-
-        gameManager.deckSystem.PlayCard(cardObject.card);
-
-        // might need special handling since some cards need to stay around for a second action,
-        // or destroying the card might have to be delegated to the deck logic
-
-        DespawnCard(index);
-        cardObjects.Remove(cardObject);
     }
 
     float GetDeltaYToScreenBottom(UnityEngine.Vector3 objectPos, UnityEngine.Vector3 currentCamPos, float vertFOV)

@@ -19,9 +19,4 @@ public class CardObject : MonoBehaviour
     {
         // the code from deckView needs to be moved here
     }
-
-    public void OnCardClicked()
-    {
-        deckView.OnCardClicked(this);
-    }
 }

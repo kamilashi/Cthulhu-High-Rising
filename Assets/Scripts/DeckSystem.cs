@@ -30,9 +30,10 @@ public class DeckSystem : MonoBehaviour
         
     }
 
-    public void PlayCard(Card card)
+    public void DisCardToGraveyard(Card card)
     {
-
+        graveyard.Add(card);
+        hand.Remove(card);
     }
 
     public void Initialize(DeckData deckData)

@@ -15,10 +15,12 @@ public class GameManager : MonoBehaviour
     [Header("Setup")]
 
     public GameSettingsSO gameSettingsSO;
+    
     public BlockTower blockTower;
     public DeckSystem deckSystem;
     public DeckView deckVisualizer;
     public Camera mainCamera;
+    public WorldObjectSelectSystem objectSelectSystem;
 
 
     [Header("Debug View")]
@@ -60,4 +62,29 @@ public class GameManager : MonoBehaviour
         deckVisualizer.DespawnCards();
         deckSystem.DiscardHand();
     }
+
+    public void OnCardSelected(CardObject cardObject)
+    {
+        cardObject.card.Play();
+
+        //potential enter to a selection mode
+
+        // only applies to block cards:
+        deckSystem.DisCardToGraveyard(cardObject.card);
+        deckVisualizer.DespawnCard(cardObject);
+    }
+
+/*
+    public void OnBlockCardSelected(BlockCard card)
+    {
+
+    }
+    public void OnEquipmentCardSelected(Equipment card)
+    {
+
+    }
+    public void OnModifierCardSelected<MT>(ModifierCard<MT> card)
+    {
+
+    }*/
 }
