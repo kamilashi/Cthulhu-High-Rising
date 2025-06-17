@@ -20,5 +20,11 @@ MonoBehaviour:
       count: 3
     - cardSO: {fileID: 11400000, guid: 975d16f446d74b24c974ff84eab0c030, type: 2}
       count: 4
-    equipmentCardCounts: []
-    modifierCardCounts: []
+    equipmentCardCounts:
+    - cardSO: {fileID: 11400000, guid: 4e94b5d589f83984cbd01b4392f9f15b, type: 2}
+      count: 1
+    modifierCardCounts:
+    - cardSO: {fileID: 11400000, guid: cdc1d464ab1e1b843aaf3a115ea26ecb, type: 2}
+      count: 1
+    - cardSO: {fileID: 11400000, guid: 03de0798d1e84db45bc14a9ac6205ea4, type: 2}
+      count: 1

@@ -17,7 +17,8 @@ public enum CardType
 public enum ModifierTarget
 {
     Block,
-    Equipment
+    Equipment,
+    None
 }
 
 public abstract class Card
@@ -29,6 +30,7 @@ public abstract class Card
     {
 
     }
+    public virtual ModifierTarget GetModifier() { return ModifierTarget.None; } // feels hacky, so far is only used in the deckViewer in a WIP function, so might have to be cleaned up
 }
 
 public class BlockCard : Card
@@ -44,6 +46,7 @@ public class BlockCard : Card
     {
         gameManager.blockTower.CreateBlock(blockSO);
     }
+
 }
 public class EquipmentCard : Card
 {
@@ -54,8 +57,6 @@ public class EquipmentCard : Card
     }
     public override void Play()
     {
-        throw new System.NotImplementedException();
-
         //request block select
     }
     public void OnTargetSelected(Block block)
@@ -81,4 +82,5 @@ public class ModifierCard<T> : Card
     {
 
     }
+    public override ModifierTarget GetModifier() { return target; }
 }

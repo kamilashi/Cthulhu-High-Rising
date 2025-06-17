@@ -7,7 +7,7 @@ public class DeckView : MonoBehaviour
 {
     [Header("Setup")]
     public GameManager gameManager;
-    public GameObject cardObjectPrefab;
+    public GameObject cardObjectPrefab; // Later might be different prefabs
     public float distanceFromCamera;
 
     [Header("Auto Setup")]
@@ -62,6 +62,9 @@ public class DeckView : MonoBehaviour
             cardObject.card = cards[i];
             cardObject.deckView = this;
             cardObject.transform.position = position;
+
+            cardObject.nameText.text = cards[i].type.ToString();
+            cardObject.descriptionText.text = GetDescriptionText(cards[i]);
         }
     }
 
@@ -83,6 +86,46 @@ public class DeckView : MonoBehaviour
 #else
             Destroy(cardObjects[index].gameObject);
 #endif
+    }
+
+    // this is temporary and needs to be replaced with something proper
+    public string GetDescriptionText(Card card)
+    {
+        string text = "";
+
+        switch(card.type)
+        {
+            case CardType.Block:
+                {
+                    BlockCard cardCard = card as BlockCard;
+                    text += "Will create a " + cardCard.blockSO.name.ToString();
+                    text += "\nHere should be stats";
+                    break; 
+                }
+            case CardType.Equipment:
+                {
+                    text += "Choose a block to equip with ???. \n";
+                    EquipmentCard cardCard = card as EquipmentCard;
+                    text += "Here should be stats";
+                    break; 
+                }
+            case CardType.Modifier:
+                {
+                    if(card.GetModifier() == ModifierTarget.Block)
+                    {
+                        ModifierCard<Block> cardCard = card as ModifierCard<Block>;
+                        text += "Choose a block to modify with ??? \n";
+                    }
+                    else
+                    {
+                        ModifierCard<Block> cardCard = card as ModifierCard<Block>;
+                        text += "Choose an equipment to modify with ??? \n";
+                    }
+                    break; 
+                }
+        }
+
+        return text;
     }
 
     public void OnCardClicked(CardObject cardObject)
