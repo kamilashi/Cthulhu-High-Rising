@@ -26,7 +26,7 @@ public class CameraControl : MonoBehaviour
         click = Input.GetMouseButton(1);
         float active = click ? 1 : 0;
         
-        float deltaHeightChange = Input.mouseScrollDelta.y + mouseDelta.y * active * mouseDeltaModifier.y;
+        float deltaHeightChange = Input.mouseScrollDelta.y * 3f + mouseDelta.y * active * mouseDeltaModifier.y;
 
         heightVelocity = new Vector3(
             Mathf.Lerp(heightVelocity.x, deltaHeightChange, heightVelocity.z * Time.deltaTime), 
