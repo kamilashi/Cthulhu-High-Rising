@@ -42,25 +42,31 @@ public class CanonController : MonoBehaviour
         {
             if (bestTarget == null)
             {
+                StopCoroutine(shooting);
+                isShooting = false;
                 findClosestEnemy();
             }
+            else if(bestTarget != null)
+            { 
 
-            Vector3 enemyDirection = bestTarget.transform.position - transform.position;
-            CanonBody.transform.up = enemyDirection;
+                Vector3 enemyDirection = bestTarget.transform.position - transform.position;
+                CanonBody.transform.up = enemyDirection;
 
-            if (!isShooting)
-            {
-                isShooting = true;
-                StartCoroutine(shooting);
-            }
+                if (!isShooting)
+                {
+                    isShooting = true;
+                    StartCoroutine(shooting);
+                }
+            }    
+
         }
-        else 
-        { 
-
-            StopCoroutine(shooting );
-            return; 
+        else
+        {
+            bestTarget = null;
+            StopCoroutine(shooting);
+            isShooting = false;
         }
-       
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -80,7 +86,9 @@ public class CanonController : MonoBehaviour
         enemyController enemy = other.GetComponent<enemyController>();
         if (enemy != null)
         {
-            Debug.Log("enemy in range");
+            Debug.Log("enemy out of range");
+            
+          
             enemies.Remove(other.transform);
         }
     }
