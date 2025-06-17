@@ -40,7 +40,10 @@ public class CanonController : MonoBehaviour
 
         if (enemies.Count > 0)
         {
-            findClosestEnemy();
+            if (bestTarget == null)
+            {
+                findClosestEnemy();
+            }
 
             Vector3 enemyDirection = bestTarget.transform.position - transform.position;
             CanonBody.transform.up = enemyDirection;
@@ -104,8 +107,14 @@ public class CanonController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1/AttackSpeed);
-            enemies.Remove(bestTarget.transform);
-            Destroy(bestTarget.gameObject);
+
+            enemyHealth enemyhealth = bestTarget.GetComponent<enemyHealth>();
+            enemyhealth.getHit(damage);
+            if (enemyhealth.currentHealth == 0)
+            {
+                enemies.Remove(bestTarget.transform);
+            }
+           // Destroy(bestTarget.gameObject);
         }
     }
 
