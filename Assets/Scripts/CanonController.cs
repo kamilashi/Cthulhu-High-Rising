@@ -9,13 +9,14 @@ public class CanonController : MonoBehaviour
 {
 
     SphereCollider SphereCollider;
-    public Transform[] enemies2;
     public List<Transform> enemies;
     [SerializeField] private GameObject closestEnemy;
     [SerializeField] private LayerMask enemyLayer;
     [SerializeField] private float AttackRange;
     [SerializeField] private float AttackSpeed;
     [SerializeField] private int damage;
+
+    public Transform CanonBody;
     bool enemyInRange;
     public GameObject bestTarget;
     private int arrayLength = 1;
@@ -41,6 +42,9 @@ public class CanonController : MonoBehaviour
         {
             findClosestEnemy();
 
+            Vector3 enemyDirection = bestTarget.transform.position - transform.position;
+            CanonBody.transform.up = enemyDirection;
+
             if (!isShooting)
             {
                 isShooting = true;
@@ -49,6 +53,7 @@ public class CanonController : MonoBehaviour
         }
         else 
         { 
+
             StopCoroutine(shooting );
             return; 
         }
