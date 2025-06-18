@@ -58,11 +58,14 @@ public class DeckView : MonoBehaviour
             position += mainCamera.transform.right * horizontalOffset;
 
             cardObject.card = cards[i];
+            cardObject.gameManager = gameManager;
             cardObject.deckView = this;
             cardObject.transform.position = position;
 
             cardObject.nameText.text = cards[i].type.ToString();
             cardObject.descriptionText.text = GetDescriptionText(cards[i]);
+
+            cardObject.Initialize();
 
             cardObjects.Add(cardObject);
         }
@@ -71,9 +74,6 @@ public class DeckView : MonoBehaviour
     public void DespawnCard(CardObject cardObject)
     {
         int index = cardObjects.IndexOf(cardObject);
-
-        // might need special handling since some cards need to stay around for a second action,
-        // or destroying the card might have to be delegated to the deck logic
 
         DespawnCard(index);
         cardObjects.Remove(cardObject);
@@ -115,8 +115,8 @@ public class DeckView : MonoBehaviour
                 }
             case CardType.Equipment:
                 {
-                    text += "Choose a block to equip with ???. \n";
                     EquipmentCard cardCard = card as EquipmentCard;
+                    text += "Choose a block to equip with a " + cardCard.equipmentSO.name + "\n";
                     text += "Here should be stats";
                     break; 
                 }

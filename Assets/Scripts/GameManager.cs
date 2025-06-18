@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public enum GamePhase
 {
@@ -9,9 +11,36 @@ public enum GamePhase
     Combat
 }
 
+public enum Selectables
+{
+    None,
+    Card,
+    Block,
+    Equipment
+}
+
+[Serializable]
+public class ModifiableData
+{
+    public float BaseValue;
+
+    public float GetValue() // to be read from in runtime
+    {
+        return BaseValue;
+    }
+}
+public static class EventManager
+{
+    public static UnityEvent<CardObject> onCardSelectedEvent = new UnityEvent<CardObject>();
+    public static UnityEvent<Block> onBlockSelectedEvent = new UnityEvent<Block>();
+    public static UnityEvent<Equipment> onEquipmentSelectedEvent = new UnityEvent<Equipment>();
+
+    public static UnityEvent<Selectables, GameObject> onObjectSelectedEvent = new UnityEvent<Selectables, GameObject>();
+}
+    
+
 public class GameManager : MonoBehaviour
 {
-
     [Header("Setup")]
 
     public GameSettingsSO gameSettingsSO;
@@ -25,12 +54,28 @@ public class GameManager : MonoBehaviour
 
     [Header("Debug View")]
     public GamePhase gamePhase;
+    public Selectables selectionMode;
+
+    
+
+    //public static GameManager Instance { get; private set; }
 
     void Awake()
     {
+/*
+        if (Instance != null && Instance != this)
+        {
+            Debug.LogAssertion("There should be only one instance of the GameManager!");
+            Destroy(gameObject); 
+            return;
+        }*/
+
         deckSystem.gameManager = this;
 
         InitializeDeck();
+
+        gamePhase = GamePhase.Draw;
+        selectionMode = Selectables.None;
     }
 
     void Start()
@@ -38,10 +83,14 @@ public class GameManager : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        // process game modes here
+
+        if(deckSystem.hand.Count == 0)
+        {
+            ResetSelectionMode();
+        }
     }
 
     void InitializeDeck()
@@ -54,6 +103,8 @@ public class GameManager : MonoBehaviour
     {
         deckSystem.DrawHand();
         deckVisualizer.SpawnCards(deckSystem.hand);
+
+        RequestSelectionMode(Selectables.Card);
     }
 
     [ContextMenu("DiscardHand")]
@@ -63,28 +114,58 @@ public class GameManager : MonoBehaviour
         deckSystem.DiscardHand();
     }
 
+    public bool TryPlaceBlock(BlockSO blockSO)
+    {
+        // here can be a check for resources
+
+        blockTower.CreateBlock(blockSO);
+
+        return true;
+    }
+
+    public bool TryPlaceEquipment(Block block, EquipmentSO equipmentSO)
+    {
+        // here can be a check for resources
+
+        if (block.HasFreeEquipmentSlots()) 
+        {
+            block.CreateEquipment(equipmentSO);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void RequestSelectionMode(Selectables mode)
+    {
+        selectionMode = mode;
+    }
+    public void ResetSelectionMode()
+    {
+        selectionMode = Selectables.None;
+    }
+
     public void OnCardSelected(CardObject cardObject)
     {
         cardObject.card.Play();
 
-        //potential enter to a selection mode
-
-        // only applies to block cards:
-        deckSystem.DisCardToGraveyard(cardObject.card);
-        deckVisualizer.DespawnCard(cardObject);
+        EventManager.onCardSelectedEvent.Invoke(cardObject);
+        EventManager.onObjectSelectedEvent.Invoke(Selectables.Card, cardObject.gameObject);
     }
 
-/*
-    public void OnBlockCardSelected(BlockCard card)
+    public void OnBlockSelected(Block block)
     {
+        EventManager.onBlockSelectedEvent.Invoke(block);
+        EventManager.onObjectSelectedEvent.Invoke(Selectables.Block, block.gameObject);
 
+        RequestSelectionMode(Selectables.Card);
     }
-    public void OnEquipmentCardSelected(Equipment card)
-    {
 
+    public void OnEquipmentSelected(Equipment equipment)
+    {
+        EventManager.onEquipmentSelectedEvent.Invoke(equipment);
+        EventManager.onObjectSelectedEvent.Invoke(Selectables.Equipment, equipment.gameObject);
+
+        RequestSelectionMode(Selectables.Card);
     }
-    public void OnModifierCardSelected<MT>(ModifierCard<MT> card)
-    {
-
-    }*/
 }

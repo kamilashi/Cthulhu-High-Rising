@@ -86,7 +86,7 @@ public class DeckSystem : MonoBehaviour
     {
         EquipmentCard card = new EquipmentCard();
         card.gameManager = gameManager;
-        //card.blockSO = cardSO.blockSO;
+        card.equipmentSO = cardSO.equipmentSO;
 
         return card;
     }
@@ -94,6 +94,7 @@ public class DeckSystem : MonoBehaviour
     private ModifierCard<Block> CreateBlockModifierCard(ModifierCardSO cardSO)
     {
         ModifierCard<Block> card = new ModifierCard<Block>();
+        card.gameManager = gameManager;
         card.target = ModifierTarget.Block;
 
         return card;
@@ -101,6 +102,7 @@ public class DeckSystem : MonoBehaviour
     private ModifierCard<Equipment> CreateEquipmentModifierCard(ModifierCardSO cardSO)
     {
         ModifierCard<Equipment> card = new ModifierCard<Equipment>();
+        card.gameManager = gameManager;
         card.target = ModifierTarget.Equipment;
 
         return card;
@@ -121,6 +123,8 @@ public class DeckSystem : MonoBehaviour
             Card card = cardDeck[randomIndex];
             hand.Add(card);
             cardDeck.RemoveAt(randomIndex);
+
+            card.Reset();
         }
     }
 

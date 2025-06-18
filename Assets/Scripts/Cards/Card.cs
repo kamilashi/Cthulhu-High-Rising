@@ -25,12 +25,23 @@ public abstract class Card
 {
     public GameManager gameManager;
     public CardType type;
+    public bool shouldBeDiscarded = false;
 
-    public virtual void Play()
+    public virtual void Play() { if (shouldBeDiscarded) { return; } }
+    public virtual void RequestTargetSelection(Selectables selectionMode) { }
+    public virtual ModifierTarget GetModifier() { return ModifierTarget.None; } // feels hacky, so far is only used in the deckViewer in a WIP function, so might have to be cleaned up
+
+    public void Reset()
     {
+        shouldBeDiscarded = false;
 
     }
-    public virtual ModifierTarget GetModifier() { return ModifierTarget.None; } // feels hacky, so far is only used in the deckViewer in a WIP function, so might have to be cleaned up
+
+    public void DisposeFromHand()
+    {
+        gameManager.deckSystem.DisCardToGraveyard(this);
+        shouldBeDiscarded = true;
+    }
 }
 
 public class BlockCard : Card
@@ -44,24 +55,35 @@ public class BlockCard : Card
 
     public override void Play()
     {
-        gameManager.blockTower.CreateBlock(blockSO);
+        base.Play();
+        gameManager.TryPlaceBlock(blockSO);
+
+        DisposeFromHand();
     }
 
 }
 public class EquipmentCard : Card
 {
-    //public EquipmentSO equipmentSO;
+    public EquipmentSO equipmentSO;
+
     public EquipmentCard()
     {
         type = CardType.Equipment;
+        EventManager.onBlockSelectedEvent.AddListener(OnTargetSelected);
     }
+
     public override void Play()
     {
-        //request block select
+        base.Play();
+        gameManager.RequestSelectionMode(Selectables.Block);
     }
+
     public void OnTargetSelected(Block block)
     {
+        base.Play();
+        gameManager.TryPlaceEquipment(block, equipmentSO);
 
+        DisposeFromHand();
     }
 }
 
@@ -75,12 +97,27 @@ public class ModifierCard<T> : Card
     }
     public override void Play()
     {
-        //either request block select or equipment select
+        base.Play();
+
+        if(target == ModifierTarget.Block)
+        {
+            gameManager.RequestSelectionMode(Selectables.Block);
+        }
+        else
+        {
+            //gameManager.RequestSelectionMode(SelectionMode.Equipment);
+        }
+
+        DisposeFromHand(); // TEMP
     }
 
     public void OnTargetSelected(T target)
     {
+        base.Play();
 
+        //modify T
+
+        DisposeFromHand();
     }
     public override ModifierTarget GetModifier() { return target; }
 }

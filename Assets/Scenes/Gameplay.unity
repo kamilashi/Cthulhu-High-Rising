@@ -294,6 +294,19 @@ MonoBehaviour:
   mainCamera: {fileID: 1968858212}
   objectSelectSystem: {fileID: 727973388}
   gamePhase: 0
+  selectionMode: 0
+  onCardSelectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onBlockSelectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onEquipmentSelectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  onObjectSelectedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &727973386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,11 +357,16 @@ MonoBehaviour:
     m_Bits: 64
   blockLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   equipmentLayer:
     serializedVersion: 2
+    m_Bits: 512
+  maxRayCastDistance: 1000000
+  hoverMode: 0
+  selectableLayerMask:
+    serializedVersion: 2
     m_Bits: 0
-  maxRayCastDistance: 100
+  hoveredObject: {fileID: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

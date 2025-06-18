@@ -34,6 +34,8 @@ public class BlockTower : MonoBehaviour
         }
 
         GameObject blockGO = Instantiate<GameObject>(blockPrefab, this.transform);
+
+        // this needs to be moved into a block.Initialize function
         Block block = blockGO.GetComponent<Block>();
         MeshFilter meshFilter = blockGO.GetComponent<MeshFilter>();
         MeshRenderer meshRenderer = blockGO.GetComponent<MeshRenderer>();

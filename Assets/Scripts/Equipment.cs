@@ -1,18 +1,20 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+[Serializable]
+public class EquipmentData
+{
+    public ModifiableData Damage;
+    public ModifiableData AttackRange;
+    public ModifiableData AttackSpeed;
+}
+
 public class Equipment : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public EquipmentData equipmentData;
+    public Block blockOwner;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
