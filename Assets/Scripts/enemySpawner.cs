@@ -39,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
         foreach (GameObject enemy in spawnList)
         {
             Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRadius, spawnRadius), transform.position.y, transform.position.z + Random.Range(-spawnRadius, spawnRadius));
-            Instantiate(enemy, spawnPosition, Quaternion.identity, this.transform);
+            Instantiate(enemy, spawnPosition, Quaternion.identity);
             
         }
 

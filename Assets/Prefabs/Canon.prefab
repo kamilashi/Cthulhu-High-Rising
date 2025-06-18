@@ -511,7 +511,7 @@ MonoBehaviour:
   closestEnemy: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   AttackRange: 2
   AttackSpeed: 2
   damage: 2
