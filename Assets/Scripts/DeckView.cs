@@ -52,12 +52,12 @@ public class DeckView : MonoBehaviour
             float horizontalOffset = (cardWidth + padding) * multiplier * sign;
 
             Vector3 position = mainCamera.transform.position;
-            position.z += distanceFromCamera;
-            position.x += horizontalOffset;
+            position += mainCamera.transform.forward * distanceFromCamera;
+            position += mainCamera.transform.right * horizontalOffset;
 
-            float verticalOffset = GetDeltaYToScreenBottom(position, mainCamera.transform.position, mainCamera.fieldOfView);
+           // float verticalOffset = GetDeltaYToScreenBottom(distanceFromCamera, position, mainCamera.transform.position, mainCamera.fieldOfView);
 
-            position.y += verticalOffset; // snap the pivot to the bottom of the screen
+            //position += mainCamera.transform.up * verticalOffset; // snap the pivot to the bottom of the screen
 
             cardObject.card = cards[i];
             cardObject.deckView = this;
@@ -141,9 +141,8 @@ public class DeckView : MonoBehaviour
         return text;
     }
 
-    float GetDeltaYToScreenBottom(UnityEngine.Vector3 objectPos, UnityEngine.Vector3 currentCamPos, float vertFOV)
+    float GetDeltaYToScreenBottom(float distanceFromCamera, UnityEngine.Vector3 objectPos, UnityEngine.Vector3 currentCamPos, float vertFOV)
     {
-        float distanceFromCamera = System.Math.Abs(objectPos.z - currentCamPos.z);
         float deltaObjY = distanceFromCamera * (float)System.Math.Tan(vertFOV * 0.5 * (System.Math.PI / 180.0));
 
         float deltaObjYtoCam0 = currentCamPos.y - objectPos.y;
