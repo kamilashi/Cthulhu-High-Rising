@@ -295,18 +295,6 @@ MonoBehaviour:
   objectSelectSystem: {fileID: 727973388}
   gamePhase: 0
   selectionMode: 0
-  onCardSelectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onBlockSelectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onEquipmentSelectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  onObjectSelectedEvent:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &727973386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +324,7 @@ MonoBehaviour:
   gameManager: {fileID: 727973385}
   cardObjectPrefab: {fileID: 3052913614238606603, guid: c864e79175edd7f479174b19c02d9761,
     type: 3}
-  distanceFromCamera: 2.21
+  distanceFromCamera: 0.5
   mainCamera: {fileID: 0}
   cardObjects: []
 --- !u!114 &727973388
@@ -367,6 +355,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   hoveredObject: {fileID: 0}
+  cardLayerIdx: 0
+  blockLayerIdx: 0
+  equipmentLayerIdx: 0
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

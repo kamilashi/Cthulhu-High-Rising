@@ -35,11 +35,10 @@ public class DeckView : MonoBehaviour
     public void SpawnCards(List<Card> cards)
     {
         // assuming that cards are 1 m in width
-        const float cardWidth = 1.0f;
+        float cardWidth = cardObjectPrefab.transform.localScale.x;
 
         float projectedCardWidth = cardWidth / distanceFromCamera;
-        //float widthRange = GetHorizontalRangeAtCameraDepth(distanceFromCamera, mainCamera.fieldOfView);
-        float padding = 0.1f; //Screen.width / cards.Count - projectedCardWidth;
+        float padding = 0.1f * cardObjectPrefab.transform.localScale.x; 
         padding = 1.5f * padding;
 
         for (int i = 0; i < cards.Count; i++)

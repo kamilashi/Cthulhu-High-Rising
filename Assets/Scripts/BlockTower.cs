@@ -30,7 +30,7 @@ public class BlockTower : MonoBehaviour
         if (blocks.Count > 0) 
         {
             position = blocks[blocks.Count - 1].transform.position;
-            position.y += blocks[blocks.Count - 1].data.height;
+            position.y += blocks[blocks.Count - 1].data.height * blocks[blocks.Count - 1].transform.localScale.y;
         }
 
         GameObject blockGO = Instantiate<GameObject>(blockPrefab, this.transform);
