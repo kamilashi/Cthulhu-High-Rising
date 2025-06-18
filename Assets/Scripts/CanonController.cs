@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Pool;
 using UnityEngine.UIElements;
 
 public class CanonController : MonoBehaviour
@@ -24,6 +25,11 @@ public class CanonController : MonoBehaviour
     bool isShooting = false;
     IEnumerator shooting;
 
+    public Projectile projectilePrefab;
+    public Transform firePoint;
+
+    IObjectPool<Projectile> projectilePool;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +38,22 @@ public class CanonController : MonoBehaviour
        shooting = Shoot();
         SphereCollider = this.GetComponent<SphereCollider>();
         SphereCollider.radius = AttackRange;
+
+        projectilePool = new ObjectPool<Projectile>(
+        createFunc: () =>
+        {
+            var proj = Instantiate(projectilePrefab);
+            proj.Pool = projectilePool;
+            return proj;
+        },
+            actionOnGet: (proj) => proj.gameObject.SetActive(true),
+             actionOnRelease: (proj) => proj.gameObject.SetActive(false),
+            actionOnDestroy: (proj) => Destroy(proj.gameObject),
+            collectionCheck: false,
+            defaultCapacity: 20,
+            maxSize: 100
+        );
+
     }
 
     // Update is called once per frame
@@ -47,9 +69,14 @@ public class CanonController : MonoBehaviour
                 findClosestEnemy();
             }
             else if(bestTarget != null)
-            { 
-
+            {
                 Vector3 enemyDirection = bestTarget.transform.position - transform.position;
+                
+                //Quaternion targetRotation = Quaternion.LookRotation(enemyDirection);
+                //CanonBody.transform.up = Quaternion.RotateTowards(CanonBody.transform.up, targetRotation, Time.deltaTime);
+
+
+                //Vector3 enemyDirection = bestTarget.transform.position - transform.position;
                 CanonBody.transform.up = enemyDirection;
 
                 if (!isShooting)
@@ -99,16 +126,20 @@ public class CanonController : MonoBehaviour
     {
         foreach (var enemy in enemies)
         {
-            
-            float closestDistance = Mathf.Infinity;
-            float distanceToEnemy = (transform.position - enemy.position).magnitude;
-            if (distanceToEnemy < closestDistance)
+            if (enemy != null)
             {
-                closestDistance = distanceToEnemy;
-                bestTarget = enemy.gameObject;
+                float closestDistance = Mathf.Infinity;
+                float distanceToEnemy = (transform.position - enemy.position).magnitude;
+                if (distanceToEnemy < closestDistance)
+                {
+                    closestDistance = distanceToEnemy;
+                    bestTarget = enemy.gameObject;
+                }
             }
+           
         }
     }
+
 
     IEnumerator Shoot()
     {
@@ -116,15 +147,19 @@ public class CanonController : MonoBehaviour
         {
             yield return new WaitForSeconds(1/AttackSpeed);
 
-            enemyHealth enemyhealth = bestTarget.GetComponent<enemyHealth>();
-            enemyhealth.getHit(damage);
-            if (enemyhealth.currentHealth == 0)
-            {
-                enemies.Remove(bestTarget.transform);
-            }
-           // Destroy(bestTarget.gameObject);
+            var proj = projectilePool.Get();
+            proj.transform.position = firePoint.position;
+            proj.transform.rotation = firePoint.rotation;
+            proj.Launch(CanonBody.up, 20f);
+
+            //enemyHealth enemyhealth = bestTarget.GetComponent<enemyHealth>();
+            //enemyhealth.getHit(damage);
+            //if (enemyhealth.currentHealth == 0)
+            //{
+            //    enemies.Remove(bestTarget.transform);
+            //}
+            // Destroy(bestTarget.gameObject);
         }
     }
-
 
 }

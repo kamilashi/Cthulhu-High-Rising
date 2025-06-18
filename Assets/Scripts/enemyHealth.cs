@@ -19,7 +19,7 @@ public class enemyHealth : MonoBehaviour
         currentHealth -= Damage;
         if (currentHealth <= 0)
         {
-            Die();
+            Invoke(nameof(Die), 0.5f);
         }
     }
 

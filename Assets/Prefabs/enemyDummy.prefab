@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1dfccd741e06084dad031b71bf4d266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 50
+  movementSpeed: 100
   ClimbstartPosition: {fileID: 0}
   towerLayer:
     serializedVersion: 2
@@ -287,11 +287,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 2
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &-340240651414499387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,4 +304,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6daeaf50acce0949b31eda94677e867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 3
+  maxHealth: 7
+  currentHealth: 0
