@@ -48,6 +48,7 @@ public class BlockTower : MonoBehaviour
        
         meshRenderer.material = blockTemplate.material;
 
+        block.Initialize();
 
 
         blocks.Add(block);

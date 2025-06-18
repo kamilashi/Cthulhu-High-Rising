@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CardObject : MonoBehaviour
+public class CardObject : MonoBehaviour, IHoverable
 {
     [Header("Setup")]
     //- this will change when we have separate prefabs for different card types.
     // Once we do, each CardObject might have to handle card display info differently.
     public TextMeshPro nameText;
     public TextMeshPro descriptionText;
+    
+    public GameObject hoverOutline; // this is temporary until a better solution
 
 
     [Header("Card Animation")]
@@ -23,12 +25,14 @@ public class CardObject : MonoBehaviour
 
     [Header("Debug VIew")]
     public bool isSelected = false;
+    public bool isHovered = false;
 
     // change this to however you see fit with the new animations
     private bool animate = false;
 
     void Awake()
     {
+        hoverOutline.SetActive(false);
     }
 
     void Update()
@@ -77,5 +81,22 @@ public class CardObject : MonoBehaviour
         {
             ExitSelected();
         }
+    }
+
+   public void OnStartHover()
+    {
+        if (isHovered) { return; }
+
+        hoverOutline.SetActive(true);
+        isHovered = true;
+    }
+
+    public void OnStopHover()
+    {
+        if (!isHovered) { return; }
+
+        hoverOutline.SetActive(false);
+
+        isHovered = false;
     }
 }

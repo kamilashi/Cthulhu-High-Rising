@@ -4,6 +4,12 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using UnityEngine.Events;
 
+public interface IHoverable
+{
+    public void OnStartHover();
+    public void OnStopHover();
+}
+
 public class WorldObjectSelectSystem : MonoBehaviour
 {
     [Header("Setup")]
@@ -11,7 +17,7 @@ public class WorldObjectSelectSystem : MonoBehaviour
     public LayerMask cardLayer;
     public LayerMask blockLayer;
     public LayerMask equipmentLayer;
-    public float maxRayCastDistance = 100.0f;
+    //public float maxRayCastDistance = 100.0f;
 
     [Header("Debug View")]
     public Selectables hoverMode;
@@ -41,12 +47,12 @@ public class WorldObjectSelectSystem : MonoBehaviour
         ProcessSelection();
     }
 
+    // might turn into templated fucntions as well
     private void OnCardSelect(GameObject selected)
     {
         CardObject cardObject = selected.GetComponent<CardObject>();
         gameManager.OnCardSelected(cardObject);
     }
-
     private void OnBlockSelect(GameObject selected)
     {
         Block blockObject = selected.GetComponent<Block>();
@@ -57,8 +63,15 @@ public class WorldObjectSelectSystem : MonoBehaviour
         // todo
     }
 
-    private void OnCardHover(GameObject hovered)
+    private void OnObjectHover<T>(GameObject hovered) where T : IHoverable
     {
+        T hoveredObject = hovered.GetComponent<T>();
+        hoveredObject.OnStartHover();
+    }
+    private void OnObjectStopHover<T>(GameObject hovered) where T : IHoverable
+    {
+        T hoveredObject = hovered.GetComponent<T>();
+        hoveredObject.OnStopHover();
     }
 
     private bool ProcessSelection() // needs to be called after processHovering
@@ -99,7 +112,7 @@ public class WorldObjectSelectSystem : MonoBehaviour
                     if (gameManager.selectionMode == Selectables.Equipment)
                     {
                         receivedSelection = true;
-                        OnEquipmentSelect(hoveredObject);
+                        // OnSelectableSelect<Equipment>(hoveredObject);
                     }
                     break;
                 }
@@ -115,27 +128,64 @@ public class WorldObjectSelectSystem : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, float.MaxValue, selectableLayerMask))
         {
+            if(hoveredObject != null && hit.transform.gameObject != hoveredObject)
+            {
+                ProcessStopHover(hoverMode);
+            }
+
             int layerIndex = hit.transform.gameObject.layer;
             if (layerIndex == cardLayerIdx)
             {
                 hoverMode = Selectables.Card;
+                OnObjectHover<CardObject>(hit.transform.gameObject);
             }
             else if (layerIndex == blockLayerIdx)
             {
                 hoverMode = Selectables.Block;
+                OnObjectHover<Block>(hit.transform.gameObject);
             }
             else if (layerIndex == equipmentLayerIdx)
             {
                 hoverMode = Selectables.Equipment;
+                OnObjectHover<Equipment>(hit.transform.gameObject);
             }
 
             hoveredObject = hit.transform.gameObject;
         }
         else
         {
+            if(hoveredObject!=null)
+            {
+                ProcessStopHover(hoverMode);
+            }
+
             hoverMode = Selectables.None;
             hoveredObject = null;
         } 
+    }
+
+    private void ProcessStopHover(Selectables mode)
+    {
+        switch (mode)
+        {
+            case Selectables.Card:
+                {
+                    OnObjectStopHover<CardObject>(hoveredObject);
+                    break;
+                }
+            case Selectables.Block:
+                {
+                    OnObjectStopHover<Block>(hoveredObject);
+                    break;
+                }
+            case Selectables.Equipment:
+                {
+                    OnObjectStopHover<Equipment>(hoveredObject);
+                    break;
+                }
+            case Selectables.None:
+                break;
+        }
     }
 
     int GetSingleLayerIndex(LayerMask mask)
