@@ -98,7 +98,7 @@ public class CanonController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        enemyController enemy = other.GetComponent<enemyController>();
+        EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null) 
         {
             Debug.Log("enemy in range");
@@ -110,7 +110,7 @@ public class CanonController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        enemyController enemy = other.GetComponent<enemyController>();
+        EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null)
         {
             Debug.Log("enemy out of range");

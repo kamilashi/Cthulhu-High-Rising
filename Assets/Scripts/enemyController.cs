@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using static UnityEngine.GraphicsBuffer;
 
-public class enemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     [SerializeField] private float movementSpeed;
     [SerializeField] private Transform ClimbstartPosition;
