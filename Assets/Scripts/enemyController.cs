@@ -32,7 +32,7 @@ public class enemyController : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         reachedTower = Physics.Raycast(transform.position, towerDirection, 0.2f, towerLayer);
 
