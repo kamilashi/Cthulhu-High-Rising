@@ -36,7 +36,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        enemyHealth enemy = other.GetComponent<enemyHealth>();
+        EnemyHealth enemy = other.GetComponent<EnemyHealth>();
         if (enemy != null)
         {
             Debug.Log("enemy in range");

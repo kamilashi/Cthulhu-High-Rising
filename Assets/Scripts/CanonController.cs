@@ -38,21 +38,6 @@ public class CanonController : MonoBehaviour
         SphereCollider = this.GetComponent<SphereCollider>();
         SphereCollider.radius = AttackRange;
 
-        //projectilePool = new ObjectPool<Projectile>(
-        //createFunc: () =>
-        //{
-        //    var proj = Instantiate(projectilePrefab);
-        //    proj.Pool = projectilePool;
-        //    return proj;
-        //},
-        //    actionOnGet: (proj) => proj.gameObject.SetActive(true),
-        //     actionOnRelease: (proj) => proj.gameObject.SetActive(false),
-        //    actionOnDestroy: (proj) => Destroy(proj.gameObject),
-        //    collectionCheck: false,
-        //    defaultCapacity: 20,
-        //    maxSize: 100
-        //);
-
     }
 
     // Update is called once per frame
@@ -70,12 +55,7 @@ public class CanonController : MonoBehaviour
             else if(bestTarget != null)
             {
                 Vector3 enemyDirection = bestTarget.transform.position - transform.position;
-                
-                //Quaternion targetRotation = Quaternion.LookRotation(enemyDirection);
-                //CanonBody.transform.up = Quaternion.RotateTowards(CanonBody.transform.up, targetRotation, Time.deltaTime);
 
-
-                //Vector3 enemyDirection = bestTarget.transform.position - transform.position;
                 CanonBody.transform.up = enemyDirection;
 
                 if (!isShooting)
@@ -97,7 +77,7 @@ public class CanonController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        enemyController enemy = other.GetComponent<enemyController>();
+        EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null) 
         {
             Debug.Log("enemy in range");
@@ -109,7 +89,7 @@ public class CanonController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        enemyController enemy = other.GetComponent<enemyController>();
+        EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null)
         {
             Debug.Log("enemy out of range");
@@ -145,11 +125,6 @@ public class CanonController : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(1/AttackSpeed);
-
-            //var proj = projectilePool.Get();
-            //proj.transform.position = firePoint.position;
-            //proj.transform.rotation = firePoint.rotation;
-            //proj.Launch(CanonBody.up, 20f);
 
             EnemyHealth enemyhealth = bestTarget.GetComponent<EnemyHealth>();
             enemyhealth.getHit(damage);

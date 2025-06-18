@@ -78,6 +78,11 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 5856605147803569421, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 8006948284894400003, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
