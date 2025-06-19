@@ -5,12 +5,20 @@ using UnityEngine;
 public class MaterialValueAdjust : MonoBehaviour
 {
     public List<MeshRenderer> meshRenderer;
+    public List<SkinnedMeshRenderer> skinnedMeshRenderer;
     public List<Material> materials;
     public Vector3 dissolveValue = new Vector3(1, 0, 0.5f); // current value, target value, timeFactor;
 
     void Start()
     {
         foreach(MeshRenderer mr in meshRenderer)
+        {
+            foreach(Material mat in mr.materials)
+            {
+                materials.Add(mat);
+            }
+        }
+        foreach(SkinnedMeshRenderer mr in skinnedMeshRenderer)
         {
             foreach(Material mat in mr.materials)
             {

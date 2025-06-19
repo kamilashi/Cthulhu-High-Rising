@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 6f740985c43afb64994a2d282c20210a
+guid: 9253bc7013454bc4586febf5252b2c72
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: slow_field
-    second: {fileID: 2100000, guid: ac1beb04669002443849b351a025bd5a, type: 2}
+      name: doc_tower_block_01
+    second: {fileID: 2100000, guid: 06fba226b1a7fed4cbe6f0fdb985abcc, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: slow_tower_block_01
-    second: {fileID: 2100000, guid: 06fba226b1a7fed4cbe6f0fdb985abcc, type: 2}
+      name: doc_tower_block_light_planes_01
+    second: {fileID: 2100000, guid: 729a398c4eaf57147943e621f0d472ec, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
