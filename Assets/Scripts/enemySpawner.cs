@@ -20,6 +20,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float spawnRadius = 5f;
     [SerializeField] float spawnInterval = 1f;
 
+
+    int activeEnemies = 0;
     bool isActive = false;
     Coroutine spawnRoutine;
 
@@ -45,7 +47,7 @@ public class EnemySpawner : MonoBehaviour
                     enemy.Pool = localData.pool;
                     return enemy;
                 },
-                actionOnGet: enemy => { },
+                actionOnGet: enemy => enemy.gameObject.SetActive(true),
                 actionOnRelease: enemy => enemy.gameObject.SetActive(false),
                 actionOnDestroy: enemy => Destroy(enemy.gameObject),
                 collectionCheck: false,
@@ -86,7 +88,6 @@ public class EnemySpawner : MonoBehaviour
 
                 var enemy = enemyData.pool.Get();
                 SpawnEnemy(enemy);
-                enemy.gameObject.SetActive(true);
                 Debug.Log($"Spawned {enemyData.enemyPrefab.name}");
             }
         }
@@ -101,6 +102,7 @@ public class EnemySpawner : MonoBehaviour
         );
 
         enemy.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
+        RegisterEnemy(enemy);
     }
 
     void Update()
@@ -110,4 +112,23 @@ public class EnemySpawner : MonoBehaviour
             SpawnEnemy(enemyTypes[0].pool.Get());
         }
     }
+
+    public void RegisterEnemy(EnemyHealth enemy)
+    {
+        activeEnemies++;
+        enemy.OnDeath += HandleEnemyDeath;
+    }
+
+    void HandleEnemyDeath(EnemyHealth enemy)
+    {
+        activeEnemies--;
+        enemy.OnDeath -= HandleEnemyDeath;
+
+        if (activeEnemies <= 0)
+        {
+            Debug.Log("All enemies defeated!");
+            EventManager.onAllEnemiesDefeatedEvent.Invoke();
+        }
+    }
+
 }

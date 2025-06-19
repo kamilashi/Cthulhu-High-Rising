@@ -11,6 +11,13 @@ public enum GamePhase
     Combat
 }
 
+//MS: We need a BattleManager
+public enum CombatResult
+{
+    Lost,
+    Won
+}
+
 public static class EventManager
 {
     public static UnityEvent<CardObject> onCardSelectedEvent = new UnityEvent<CardObject>();
@@ -20,6 +27,8 @@ public static class EventManager
     public static UnityEvent<Selectables, GameObject> onObjectSelectedEvent = new UnityEvent<Selectables, GameObject>(); // not used really
 
     public static UnityEvent<GamePhase> onGamePhaseChangedEvent = new UnityEvent<GamePhase>();
+
+    public static UnityEvent onAllEnemiesDefeatedEvent = new UnityEvent();
 }
     
 
@@ -38,11 +47,21 @@ public class GameManager : MonoBehaviour
 
     [Header("Debug View")]
     public GamePhase gamePhase;
+    public CombatResult? combatResult;
     public Selectables selectionMode;
 
-    
-
     //public static GameManager Instance { get; private set; }
+
+
+    void OnEnable()
+    {
+        EventManager.onAllEnemiesDefeatedEvent.AddListener(OnCombatVictory);
+    }
+
+    void OnDisable()
+    {
+        EventManager.onAllEnemiesDefeatedEvent.RemoveListener(OnCombatVictory);
+    }
 
     void Awake()
     {
@@ -85,6 +104,11 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GamePhase.Combat:
+                if(combatResult != null)
+                {
+                    gamePhase = GamePhase.Draw;
+                    combatResult = null;
+                }
                 break;
         }
 
@@ -174,5 +198,11 @@ public class GameManager : MonoBehaviour
         EventManager.onObjectSelectedEvent.Invoke(Selectables.Equipment, equipment.gameObject);
 
         RequestSelectionMode(Selectables.Card);
+    }
+
+    void OnCombatVictory()
+    {
+        Debug.Log("Combat ended – all enemies defeated!");
+        combatResult = CombatResult.Won;
     }
 }
