@@ -10,12 +10,15 @@ public class EnemySpawner : MonoBehaviour
     [Header("Enemy option 1")]
     [SerializeField] private EnemyHealth enemyOption1;
     [SerializeField] private int spawnCount1;
+    private int Enemy1Count = 0;
     [Header("Enemy option 2")]
     [SerializeField] private EnemyHealth enemyOption2;
     [SerializeField] private int spawnCount2;
+    private int Enemy2Count = 0;
     [Header("Enemy option 3")]
     [SerializeField] private EnemyHealth enemyOption3;  
-    [SerializeField] private int spawnCount3; 
+    [SerializeField] private int spawnCount3;
+    private int Enemy3Count = 0;
 
     [SerializeField] private float spawnRadius;
     [SerializeField] private float spawnTime;
@@ -61,7 +64,7 @@ public class EnemySpawner : MonoBehaviour
         enemyPool2 = new ObjectPool<EnemyHealth>(
          createFunc: () =>
          {
-             var enemy2 = Instantiate(enemyOption1);
+             var enemy2 = Instantiate(enemyOption2);
 
              enemy2.Pool = enemyPool2;
 
@@ -80,7 +83,7 @@ public class EnemySpawner : MonoBehaviour
         enemyPool3 = new ObjectPool<EnemyHealth>(
          createFunc: () =>
          {
-             var enemy3 = Instantiate(enemyOption1);
+             var enemy3 = Instantiate(enemyOption3);
 
              enemy3.Pool = enemyPool1;
 
@@ -106,6 +109,8 @@ public class EnemySpawner : MonoBehaviour
             
         }
 
+        
+
     }
 
  
@@ -118,73 +123,63 @@ public class EnemySpawner : MonoBehaviour
             var enemy1 = enemyPool1.Get();
             enemy1.transform.position = transform.position;
             enemy1.transform.rotation = Quaternion.identity;
-
+            Enemy1Count += 1;
         
         
     }
 
     public void spawnEnemyType2()
     {
-        Debug.Log("spawnenemy");
+        Debug.Log("spawnenemy2");
         Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRadius, spawnRadius), transform.position.y, transform.position.z + Random.Range(-spawnRadius, spawnRadius));
         
             var enemy2 = enemyPool2.Get();
             enemy2.transform.position = transform.position;
             enemy2.transform.rotation = Quaternion.identity;
+        Enemy2Count += 1;
 
-        
 
     }
 
     public void spawnEnemyType3()
     {
-        Debug.Log("spawnenemy");
+        Debug.Log("spawnenemy3");
         Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRadius, spawnRadius), transform.position.y, transform.position.z + Random.Range(-spawnRadius, spawnRadius));
         
             var enemy3 = enemyPool3.Get();
             enemy3.transform.position = transform.position;
             enemy3.transform.rotation = Quaternion.identity;
+        Enemy3Count += 1;
 
-        
 
     }
 
     public IEnumerator SpawnCoroutine(int Spawn1, int Spawn2, int Spawn3)
     {
-        while(true)
+        Debug.Log(Spawn1);
+        while (true)
         {
             for (int i = 0; i < Spawn1; i++) { 
+            
                 yield return new WaitForSeconds(spawnTime);
-
-
-                spawnEnemyType1();
-                if(i >= Spawn1)
-                {
-                   yield return null;
-                }
+                spawnEnemyType1();      
             }
+
             for (int i = 0; i < Spawn2; i++)
             {
+
                 yield return new WaitForSeconds(spawnTime);
-
-
                 spawnEnemyType2();
-                if (i >= Spawn2)
-                {
-                    yield return null;
-                }
+
             }
             for (int i = 0; i < Spawn3; i++)
             {
+
                 yield return new WaitForSeconds(spawnTime);
-
-
                 spawnEnemyType3();
-                if (i >= Spawn2)
-                {
-                    yield return null;
-                }
+
             }
+            break;
 
         }
         
