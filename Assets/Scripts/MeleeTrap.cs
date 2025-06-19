@@ -8,7 +8,7 @@ public class MeleeTrap : MonoBehaviour
     Rigidbody rb;
     public Transform trapBody;
     [SerializeField] private float spinSpeed;
-    [SerializeField] private int damage;
+    public int damage;
 
     // Start is called before the first frame update
     void Start()

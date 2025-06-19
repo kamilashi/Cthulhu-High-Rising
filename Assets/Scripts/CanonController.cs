@@ -13,9 +13,9 @@ public class CanonController : MonoBehaviour
     public List<Transform> enemies;
     [SerializeField] private GameObject closestEnemy;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float AttackRange;
-    [SerializeField] private float AttackSpeed;
-    [SerializeField] private int damage;
+    public float AttackRange;
+    public float AttackSpeed;
+    public int damage;
 
     public Transform CanonBody;
     bool enemyInRange;
