@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyOption1: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
     type: 3}
-  spawnCount1: 1
+  spawnCount1: 0
   enemyOption2: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
     type: 3}
   spawnCount2: 1
