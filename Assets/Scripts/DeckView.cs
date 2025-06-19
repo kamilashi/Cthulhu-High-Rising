@@ -9,6 +9,7 @@ public class DeckView : MonoBehaviour
     public GameManager gameManager;
     public GameObject cardObjectPrefab; // Later might be different prefabs
     public float distanceFromCamera;
+    public float basePadding = 1.0f;
 
     [Header("Auto Setup")]
     public Camera mainCamera;
@@ -35,11 +36,11 @@ public class DeckView : MonoBehaviour
     public void SpawnCards(List<Card> cards)
     {
         // assuming that cards are 1 m in width
-        float cardWidth = cardObjectPrefab.transform.localScale.x;
+        //float cardWidth = cardObjectPrefab.transform.localScale.x;
 
-        float projectedCardWidth = cardWidth / distanceFromCamera;
-        float padding = 0.1f * cardObjectPrefab.transform.localScale.x; 
-        padding = 1.5f * padding;
+        //float projectedCardWidth = cardWidth / distanceFromCamera;
+        float padding = basePadding /** cardObjectPrefab.transform.localScale.x*/; 
+        //padding = 1.5f * padding;
 
         for (int i = 0; i < cards.Count; i++)
         {
@@ -48,7 +49,7 @@ public class DeckView : MonoBehaviour
 
             float multiplier = Mathf.Ceil(i / 2.0f);
             float sign = i % 2 == 0 ? -1 : 1;
-            float horizontalOffset = (cardWidth + padding) * multiplier * sign;
+            float horizontalOffset = (/*cardWidth +*/ padding) * multiplier * sign;
 
             Vector3 position = mainCamera.transform.position;
 
@@ -63,6 +64,8 @@ public class DeckView : MonoBehaviour
 
             cardObject.nameText.text = cards[i].cardType.ToString();
             cardObject.descriptionText.text = GetDescriptionText(cards[i]);
+
+            cardObject.meshRenderer.material = cards[i].material;
 
             cardObject.Initialize();
 

@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class CardObject : MonoBehaviour, IHoverable
 {
-    [Header("Setup")]
+    [Header("Setup in Prefab")]
     //- this will change when we have separate prefabs for different card types.
     // Once we do, each CardObject might have to handle card display info differently.
+    public MeshRenderer meshRenderer;
+    
     public TextMeshPro nameText;
     public TextMeshPro descriptionText;
     

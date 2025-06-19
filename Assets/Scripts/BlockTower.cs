@@ -45,7 +45,7 @@ public class BlockTower : MonoBehaviour
         block.data = blockTemplate.blockData;
 
         //meshFilter.mesh = blockTemplate.mesh; // Note AV: this happens in block?
-        // meshRenderer.material = blockTemplate.material;  // Note AV: this happens in block?
+        // meshRenderer.material = blockTemplate.material;  // Note AV: this happens in block? KS: yes, it should ideally come from the prefab, sicne its unique oer model anyway
 
         block.Initialize();
 

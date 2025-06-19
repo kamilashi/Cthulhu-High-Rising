@@ -30,6 +30,8 @@ public abstract class Card
     public bool shouldBeDiscarded = false;
     public bool awaitingInput = false;
 
+    public Material material;
+
     public virtual void Play() { }
     public virtual void RequestTargetSelection(Selectables selectionMode) { }
     public virtual ModifierTarget GetModifier() { return ModifierTarget.None; } // feels hacky, so far is only used in the deckViewer in a WIP function, so might have to be cleaned up

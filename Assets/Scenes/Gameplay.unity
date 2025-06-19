@@ -430,6 +430,7 @@ MonoBehaviour:
   cardObjectPrefab: {fileID: 3052913614238606603, guid: c864e79175edd7f479174b19c02d9761,
     type: 3}
   distanceFromCamera: 0.5
+  basePadding: 0.2
   mainCamera: {fileID: 0}
   cardObjects: []
 --- !u!114 &727973388
@@ -591,17 +592,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adb17d66448a76b4eaf39e66c753ba29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyTypes:
-  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
-      type: 3}
-    spawnCount: 2
-  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
-      type: 3}
-    spawnCount: 2
-  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
-      type: 3}
-    spawnCount: 2
-  spawnRadius: 1
+  enemyTypes: []
+  spawnRadius: 5
   spawnInterval: 1
 --- !u!4 &1179290234
 Transform:

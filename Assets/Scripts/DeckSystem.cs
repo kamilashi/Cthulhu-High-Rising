@@ -77,6 +77,7 @@ public class DeckSystem : MonoBehaviour
     private BlockCard CreateBlockCard(BlockCardSO cardSO)
     {
         BlockCard card = new BlockCard();
+        card.material = cardSO.material;
         card.gameManager = gameManager;
         card.blockSO = cardSO.blockSO;
 
@@ -87,6 +88,7 @@ public class DeckSystem : MonoBehaviour
     {
         EquipmentCard card = new EquipmentCard();
         card.gameManager = gameManager;
+        card.material = cardSO.material;
         card.equipmentSO = cardSO.equipmentSO;
 
         return card;
@@ -98,6 +100,7 @@ public class DeckSystem : MonoBehaviour
         ModifierCard card = new ModifierCard();
         card.gameManager = gameManager;
         card.modifierData = cardSO.modifierData;
+        card.material = cardSO.material;
 
         object operandConverted = cardSO.operand;
 
@@ -117,6 +120,7 @@ public class DeckSystem : MonoBehaviour
         ModifierCard card = new ModifierCard();
         card.gameManager = gameManager;
         card.modifierData = cardSO.modifierData;
+        card.material = cardSO.material;
 
         object operandConverted = cardSO.operand;
 

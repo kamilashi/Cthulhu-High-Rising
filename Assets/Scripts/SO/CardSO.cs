@@ -5,6 +5,8 @@ using UnityEngine;
 
 public abstract class CardSO : ScriptableObject
 {
+    public Material material;
+
     public CardType cardType;
 }
 
