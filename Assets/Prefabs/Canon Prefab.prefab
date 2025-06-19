@@ -430,7 +430,6 @@ Transform:
   - {fileID: 750835873173559787}
   - {fileID: 8250370790336659380}
   - {fileID: 4187940285949161427}
-  - {fileID: 1856782318784524433}
   m_Father: {fileID: 653134310053934941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6522581001298562106
@@ -572,6 +571,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 653134310053934941}
+  - {fileID: 6835480688192676757}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &611943009305537596
@@ -593,8 +593,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.63
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.5
+  m_Center: {x: 0, y: 0, z: -0.56}
 --- !u!114 &4697583499359717680
 MonoBehaviour:
   m_ObjectHideFlags: 0

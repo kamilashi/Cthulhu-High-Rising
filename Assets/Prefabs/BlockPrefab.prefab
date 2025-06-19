@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 8294841682658950506}
   - component: {fileID: 6143026751571720380}
   - component: {fileID: 6698211299471286168}
-  - component: {fileID: 8252892818310319150}
+  - component: {fileID: 1670418044453726591}
   m_Layer: 8
   m_Name: BlockPrefab
   m_TagString: Untagged
@@ -91,7 +91,7 @@ MonoBehaviour:
     givenName: 
   equipmentList: []
   hoveredColor: {r: 1, g: 1, b: 1, a: 1}
-  material: {fileID: 8252892818310319150}
+  material: {fileID: 1670418044453726591}
   isHovered: 0
 --- !u!136 &6698211299471286168
 CapsuleCollider:
@@ -116,6 +116,22 @@ CapsuleCollider:
   m_Height: 2.33
   m_Direction: 1
   m_Center: {x: 0, y: 1.0005114, z: 0}
+--- !u!114 &1670418044453726591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6034568755760224155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1caf8463eca1e9840b6744798cf37a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer:
+  - {fileID: 3171606520108587255}
+  materials: []
+  dissolveValue: {x: 1, y: 0, z: 0.5}
 --- !u!1 &7890655387852921868
 GameObject:
   m_ObjectHideFlags: 0
@@ -248,11 +264,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: f7b68ab334d58434c8c351505df903b4,
-        type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 2276342747588343960}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f7b68ab334d58434c8c351505df903b4, type: 3}
 --- !u!23 &3171606520108587255 stripped
