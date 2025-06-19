@@ -10,10 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6182961961429610747}
   - component: {fileID: 7965261251913837333}
-  - component: {fileID: 49851460854359846}
   - component: {fileID: 802738306722983182}
   m_Layer: 0
-  m_Name: MeleeTrap
+  m_Name: MeleeTrap Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,33 +57,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 0.3, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &49851460854359846
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421151135407341250}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!114 &802738306722983182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -99,7 +71,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   trapBody: {fileID: 1832395590066458154}
   spinSpeed: 100
-  attackSpeed: 5
   damage: 1
 --- !u!1 &802312527415287503
 GameObject:

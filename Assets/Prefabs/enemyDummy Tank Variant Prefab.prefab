@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 253192214879063611, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 769465820490594831, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Interpolate
@@ -72,6 +77,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CollisionDetection
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: maxHealth
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4907766735849464133, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}

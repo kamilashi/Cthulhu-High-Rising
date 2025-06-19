@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Pool;
 
 public class EnemyController : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField] Transform GroundPos;
     [SerializeField] private float moveSpeed;
     public int Index;
+
+    
 
     // Start is called before the first frame update
     void Awake()

@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 611943009305537596}
   - component: {fileID: -2075044885992784349}
   m_Layer: 0
-  m_Name: Canon
+  m_Name: Canon Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -514,7 +514,7 @@ MonoBehaviour:
     m_Bits: 128
   AttackRange: 2
   AttackSpeed: 2
-  damage: 2
+  damage: 1
   CanonBody: {fileID: 1389500295530160177}
   bestTarget: {fileID: 0}
   projectilePrefab: {fileID: 7254907025905155245, guid: e131887394c86c3468d3489f3ee1d05f,
