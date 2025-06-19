@@ -13,9 +13,9 @@ public class CanonController : MonoBehaviour
     public List<Transform> enemies;
     [SerializeField] private GameObject closestEnemy;
     [SerializeField] private LayerMask enemyLayer;
-    [SerializeField] private float AttackRange;
-    [SerializeField] private float AttackSpeed;
-    [SerializeField] private int damage;
+    public float AttackRange;
+    public float AttackSpeed;
+    public int damage;
 
     public Transform CanonBody;
     bool enemyInRange;
@@ -33,26 +33,10 @@ public class CanonController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
        enemies = new List<Transform>();
        shooting = Shoot();
         SphereCollider = this.GetComponent<SphereCollider>();
         SphereCollider.radius = AttackRange;
-
-        projectilePool = new ObjectPool<Projectile>(
-        createFunc: () =>
-        {
-            var proj = Instantiate(projectilePrefab);
-            proj.Pool = projectilePool;
-            return proj;
-        },
-            actionOnGet: (proj) => proj.gameObject.SetActive(true),
-             actionOnRelease: (proj) => proj.gameObject.SetActive(false),
-            actionOnDestroy: (proj) => Destroy(proj.gameObject),
-            collectionCheck: false,
-            defaultCapacity: 20,
-            maxSize: 100
-        );
 
     }
 
@@ -71,12 +55,7 @@ public class CanonController : MonoBehaviour
             else if(bestTarget != null)
             {
                 Vector3 enemyDirection = bestTarget.transform.position - transform.position;
-                
-                //Quaternion targetRotation = Quaternion.LookRotation(enemyDirection);
-                //CanonBody.transform.up = Quaternion.RotateTowards(CanonBody.transform.up, targetRotation, Time.deltaTime);
 
-
-                //Vector3 enemyDirection = bestTarget.transform.position - transform.position;
                 CanonBody.transform.up = enemyDirection;
 
                 if (!isShooting)
@@ -147,18 +126,13 @@ public class CanonController : MonoBehaviour
         {
             yield return new WaitForSeconds(1/AttackSpeed);
 
-            var proj = projectilePool.Get();
-            proj.transform.position = firePoint.position;
-            proj.transform.rotation = firePoint.rotation;
-            proj.Launch(CanonBody.up, 20f);
-
-            //enemyHealth enemyhealth = bestTarget.GetComponent<enemyHealth>();
-            //enemyhealth.getHit(damage);
-            //if (enemyhealth.currentHealth == 0)
-            //{
-            //    enemies.Remove(bestTarget.transform);
-            //}
-            // Destroy(bestTarget.gameObject);
+            EnemyHealth enemyhealth = bestTarget.GetComponent<EnemyHealth>();
+            enemyhealth.getHit(damage);
+            if (enemyhealth.currentHealth == 0)
+            {
+                enemies.Remove(bestTarget.transform);
+            }
+            
         }
     }
 
