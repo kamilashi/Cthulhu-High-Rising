@@ -325,6 +325,7 @@ MonoBehaviour:
     m_Bits: 0
   GroundPos: {fileID: 7255182431229689713}
   moveSpeed: 0.75
+  rotationSpeed: 10
   Index: 0
 --- !u!114 &3973001434292359830
 MonoBehaviour:

@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] LayerMask FistNodeLayer;
     [SerializeField] Transform GroundPos;
     [SerializeField] float moveSpeed;
+    [SerializeField] float rotationSpeed;
 
     public int Index;
 
@@ -24,6 +25,13 @@ public class EnemyController : MonoBehaviour
         if(Index <= Nodes.Count -1)
         {
             transform.position = Vector3.MoveTowards(transform.position, Nodes[Index].transform.position, moveSpeed * Time.deltaTime);
+
+            Vector3 direction = Nodes[Index].position - transform.position;
+            if (direction.sqrMagnitude > 0.001f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(direction.normalized);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            }
 
             float PointDistance = (Nodes[Index].transform.position - transform.position).magnitude;
 

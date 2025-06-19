@@ -6,6 +6,8 @@ using UnityEngine.Pool;
 
 public class EnemyHealth : MonoBehaviour
 {
+    public event Action<EnemyHealth> OnDeath;
+
     public int maxHealth;
     public int currentHealth;
     private Rigidbody rb;
@@ -29,7 +31,9 @@ public class EnemyHealth : MonoBehaviour
 
     void Die()
     {
-        Destroy(this.gameObject);
+        OnDeath?.Invoke(this);
+        gameObject.SetActive(false);
+        Pool?.Release(this);
     }
 
     void ReturnToPool()
