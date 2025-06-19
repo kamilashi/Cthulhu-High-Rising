@@ -232,9 +232,10 @@ GameObject:
   - component: {fileID: 5856605147803569421}
   - component: {fileID: 3724764526092195291}
   - component: {fileID: 769465820490594831}
-  - component: {fileID: -340240651414499387}
+  - component: {fileID: 253192214879063611}
+  - component: {fileID: 3973001434292359830}
   m_Layer: 6
-  m_Name: enemyDummy
+  m_Name: enemyDummyBasePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -326,7 +327,26 @@ Rigidbody:
   m_Interpolate: 2
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &-340240651414499387
+--- !u!114 &253192214879063611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9009399801978179280}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fbaadcb667b67e4e99f05cfe24a287c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Nodes: []
+  FistNodeLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  GroundPos: {fileID: 7255182431229689713}
+  moveSpeed: 0.75
+  Index: 0
+--- !u!114 &3973001434292359830
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -338,5 +358,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6daeaf50acce0949b31eda94677e867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 7
+  maxHealth: 5
   currentHealth: 0
