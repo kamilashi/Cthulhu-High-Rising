@@ -105,7 +105,7 @@ public class CanonController : MonoBehaviour
     {
         foreach (var enemy in enemies)
         {
-            if (enemy != null)
+            if (enemy != null && enemy.gameObject.activeInHierarchy)
             {
                 float closestDistance = Mathf.Infinity;
                 float distanceToEnemy = (transform.position - enemy.position).magnitude;
@@ -128,11 +128,10 @@ public class CanonController : MonoBehaviour
 
             EnemyHealth enemyhealth = bestTarget.GetComponent<EnemyHealth>();
             enemyhealth.getHit(damage);
-            if (enemyhealth.currentHealth == 0)
+            if (enemyhealth.currentHealth <= 0)
             {
                 enemies.Remove(bestTarget.transform);
             }
-            
         }
     }
 

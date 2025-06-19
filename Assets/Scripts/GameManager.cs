@@ -29,9 +29,9 @@ public static class EventManager
     public static UnityEvent<GamePhase> onGamePhaseChangedEvent = new UnityEvent<GamePhase>();
 
     public static UnityEvent onAllEnemiesDefeatedEvent = new UnityEvent();
+    public static UnityEvent onEnemiesReachedTopEvent = new UnityEvent();
 }
     
-
 public class GameManager : MonoBehaviour
 {
     [Header("Setup")]
@@ -52,15 +52,16 @@ public class GameManager : MonoBehaviour
 
     //public static GameManager Instance { get; private set; }
 
-
     void OnEnable()
     {
         EventManager.onAllEnemiesDefeatedEvent.AddListener(OnCombatVictory);
+        EventManager.onEnemiesReachedTopEvent.AddListener(OnCombatLost);
     }
 
     void OnDisable()
     {
         EventManager.onAllEnemiesDefeatedEvent.RemoveListener(OnCombatVictory);
+        EventManager.onEnemiesReachedTopEvent.AddListener(OnCombatLost);
     }
 
     void Awake()
@@ -209,5 +210,14 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Combat ended – all enemies defeated!");
         combatResult = CombatResult.Won;
+    }
+
+    void OnCombatLost()
+    {
+        if(gamePhase == GamePhase.Combat)
+        {
+            Debug.Log("Combat ended – enemies reached the top!");
+            combatResult = CombatResult.Lost;
+        }
     }
 }

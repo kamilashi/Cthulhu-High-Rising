@@ -13,10 +13,16 @@ public class EnemyHealth : MonoBehaviour
     private Rigidbody rb;
     public IObjectPool<EnemyHealth> Pool { get; set; }
 
-    // Start is called before the first frame update
-    void Start()
+    bool isDead = false;
+
+    void OnEnable()
     {
         currentHealth = maxHealth;
+        isDead = false;
+    }
+
+    void Start()
+    {
         rb = GetComponent<Rigidbody>();
     }
 
@@ -25,21 +31,18 @@ public class EnemyHealth : MonoBehaviour
         currentHealth -= Damage;
         if (currentHealth <= 0)
         {
-            Invoke(nameof(Die), 0.5f);
+            Die();
         }
     }
 
     void Die()
     {
-        OnDeath?.Invoke(this);
-        gameObject.SetActive(false);
-        Pool?.Release(this);
-    }
+        if (!isDead)
+        {
+            isDead = true;
 
-    void ReturnToPool()
-    {
-        rb.velocity = Vector3.zero;
-        rb.angularVelocity = Vector3.zero;
-        Pool?.Release(this);
+            OnDeath?.Invoke(this);
+            Pool?.Release(this);
+        }
     }
 }

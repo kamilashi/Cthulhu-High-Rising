@@ -20,7 +20,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] float spawnRadius = 5f;
     [SerializeField] float spawnInterval = 1f;
 
-
     int activeEnemies = 0;
     bool isActive = false;
     Coroutine spawnRoutine;
@@ -39,21 +38,34 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var enemyData in enemyTypes)
         {
-            var localData = enemyData; 
-            enemyData.pool = new ObjectPool<EnemyHealth>(
+            IObjectPool<EnemyHealth> pool = null;
+
+            pool = new ObjectPool<EnemyHealth>(
                 createFunc: () =>
                 {
-                    var enemy = Instantiate(localData.enemyPrefab);
-                    enemy.Pool = localData.pool;
+                    var enemy = Instantiate(enemyData.enemyPrefab);
+                    enemy.Pool = pool;
                     return enemy;
                 },
                 actionOnGet: enemy => enemy.gameObject.SetActive(true),
-                actionOnRelease: enemy => enemy.gameObject.SetActive(false),
-                actionOnDestroy: enemy => Destroy(enemy.gameObject),
+                actionOnRelease: enemy =>
+                {
+                    enemy.OnDeath -= HandleEnemyDeath;
+
+                    var controller = enemy.GetComponent<EnemyController>();
+                    if (controller != null)
+                    {
+                        controller.OnReachedGoal -= HandleOnReachedTop;
+                    }
+
+                    enemy.gameObject.SetActive(false);
+                },
                 collectionCheck: false,
                 defaultCapacity: 20,
                 maxSize: 100
             );
+
+            enemyData.pool = pool;
         }
     }
 
@@ -117,6 +129,13 @@ public class EnemySpawner : MonoBehaviour
     {
         activeEnemies++;
         enemy.OnDeath += HandleEnemyDeath;
+
+        EnemyController enemyController = enemy.GetComponent<EnemyController>();
+
+        if (enemyController)
+        {
+            enemyController.OnReachedGoal += HandleOnReachedTop;
+        }
     }
 
     void HandleEnemyDeath(EnemyHealth enemy)
@@ -131,4 +150,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
+    void HandleOnReachedTop(EnemyController enemy)
+    {
+        EventManager.onEnemiesReachedTopEvent.Invoke();
+    }
 }
