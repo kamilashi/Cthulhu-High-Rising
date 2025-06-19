@@ -10,7 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a8a7c7faa55278541b9ee1b331144bdc, type: 3}
-  m_Name: EmptyBlockModifierCard
+  m_Name: DamageEquipmentModifierCardSO
   m_EditorClassIdentifier: 
   cardType: 2
-  modifierTarget: 0
+  modifierData:
+    target: 1
+    modifiablePropertyType: 1
+    operation: 0
+  operand: 2

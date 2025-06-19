@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Modifiers;
 
 public class DeckSystem : MonoBehaviour
 {
@@ -60,7 +61,7 @@ public class DeckSystem : MonoBehaviour
         {
             for(int j = 0;  j < deckData.modifierCardCounts[i].count; j++)
             {
-                ModifierTarget modifierTarget = deckData.modifierCardCounts[i].cardSO.modifierTarget;
+                ModifierTarget modifierTarget = deckData.modifierCardCounts[i].cardSO.modifierData.target;
                 if (modifierTarget == ModifierTarget.Block)
                 {
                     cardDeck.Add(CreateBlockModifierCard(deckData.modifierCardCounts[i].cardSO));
@@ -91,19 +92,42 @@ public class DeckSystem : MonoBehaviour
         return card;
     }
 
-    private ModifierCard<Block> CreateBlockModifierCard(ModifierCardSO cardSO)
+    // todo: combine CreateBlockModifierCard and CreateEquipmentModifierCard into CreateModifierCard!
+    private ModifierCard CreateBlockModifierCard(ModifierCardSO cardSO)
     {
-        ModifierCard<Block> card = new ModifierCard<Block>();
+        ModifierCard card = new ModifierCard();
         card.gameManager = gameManager;
-        card.target = ModifierTarget.Block;
+        card.modifierData = cardSO.modifierData;
+
+        object operandConverted = cardSO.operand;
+
+        if (cardSO.modifierData.modifiablePropertyType.GetType() == typeof(ModifiableInt))
+        {
+            Debug.Assert(cardSO.operand - Mathf.Floor(cardSO.operand) != 0.0f, "please, define a fractionless operand for " + cardSO.name);
+
+            operandConverted = Mathf.FloorToInt(cardSO.operand);
+        }
+
+        card.operand = cardSO.operand;
 
         return card;
     }
-    private ModifierCard<Equipment> CreateEquipmentModifierCard(ModifierCardSO cardSO)
+    private ModifierCard CreateEquipmentModifierCard(ModifierCardSO cardSO)
     {
-        ModifierCard<Equipment> card = new ModifierCard<Equipment>();
+        ModifierCard card = new ModifierCard();
         card.gameManager = gameManager;
-        card.target = ModifierTarget.Equipment;
+        card.modifierData = cardSO.modifierData;
+
+        object operandConverted = cardSO.operand;
+
+        if(cardSO.modifierData.modifiablePropertyType.GetType() == typeof(ModifiableInt))
+        {
+            Debug.Assert(cardSO.operand - Mathf.Floor(cardSO.operand) != 0.0f, "please, define a fractionless operand for " + cardSO.name);
+
+            operandConverted = Mathf.FloorToInt(cardSO.operand);
+        }
+
+        card.operand = cardSO.operand;
 
         return card;
     }

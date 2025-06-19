@@ -61,7 +61,7 @@ public class DeckView : MonoBehaviour
             cardObject.deckView = this;
             cardObject.transform.position = position;
 
-            cardObject.nameText.text = cards[i].type.ToString();
+            cardObject.nameText.text = cards[i].cardType.ToString();
             cardObject.descriptionText.text = GetDescriptionText(cards[i]);
 
             cardObject.Initialize();
@@ -103,13 +103,13 @@ public class DeckView : MonoBehaviour
     {
         string text = "";
 
-        switch(card.type)
+        switch(card.cardType)
         {
             case CardType.Block:
                 {
                     BlockCard cardCard = card as BlockCard;
-                    text += "Will create a " + cardCard.blockSO.name.ToString();
-                    text += "\nHere should be stats";
+                    text += "Will create a " + cardCard.blockSO.name.ToString() + "\n";
+                    text += "Here should be stats";
                     break; 
                 }
             case CardType.Equipment:
@@ -121,16 +121,20 @@ public class DeckView : MonoBehaviour
                 }
             case CardType.Modifier:
                 {
-                    if(card.GetModifier() == ModifierTarget.Block)
+                    ModifierCard cardCard = card as ModifierCard;
+                    if (card.GetModifier() == ModifierTarget.Block)
                     {
-                        ModifierCard<Block> cardCard = card as ModifierCard<Block>;
-                        text += "Choose a block to modify with ??? \n";
+                        text += "Choose a block to modify:\n";
                     }
                     else
                     {
-                        ModifierCard<Block> cardCard = card as ModifierCard<Block>;
-                        text += "Choose an equipment to modify with ??? \n";
+                        text += "Choose equipment to modify:\n\n";
                     }
+
+                    text += cardCard.modifierData.modifiablePropertyType.ToString() + "\n\n";
+
+                    text += cardCard.modifierData.operation + " , " + cardCard.operand.ToString() + "\n";
+
                     break; 
                 }
         }

@@ -392,7 +392,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3c1ba4baaaa7e449b18522da33a1dd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameSettingsSO: {fileID: 11400000, guid: 291b41dd62996bf44a028d32b88bd40a, type: 2}
+  gameSettingsSO: {fileID: 11400000, guid: ff493f822358c3248b5c1a49ccf97d23, type: 2}
   blockTower: {fileID: 839130300}
   deckSystem: {fileID: 727973386}
   deckVisualizer: {fileID: 727973387}
@@ -454,6 +454,7 @@ MonoBehaviour:
   equipmentLayer:
     serializedVersion: 2
     m_Bits: 512
+  selectAllBlockEquipment: 1
   hoverMode: 0
   selectableLayerMask:
     serializedVersion: 2
