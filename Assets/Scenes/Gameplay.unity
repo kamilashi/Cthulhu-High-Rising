@@ -485,9 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8128142da077c654ca192a9f5520ee23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 6034568755760224155, guid: e70a91f328f6c984fbee73ebeb091a27,
-    type: 3}
-  startBlock: {fileID: 328488006}
+  topBlock: {fileID: 328488006}
   blockScriptableObject: {fileID: 11400000, guid: 165c79de15d7a18429567caff2b1fa15,
     type: 2}
   blocks: []

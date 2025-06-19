@@ -5,8 +5,7 @@ using UnityEngine;
 public class BlockTower : MonoBehaviour
 {
     [Header("Setup")]
-    public GameObject blockPrefab;
-    public Transform startBlock;
+    public Transform topBlock;
 
     [Header("Testing")]
     public BlockSO blockScriptableObject; // should come from the card
@@ -33,28 +32,23 @@ public class BlockTower : MonoBehaviour
             position.y += blocks[blocks.Count - 1].data.height * blocks[blocks.Count - 1].transform.localScale.y;
         }
 
-        GameObject blockGO = Instantiate<GameObject>(blockPrefab, this.transform);
+        GameObject blockGO = Instantiate<GameObject>(blockTemplate.blockPrefab, this.transform);
 
         // this needs to be moved into a block.Initialize function
         Block block = blockGO.GetComponent<Block>();
-        // MeshFilter meshFilter = blockGO.GetComponent<MeshFilter>();  // Note AV: this happens in block?
-        // MeshRenderer meshRenderer = blockGO.GetComponent<MeshRenderer>(); // Note AV: this happens in block?
 
         block.transform.position = position;
 
         block.data = blockTemplate.blockData;
-
-        //meshFilter.mesh = blockTemplate.mesh; // Note AV: this happens in block?
-        // meshRenderer.material = blockTemplate.material;  // Note AV: this happens in block? KS: yes, it should ideally come from the prefab, sicne its unique oer model anyway
 
         block.Initialize();
 
         blocks.Add(block);
 
         // Move startBlock up with each new block
-        Vector3 pos = startBlock.position;
-        pos.y += block.data.height * block.transform.localScale.y;
-        startBlock.position = pos;
+        Vector3 pos = topBlock.position;
+        pos.y += blocks[blocks.Count - 1].data.height * blocks[blocks.Count - 1].transform.localScale.y;
+        topBlock.transform.position = pos;
     }
 
     [ContextMenu("AddBlock")]

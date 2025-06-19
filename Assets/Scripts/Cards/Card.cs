@@ -115,6 +115,9 @@ public class ModifierCard : Card
     {
         cardType = CardType.Modifier;
     }
+
+    // todo: add removing listener on deselect and on disposing from hand
+
     public override void Play()
     {
         if (IsDisabled())

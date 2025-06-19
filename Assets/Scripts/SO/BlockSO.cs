@@ -7,9 +7,7 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Block", menuName = "ScriptableObjects/Block", order = 2)]
 public class BlockSO : ScriptableObject
 {
-    public Mesh mesh;
-    
-    public Material material;
+    public GameObject blockPrefab;
 
     public BlockData blockData;
 }
