@@ -71,12 +71,17 @@ PrefabInstance:
     - target: {fileID: 769465820490594831, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Interpolate
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 769465820490594831, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2552788356925987312, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
@@ -88,15 +93,30 @@ PrefabInstance:
       propertyPath: movementSpeed
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 7329728714812854101, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 8006948284894400003, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7dde9839b9dd30f4c80f35537ba82e37, type: 2}
+    - target: {fileID: 8791935100734633394, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 9009399801978179280, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Name
-      value: enemyDummy Fast
+      value: enemyDummy Fast Variant Prefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 9009399801978179280, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

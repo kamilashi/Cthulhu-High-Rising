@@ -1,183 +1,113 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Pool;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Enemy option 1")]
-    [SerializeField] private EnemyHealth enemyOption1;
-    [SerializeField] private int spawnCount1;
-    private int Enemy1Count = 0;
-    [Header("Enemy option 2")]
-    [SerializeField] private EnemyHealth enemyOption2;
-    [SerializeField] private int spawnCount2;
-    private int Enemy2Count = 0;
-    [Header("Enemy option 3")]
-    [SerializeField] private EnemyHealth enemyOption3;  
-    [SerializeField] private int spawnCount3;
-    private int Enemy3Count = 0;
+    [System.Serializable]
+    public class EnemySpawnData
+    {
+        public EnemyHealth enemyPrefab;
+        public int spawnCount;
+        [HideInInspector] public IObjectPool<EnemyHealth> pool;
+    }
 
-    [SerializeField] private float spawnRadius;
-    [SerializeField] private float spawnTime;
+    [Header("Enemy Types")]
+    [SerializeField] List<EnemySpawnData> enemyTypes = new List<EnemySpawnData>();
 
-    IEnumerator spawnCoroutine;
-    public List<GameObject> spawnList = new List<GameObject>();
+    [Header("Settings")]
+    [SerializeField] float spawnRadius = 5f;
+    [SerializeField] float spawnInterval = 1f;
 
-    IObjectPool<EnemyHealth> enemyPool1;
-    IObjectPool<EnemyHealth> enemyPool2;
-    IObjectPool<EnemyHealth> enemyPool3;
-    // Start is called before the first frame update
+    bool isActive = false;
+    Coroutine spawnRoutine;
+
+    void OnEnable()
+    {
+        EventManager.onGamePhaseChangedEvent.AddListener(OnGamePhaseChanged);
+    }
+
+    void OnDisable()
+    {
+        EventManager.onGamePhaseChangedEvent.RemoveListener(OnGamePhaseChanged);
+    }
+
     void Start()
     {
-
-        spawnCoroutine = SpawnCoroutine(spawnCount1, spawnCount2, spawnCount3);
-        StartCoroutine(spawnCoroutine);
-       
-
-        //Enemy pool for Type 1 Enemies
-        enemyPool1 = new ObjectPool<EnemyHealth>(
-         createFunc: () =>
-         {
-             var enemy1 = Instantiate(enemyOption1);
-             
-             enemy1.Pool = enemyPool1;
-             
-             return enemy1;
-             
-         },
-         actionOnGet: (enemy1) => enemy1.gameObject.SetActive(true),
-         actionOnRelease: (enemy1) => enemy1.gameObject.SetActive(false),
-         actionOnDestroy: (enemy1) => Destroy(enemy1.gameObject),
-         collectionCheck: false,
-         defaultCapacity: 20,
-         maxSize: 100
-         );
-
-        //Enemy pool for Type 2 Enemies
-        enemyPool2 = new ObjectPool<EnemyHealth>(
-         createFunc: () =>
-         {
-             var enemy2 = Instantiate(enemyOption2);
-
-             enemy2.Pool = enemyPool2;
-
-             return enemy2;
-
-         },
-         actionOnGet: (enemy2) => enemy2.gameObject.SetActive(true),
-         actionOnRelease: (enemy2) => enemy2.gameObject.SetActive(false),
-         actionOnDestroy: (enemy2) => Destroy(enemy2.gameObject),
-         collectionCheck: false,
-         defaultCapacity: 20,
-         maxSize: 100
-         );
-
-        //Enemy pool for Type 3 Enemies
-        enemyPool3 = new ObjectPool<EnemyHealth>(
-         createFunc: () =>
-         {
-             var enemy3 = Instantiate(enemyOption3);
-
-             enemy3.Pool = enemyPool1;
-
-             return enemy3;
-
-         },
-         actionOnGet: (enemy3) => enemy3.gameObject.SetActive(true),
-         actionOnRelease: (enemy3) => enemy3.gameObject.SetActive(false),
-         actionOnDestroy: (enemy3) => Destroy(enemy3.gameObject),
-         collectionCheck: false,
-         defaultCapacity: 20,
-         maxSize: 100
-         );
-
+        foreach (var enemyData in enemyTypes)
+        {
+            var localData = enemyData; 
+            enemyData.pool = new ObjectPool<EnemyHealth>(
+                createFunc: () =>
+                {
+                    var enemy = Instantiate(localData.enemyPrefab);
+                    enemy.Pool = localData.pool;
+                    return enemy;
+                },
+                actionOnGet: enemy => { },
+                actionOnRelease: enemy => enemy.gameObject.SetActive(false),
+                actionOnDestroy: enemy => Destroy(enemy.gameObject),
+                collectionCheck: false,
+                defaultCapacity: 20,
+                maxSize: 100
+            );
+        }
     }
 
-    private void Update()
+    void OnGamePhaseChanged(GamePhase phase)
     {
-        // Remove, only to test
+        bool shouldBeActive = (phase == GamePhase.Combat);
+
+        if (isActive == shouldBeActive)
+        {
+            return;
+        }
+
+        isActive = shouldBeActive;
+
+        if (isActive)
+        {
+            spawnRoutine = StartCoroutine(SpawnEnemies());
+        }
+        else if (spawnRoutine != null)
+        {
+            StopCoroutine(spawnRoutine);
+        }
+    }
+
+    IEnumerator SpawnEnemies()
+    {
+        foreach (var enemyData in enemyTypes)
+        {
+            for (int i = 0; i < enemyData.spawnCount; i++)
+            {
+                yield return new WaitForSeconds(spawnInterval);
+
+                var enemy = enemyData.pool.Get();
+                SpawnEnemy(enemy);
+                enemy.gameObject.SetActive(true);
+                Debug.Log($"Spawned {enemyData.enemyPrefab.name}");
+            }
+        }
+    }
+
+    void SpawnEnemy(EnemyHealth enemy)
+    {
+        Vector3 spawnPosition = transform.position + new Vector3(
+            Random.Range(-spawnRadius, spawnRadius),
+            0,
+            Random.Range(-spawnRadius, spawnRadius)
+        );
+
+        enemy.transform.SetPositionAndRotation(spawnPosition, Quaternion.identity);
+    }
+
+    void Update()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            spawnEnemyType1();
-            
+            SpawnEnemy(enemyTypes[0].pool.Get());
         }
-
-        
-
-    }
-
- 
-
-    public void spawnEnemyType1()
-    {
-        Debug.Log("spawnenemy");
-        Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRadius, spawnRadius), transform.position.y, transform.position.z + Random.Range(-spawnRadius, spawnRadius));
-        
-            var enemy1 = enemyPool1.Get();
-            enemy1.transform.position = transform.position;
-            enemy1.transform.rotation = Quaternion.identity;
-
-        
-        
-    }
-
-    public void spawnEnemyType2()
-    {
-        Debug.Log("spawnenemy2");
-        Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRadius, spawnRadius), transform.position.y, transform.position.z + Random.Range(-spawnRadius, spawnRadius));
-        
-            var enemy2 = enemyPool2.Get();
-            enemy2.transform.position = transform.position;
-            enemy2.transform.rotation = Quaternion.identity;
-
-
-
-    }
-
-    public void spawnEnemyType3()
-    {
-        Debug.Log("spawnenemy3");
-        Vector3 spawnPosition = new Vector3(transform.position.x + Random.Range(-spawnRadius, spawnRadius), transform.position.y, transform.position.z + Random.Range(-spawnRadius, spawnRadius));
-        
-            var enemy3 = enemyPool3.Get();
-            enemy3.transform.position = transform.position;
-            enemy3.transform.rotation = Quaternion.identity;
-   
-
-
-    }
-
-    public IEnumerator SpawnCoroutine(int Spawn1, int Spawn2, int Spawn3)
-    {
-        Debug.Log(Spawn1);
-        while (true)
-        {
-            for (int i = 0; i < Spawn1; i++) { 
-            
-                yield return new WaitForSeconds(spawnTime);
-                spawnEnemyType1();      
-            }
-
-            for (int i = 0; i < Spawn2; i++)
-            {
-
-                yield return new WaitForSeconds(spawnTime);
-                spawnEnemyType2();
-
-            }
-            for (int i = 0; i < Spawn3; i++)
-            {
-
-                yield return new WaitForSeconds(spawnTime);
-                spawnEnemyType3();
-
-            }
-            break;
-
-        }
-        
     }
 }

@@ -6,7 +6,4 @@ using UnityEngine;
 public class PathfindingNode : MonoBehaviour
 {
     public Transform NextNode;
-
-
-   
 }
