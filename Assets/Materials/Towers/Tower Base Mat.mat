@@ -154,6 +154,7 @@ Material:
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _ColorHighlight: {r: 0, g: 0, b: 0, a: 0}
     - _ColorShift: {r: 0, g: 0.9436171, b: 1, a: 0}
     - _Dissolve_Color: {r: 1.0034034, g: 2.9603517, b: 2.9960778, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}

@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8224343570509545491
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7
 --- !u!21 &2100000
 Material:
   serializedVersion: 8
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: card_tower_basic
+  m_Name: Tower Cthulhu
   m_Shader: {fileID: -6465566751694194690, guid: 1a76b97426785b944a92c11aff395bab,
     type: 3}
   m_Parent: {fileID: 0}
@@ -25,15 +38,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: d88bec4dbb2b54f4bb3d94695c88814c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 00f8d38e7ecba7c42bc8ee2e6a76a5f5, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _C:
-        m_Texture: {fileID: 2800000, guid: d88bec4dbb2b54f4bb3d94695c88814c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9996a0ac04913ae44a56785f204fc25d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -48,8 +61,12 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _Dissolve_Pattern:
+        m_Texture: {fileID: 2800000, guid: 1937721ffc9895b419ea262ec6dc665e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _E:
-        m_Texture: {fileID: 2800000, guid: c018c0b6b19171c42a6d74291541e415, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8453c685814130e43aedf6162ca5c69e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -57,15 +74,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _M:
-        m_Texture: {fileID: 2800000, guid: 60a65c247a0a50843b73866122805696, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1108196b996ea1d4dad1344f135e846a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d88bec4dbb2b54f4bb3d94695c88814c, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 60a65c247a0a50843b73866122805696, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _N:
@@ -81,7 +98,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _R:
-        m_Texture: {fileID: 2800000, guid: 45a9c150467f27841b48aa9ea0689438, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1108196b996ea1d4dad1344f135e846a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
@@ -138,21 +155,8 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorHighlight: {r: 0, g: 0, b: 0, a: 0}
-    - _ColorShift: {r: 1, g: 1, b: 1, a: 0}
-    - _Dissolve_Color: {r: 5.206835, g: 15.36178, b: 15.54717, a: 0}
+    - _ColorShift: {r: 0, g: 0.9436171, b: 1, a: 0}
+    - _Dissolve_Color: {r: 1.0034034, g: 2.9603517, b: 2.9960778, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
   m_BuildTextureStacks: []
---- !u!114 &8965874281794965244
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 7
