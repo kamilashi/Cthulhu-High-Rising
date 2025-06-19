@@ -32,11 +32,7 @@ public class enemySpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //AddToSpawnList(enemyOption1.gameObject, spawnCount1);
-        //AddToSpawnList(enemyOption2.gameObject, spawnCount2);
-        //AddToSpawnList(enemyOption3, spawnCount3);
-        //spawnEnemies();
-        
+
         spawnCoroutine = SpawnCoroutine(spawnCount1, spawnCount2, spawnCount3);
         StartCoroutine(spawnCoroutine);
        
@@ -123,7 +119,7 @@ public class enemySpawner : MonoBehaviour
             var enemy1 = enemyPool1.Get();
             enemy1.transform.position = transform.position;
             enemy1.transform.rotation = Quaternion.identity;
-            Enemy1Count += 1;
+
         
         
     }
@@ -136,7 +132,7 @@ public class enemySpawner : MonoBehaviour
             var enemy2 = enemyPool2.Get();
             enemy2.transform.position = transform.position;
             enemy2.transform.rotation = Quaternion.identity;
-        Enemy2Count += 1;
+
 
 
     }
@@ -149,7 +145,7 @@ public class enemySpawner : MonoBehaviour
             var enemy3 = enemyPool3.Get();
             enemy3.transform.position = transform.position;
             enemy3.transform.rotation = Quaternion.identity;
-        Enemy3Count += 1;
+   
 
 
     }
