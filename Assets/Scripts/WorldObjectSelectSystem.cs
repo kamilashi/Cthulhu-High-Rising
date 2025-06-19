@@ -25,6 +25,8 @@ public class WorldObjectSelectSystem : MonoBehaviour
     public LayerMask cardLayer;
     public LayerMask blockLayer;
     public LayerMask equipmentLayer;
+
+    public bool selectAllBlockEquipment = true;
     //public float maxRayCastDistance = 100.0f;
 
     [Header("Debug View")]
@@ -68,7 +70,16 @@ public class WorldObjectSelectSystem : MonoBehaviour
     }
     private void OnEquipmentSelect(GameObject selected)
     {
-        // todo
+        Equipment equipmentObject = selected.GetComponent<Equipment>();
+        gameManager.OnEquipmentSelected(equipmentObject);
+    }
+    private void OnEquipmentBlockSelect(GameObject selected)
+    {
+        Block ownerBlockObject = selected.GetComponent<Equipment>().blockOwner;
+        for (int i = 0; i < ownerBlockObject.equipmentList.Count; i++)
+        {
+            gameManager.OnEquipmentSelected(ownerBlockObject.equipmentList[i]);
+        }
     }
 
     private void OnObjectHover<T>(GameObject hovered) where T : IHoverable
@@ -80,6 +91,23 @@ public class WorldObjectSelectSystem : MonoBehaviour
     {
         T hoveredObject = hovered.GetComponent<T>();
         hoveredObject.OnStopHover();
+    }
+
+    private void OnEquipmentBlockHover(GameObject hovered)
+    {
+        Block ownerBlockObject = hovered.GetComponent<Equipment>().blockOwner;
+        for (int i = 0; i < ownerBlockObject.equipmentList.Count; i++) 
+        {
+            ownerBlockObject.equipmentList[i].OnStartHover();
+        }
+    }
+    private void OnEquipmentBlockStopHover(GameObject hovered)
+    {
+        Block ownerBlockObject = hovered.GetComponent<Equipment>().blockOwner;
+        for (int i = 0; i < ownerBlockObject.equipmentList.Count; i++)
+        {
+            ownerBlockObject.equipmentList[i].OnStopHover();
+        }
     }
 
     private bool ProcessSelection() // needs to be called after processHovering
@@ -120,7 +148,15 @@ public class WorldObjectSelectSystem : MonoBehaviour
                     if (gameManager.selectionMode == Selectables.Equipment)
                     {
                         receivedSelection = true;
-                        // OnSelectableSelect<Equipment>(hoveredObject);
+
+                        if(selectAllBlockEquipment)
+                        {
+                            OnEquipmentBlockSelect(hoveredObject);
+                        }
+                        else
+                        {
+                            OnEquipmentSelect(hoveredObject);
+                        }
                     }
                     break;
                 }
@@ -155,7 +191,15 @@ public class WorldObjectSelectSystem : MonoBehaviour
             else if (layerIndex == equipmentLayerIdx)
             {
                 hoverMode = Selectables.Equipment;
-                OnObjectHover<Equipment>(hit.transform.gameObject);
+
+                if(selectAllBlockEquipment)
+                {
+                    OnEquipmentBlockHover(hit.transform.gameObject);
+                }
+                else
+                {
+                    OnObjectHover<Equipment>(hit.transform.gameObject);
+                }
             }
 
             hoveredObject = hit.transform.gameObject;
@@ -188,7 +232,14 @@ public class WorldObjectSelectSystem : MonoBehaviour
                 }
             case Selectables.Equipment:
                 {
-                    OnObjectStopHover<Equipment>(hoveredObject);
+                    if (selectAllBlockEquipment)
+                    {
+                        OnEquipmentBlockStopHover(hoveredObject);
+                    }
+                    else
+                    {
+                        OnObjectStopHover<Equipment>(hoveredObject);
+                    }
                     break;
                 }
             case Selectables.None:

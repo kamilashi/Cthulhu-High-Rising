@@ -14,9 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 6562604598940603689, guid: 4d592236c9081834ab5b45d2d16c5a06, type: 3}
   equipmentData:
-    Damage:
-      BaseValue: 0
-    AttackRange:
-      BaseValue: 0
-    AttackSpeed:
-      BaseValue: 0
+    damage:
+      baseValueContainer:
+        value: 1
+      operations: []
+    attackRange:
+      baseValueContainer:
+        value: 2
+      operations: []
+    attackSpeed:
+      baseValueContainer:
+        value: 2
+      operations: []
+    givenName: 

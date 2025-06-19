@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Modifiers;
 
 public interface ITargetOperator
 {
@@ -25,17 +26,23 @@ public enum ModifierTarget
 public abstract class Card
 {
     public GameManager gameManager;
-    public CardType type;
+    public CardType cardType;
     public bool shouldBeDiscarded = false;
+    public bool awaitingInput = false;
 
-    public virtual void Play() { if (shouldBeDiscarded) { return; } }
+    public virtual void Play() { }
     public virtual void RequestTargetSelection(Selectables selectionMode) { }
     public virtual ModifierTarget GetModifier() { return ModifierTarget.None; } // feels hacky, so far is only used in the deckViewer in a WIP function, so might have to be cleaned up
 
     public void Reset()
     {
         shouldBeDiscarded = false;
+        awaitingInput = false;
+    }
 
+    public bool IsDisabled()
+    {
+        return (shouldBeDiscarded);
     }
 
     public void DisposeFromHand()
@@ -51,12 +58,12 @@ public class BlockCard : Card
 
     public BlockCard()
     {
-        type = CardType.Block;
+        cardType = CardType.Block;
     }
 
     public override void Play()
     {
-        base.Play();
+        IsDisabled();
         gameManager.TryPlaceBlock(blockSO);
 
         DisposeFromHand();
@@ -69,63 +76,91 @@ public class EquipmentCard : Card
 
     public EquipmentCard()
     {
-        type = CardType.Equipment;
-        EventManager.onBlockSelectedEvent.AddListener(OnTargetSelected);
+        cardType = CardType.Equipment;
+        EventManager.onBlockSelectedEvent.AddListener(OnBlockTargetSelected);
     }
 
     public override void Play()
     {
-        base.Play();
+        if (IsDisabled())
+        {
+            return;
+        }
+
         gameManager.RequestSelectionMode(Selectables.Block);
+
+        awaitingInput = true;
     }
 
-    public void OnTargetSelected(Block block)
+    public void OnBlockTargetSelected(Block block)
     {
-        base.Play();
+        if (!awaitingInput || IsDisabled())
+        {
+            return;
+        }
+
         gameManager.TryPlaceEquipment(block, equipmentSO);
 
         DisposeFromHand();
     }
 }
 
-
-[Serializable]
-public class ModifierData
+public class ModifierCard : Card
 {
-
-}
-
-public class ModifierCard<T> : Card
-{
-    public ModifierTarget target;
-
+    public ModifierData modifierData;
+    public object operand;
     public ModifierCard()
     {
-        type = CardType.Modifier;
+        cardType = CardType.Modifier;
+
+        EventManager.onBlockSelectedEvent.AddListener(OnBlockTargetSelected);
+        EventManager.onEquipmentSelectedEvent.AddListener(OnEquipmentTargetSelected);
     }
     public override void Play()
     {
-        base.Play();
+        if (IsDisabled())
+        {
+            return;
+        }
 
-        if(target == ModifierTarget.Block)
+        if (modifierData.target == ModifierTarget.Block)
         {
             gameManager.RequestSelectionMode(Selectables.Block);
         }
         else
         {
-            //gameManager.RequestSelectionMode(SelectionMode.Equipment);
+            gameManager.RequestSelectionMode(Selectables.Equipment);
         }
 
-        DisposeFromHand(); // TEMP
+        awaitingInput = true;
     }
-
-    public void OnTargetSelected(T target)
+    public void OnBlockTargetSelected(Block block)
     {
-        base.Play();
+        if (!awaitingInput || !IsTargetCorrect(ModifierTarget.Block, modifierData.target) || IsDisabled() )
+        {
+            return;
+        }
 
-        //modify T
+        ModifyTarget(block, modifierData, operand);
 
         DisposeFromHand();
     }
-    public override ModifierTarget GetModifier() { return target; }
+    public void OnEquipmentTargetSelected(Equipment equipment)
+    {
+        if (!awaitingInput || !IsTargetCorrect(ModifierTarget.Equipment, modifierData.target) || IsDisabled())
+        {
+            return;
+        }
+
+        ModifyTarget(equipment, modifierData, operand);
+
+        DisposeFromHand();
+    }
+
+    private bool IsTargetCorrect(ModifierTarget current, ModifierTarget correct)
+    {
+        return current == correct;
+    }
+
+    public override ModifierTarget GetModifier() { return modifierData.target; }
 }

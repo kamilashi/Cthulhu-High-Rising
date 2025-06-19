@@ -11,11 +11,11 @@ public enum BlockType
 }
 
 [Serializable]
-public class BlockData
+public struct BlockData
 {
     public BlockType blockType;
 
-    public float height = 1.0f;
+    public float height;
 
     public string givenName;
 }
@@ -31,7 +31,6 @@ public class Block : MonoBehaviour, IHoverable
     [Header("Debug View")]
     public List<Equipment> equipmentList = new List<Equipment>(); // may change how equipment is stored
 
-    // temporary
     // public Color regularColor;
     public Color hoveredColor = Color.blue;
     // public Material sharedMaterial;
@@ -67,11 +66,13 @@ public class Block : MonoBehaviour, IHoverable
         {
             GameObject EquipmentGO = Instantiate<GameObject>(equipmentSO.prefab, slots[i]);
 
-            Equipment equipment = EquipmentGO.GetComponent<Equipment>();
+            Equipment equipment = EquipmentGO.GetComponentInChildren<Equipment>();
 
             equipment.equipmentData = equipmentSO.equipmentData;    
             
-            equipment.blockOwner = this;    
+            equipment.blockOwner = this;
+
+            equipment.Initialize();
 
             equipmentList.Add(equipment);
         }

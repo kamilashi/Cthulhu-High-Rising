@@ -131,6 +131,11 @@ public class GameManager : MonoBehaviour
     [ContextMenu("DrawHand")]
     void DrawHand()
     {
+        if(deckSystem.hand.Count != 0)
+        {
+            DiscardHand();
+        }
+
         deckSystem.DrawHand();
         deckVisualizer.SpawnCards(deckSystem.hand);
 
