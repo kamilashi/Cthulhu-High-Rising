@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 611943009305537596}
   - component: {fileID: -2075044885992784349}
   m_Layer: 0
-  m_Name: Canon Prefab
+  m_Name: Canon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
   closestEnemy: {fileID: 0}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   AttackRange: 2
   AttackSpeed: 2
   damage: 1
