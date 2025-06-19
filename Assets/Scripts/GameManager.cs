@@ -18,6 +18,8 @@ public static class EventManager
     public static UnityEvent<Equipment> onEquipmentSelectedEvent = new UnityEvent<Equipment>();
 
     public static UnityEvent<Selectables, GameObject> onObjectSelectedEvent = new UnityEvent<Selectables, GameObject>(); // not used really
+
+    public static UnityEvent<GamePhase> onGamePhaseChangedEvent = new UnityEvent<GamePhase>();
 }
     
 
@@ -62,14 +64,36 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
     }
 
     void Update()
     {
-        // process game modes here
+        GamePhase currentPhase = gamePhase;
+        switch (gamePhase)
+        {
+            case GamePhase.Draw:
+                if (deckSystem.hand.Count == 0)
+                {
+                    DrawHand();
+                    gamePhase = GamePhase.Build;
+                }
+                break;
+            case GamePhase.Build:
+                if (deckSystem.hand.Count == 0)
+                {
+                    gamePhase = GamePhase.Combat;
+                }
+                break;
+            case GamePhase.Combat:
+                break;
+        }
 
-        if(deckSystem.hand.Count == 0)
+        if (currentPhase != gamePhase)
+        {
+            EventManager.onGamePhaseChangedEvent.Invoke(gamePhase);
+        }
+
+        if (deckSystem.hand.Count == 0)
         {
             ResetSelectionMode();
         }
@@ -122,6 +146,7 @@ public class GameManager : MonoBehaviour
     {
         selectionMode = mode;
     }
+
     public void ResetSelectionMode()
     {
         selectionMode = Selectables.None;

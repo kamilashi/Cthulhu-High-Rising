@@ -6,27 +6,24 @@ using UnityEngine.Pool;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] List<Transform> Nodes;
-    [SerializeField] private LayerMask FistNodeLayer;
+    [SerializeField] LayerMask FistNodeLayer;
     [SerializeField] Transform GroundPos;
-    [SerializeField] private float moveSpeed;
-    public int Index;
+    [SerializeField] float moveSpeed;
 
-    
+    public int Index;
 
     // Start is called before the first frame update
     void Awake()
     {
-            Physics.IgnoreLayerCollision(6, 6);
-    }
-
- 
+            Physics.IgnoreLayerCollision(7, 7);
+    } 
 
     // Update is called once per frame
     void FixedUpdate()
     {
         if(Index <= Nodes.Count -1)
         {
-            transform.localPosition = Vector3.MoveTowards(transform.localPosition, Nodes[Index].transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Nodes[Index].transform.position, moveSpeed * Time.deltaTime);
 
             float PointDistance = (Nodes[Index].transform.position - transform.position).magnitude;
 
@@ -60,20 +57,13 @@ public class EnemyController : MonoBehaviour
             {
                 Index = Nodes.Count - 1;
             }
-
-
         }
-
-
-       
     }
 
     public void FindFirstPoint(Transform PointToAdd)
-    {
-        
-            Nodes = new List<Transform>();
-            Nodes.Add(PointToAdd.transform);
-            Index = 0;
-        
+    {   
+        Nodes = new List<Transform>();
+        Nodes.Add(PointToAdd.transform);
+        Index = 0;       
     }
 }
