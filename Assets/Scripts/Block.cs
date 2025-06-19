@@ -32,9 +32,11 @@ public class Block : MonoBehaviour, IHoverable
     public List<Equipment> equipmentList = new List<Equipment>(); // may change how equipment is stored
 
     // temporary
-    public Color regularColor;
+    // public Color regularColor;
     public Color hoveredColor = Color.blue;
-    public Material sharedMaterial;
+    // public Material sharedMaterial;
+
+    public MaterialValueAdjust material;
 
     public bool isHovered = false;
 
@@ -51,9 +53,9 @@ public class Block : MonoBehaviour, IHoverable
     public void Initialize()
     {
         // this is temporary, until a better on hovered solution is implemented
-        MeshRenderer meshRenderer = this.gameObject.GetComponent<MeshRenderer>();
-        regularColor = meshRenderer.material.color;
-        sharedMaterial = meshRenderer.sharedMaterial;
+        // MeshRenderer meshRenderer = this.gameObject.GetComponent<MeshRenderer>();
+        // regularColor = meshRenderer.material.color;
+        // sharedMaterial = meshRenderer.sharedMaterial;
     }
 
     public void CreateEquipment(EquipmentSO equipmentSO)
@@ -84,7 +86,8 @@ public class Block : MonoBehaviour, IHoverable
     {
         if (isHovered) { return; }
 
-        sharedMaterial.color = hoveredColor;
+        // sharedMaterial.color = hoveredColor;
+        material.SetColor(hoveredColor);
         isHovered = true;
     }
 
@@ -92,7 +95,8 @@ public class Block : MonoBehaviour, IHoverable
     {
         if (!isHovered) { return; }
 
-        sharedMaterial.color = regularColor;
+        // sharedMaterial.color = regularColor;
+        material.SetColor(Color.black);
         isHovered = false;
     }
 }

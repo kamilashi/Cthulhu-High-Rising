@@ -37,16 +37,15 @@ public class BlockTower : MonoBehaviour
 
         // this needs to be moved into a block.Initialize function
         Block block = blockGO.GetComponent<Block>();
-        MeshFilter meshFilter = blockGO.GetComponent<MeshFilter>();
-        MeshRenderer meshRenderer = blockGO.GetComponent<MeshRenderer>();
+        // MeshFilter meshFilter = blockGO.GetComponent<MeshFilter>();  // Note AV: this happens in block?
+        // MeshRenderer meshRenderer = blockGO.GetComponent<MeshRenderer>(); // Note AV: this happens in block?
 
         block.transform.position = position;
 
         block.data = blockTemplate.blockData;
 
-        meshFilter.mesh = blockTemplate.mesh;
-       
-        meshRenderer.material = blockTemplate.material;
+        //meshFilter.mesh = blockTemplate.mesh; // Note AV: this happens in block?
+        // meshRenderer.material = blockTemplate.material;  // Note AV: this happens in block?
 
         block.Initialize();
 

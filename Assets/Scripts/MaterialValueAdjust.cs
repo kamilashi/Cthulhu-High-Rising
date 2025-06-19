@@ -40,4 +40,12 @@ public class MaterialValueAdjust : MonoBehaviour
             dissolve ? 1 : 0, 
             dissolveValue.z);
     }
+
+    public void SetColor(Color _color)
+    {
+        foreach(Material mat in materials)
+        {
+            mat.SetColor("_ColorHighlight", _color);
+        }
+    }
 }

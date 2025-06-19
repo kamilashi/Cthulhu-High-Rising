@@ -90,9 +90,8 @@ MonoBehaviour:
     height: 1
     givenName: 
   equipmentList: []
-  regularColor: {r: 0, g: 0, b: 0, a: 0}
-  hoveredColor: {r: 0.9858491, g: 0.9858491, b: 0.9858491, a: 1}
-  sharedMaterial: {fileID: 0}
+  hoveredColor: {r: 1, g: 1, b: 1, a: 1}
+  material: {fileID: 8252892818310319150}
   isHovered: 0
 --- !u!136 &6698211299471286168
 CapsuleCollider:
