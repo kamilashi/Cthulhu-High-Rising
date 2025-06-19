@@ -7,9 +7,10 @@ using UnityEngine;
 [Serializable]
 public class EquipmentData
 {
+/*
     public ModifiableData Damage;
     public ModifiableData AttackRange;
-    public ModifiableData AttackSpeed;
+    public ModifiableData AttackSpeed;*/
 
     public string givenName;
 }

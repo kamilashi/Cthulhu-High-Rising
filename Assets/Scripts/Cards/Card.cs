@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -85,6 +86,13 @@ public class EquipmentCard : Card
 
         DisposeFromHand();
     }
+}
+
+
+[Serializable]
+public class ModifierData
+{
+
 }
 
 public class ModifierCard<T> : Card

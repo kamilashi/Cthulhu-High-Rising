@@ -11,31 +11,13 @@ public enum GamePhase
     Combat
 }
 
-public enum Selectables
-{
-    None,
-    Card,
-    Block,
-    Equipment
-}
-
-[Serializable]
-public class ModifiableData
-{
-    public float BaseValue;
-
-    public float GetValue() // to be read from in runtime
-    {
-        return BaseValue;
-    }
-}
 public static class EventManager
 {
     public static UnityEvent<CardObject> onCardSelectedEvent = new UnityEvent<CardObject>();
     public static UnityEvent<Block> onBlockSelectedEvent = new UnityEvent<Block>();
     public static UnityEvent<Equipment> onEquipmentSelectedEvent = new UnityEvent<Equipment>();
 
-    public static UnityEvent<Selectables, GameObject> onObjectSelectedEvent = new UnityEvent<Selectables, GameObject>();
+    public static UnityEvent<Selectables, GameObject> onObjectSelectedEvent = new UnityEvent<Selectables, GameObject>(); // not used really
 }
     
 

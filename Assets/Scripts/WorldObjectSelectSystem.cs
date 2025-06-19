@@ -10,6 +10,14 @@ public interface IHoverable
     public void OnStopHover();
 }
 
+public enum Selectables
+{
+    None,
+    Card,
+    Block,
+    Equipment
+}
+
 public class WorldObjectSelectSystem : MonoBehaviour
 {
     [Header("Setup")]
