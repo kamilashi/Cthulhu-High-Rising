@@ -3,7 +3,22 @@ guid: dbf5c6c39b373a24798331036a21bdc1
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlockTop
+    second: {fileID: 2100000, guid: 837e80eb9c6ef1e4ab347ab603f727cc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BlockTop_Orb
+    second: {fileID: 2100000, guid: 4609b968f2f92e74e983f7a486ca4035, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Block_Tower
+    second: {fileID: 2100000, guid: 06fba226b1a7fed4cbe6f0fdb985abcc, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
