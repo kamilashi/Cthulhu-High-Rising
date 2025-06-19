@@ -1156,7 +1156,7 @@
     "m_Title": "Noise",
     "m_Position": {
         "x": -1747.0,
-        "y": -209.00003051757813
+        "y": -208.99996948242188
     }
 }
 
@@ -2465,7 +2465,7 @@
     "m_ShaderOutputName": "OutMinMax",
     "m_StageCapability": 3,
     "m_Value": {
-        "x": -0.6000000238418579,
+        "x": -0.699999988079071,
         "y": 1.0
     },
     "m_DefaultValue": {
@@ -3569,8 +3569,8 @@
     "m_ObjectId": "f632a5edfedc4f52818dad60bd8f9b5b",
     "m_Title": "Get Edges",
     "m_Position": {
-        "x": 461.9998474121094,
-        "y": -64.0
+        "x": 462.0001220703125,
+        "y": -63.99993896484375
     }
 }
 
