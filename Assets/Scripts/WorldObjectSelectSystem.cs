@@ -76,6 +76,8 @@ public class WorldObjectSelectSystem : MonoBehaviour
     private void OnEquipmentBlockSelect(GameObject selected)
     {
         Block ownerBlockObject = selected.GetComponent<Equipment>().blockOwner;
+        ModifierCard.modifiedUnitsCount = ownerBlockObject.equipmentList.Count;
+
         for (int i = 0; i < ownerBlockObject.equipmentList.Count; i++)
         {
             gameManager.OnEquipmentSelected(ownerBlockObject.equipmentList[i]);

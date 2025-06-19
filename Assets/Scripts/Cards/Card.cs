@@ -28,7 +28,6 @@ public abstract class Card
     public GameManager gameManager;
     public CardType cardType;
     public bool shouldBeDiscarded = false;
-    public bool awaitingInput = false;
 
     public Material material;
 
@@ -39,7 +38,6 @@ public abstract class Card
     public void Reset()
     {
         shouldBeDiscarded = false;
-        awaitingInput = false;
     }
 
     public bool IsDisabled()
@@ -79,7 +77,6 @@ public class EquipmentCard : Card
     public EquipmentCard()
     {
         cardType = CardType.Equipment;
-        EventManager.onBlockSelectedEvent.AddListener(OnBlockTargetSelected);
     }
 
     public override void Play()
@@ -91,18 +88,19 @@ public class EquipmentCard : Card
 
         gameManager.RequestSelectionMode(Selectables.Block);
 
-        awaitingInput = true;
+        EventManager.onBlockSelectedEvent.AddListener(OnBlockTargetSelected);
     }
 
     public void OnBlockTargetSelected(Block block)
     {
-        if (!awaitingInput || IsDisabled())
+        if (IsDisabled())
         {
             return;
         }
 
         gameManager.TryPlaceEquipment(block, equipmentSO);
 
+        EventManager.onBlockSelectedEvent.RemoveListener(OnBlockTargetSelected);
         DisposeFromHand();
     }
 }
@@ -111,12 +109,11 @@ public class ModifierCard : Card
 {
     public ModifierData modifierData;
     public object operand;
+    public static int modifiedUnitsCount;
+    public static int currentModifiedUnitsCount;
     public ModifierCard()
     {
         cardType = CardType.Modifier;
-
-        EventManager.onBlockSelectedEvent.AddListener(OnBlockTargetSelected);
-        EventManager.onEquipmentSelectedEvent.AddListener(OnEquipmentTargetSelected);
     }
     public override void Play()
     {
@@ -127,36 +124,46 @@ public class ModifierCard : Card
 
         if (modifierData.target == ModifierTarget.Block)
         {
+            EventManager.onBlockSelectedEvent.AddListener(OnBlockTargetSelected);
             gameManager.RequestSelectionMode(Selectables.Block);
         }
         else
         {
+            EventManager.onEquipmentSelectedEvent.AddListener(OnEquipmentTargetSelected);
             gameManager.RequestSelectionMode(Selectables.Equipment);
         }
-
-        awaitingInput = true;
     }
     public void OnBlockTargetSelected(Block block)
     {
-        if (!awaitingInput || !IsTargetCorrect(ModifierTarget.Block, modifierData.target) || IsDisabled() )
+        if (!IsTargetCorrect(ModifierTarget.Block, modifierData.target) || IsDisabled() )
         {
             return;
         }
 
         ModifyTarget(block, modifierData, operand);
 
+        EventManager.onBlockSelectedEvent.RemoveListener(OnBlockTargetSelected);
         DisposeFromHand();
     }
     public void OnEquipmentTargetSelected(Equipment equipment)
     {
-        if (!awaitingInput || !IsTargetCorrect(ModifierTarget.Equipment, modifierData.target) || IsDisabled())
+        if (!IsTargetCorrect(ModifierTarget.Equipment, modifierData.target) || IsDisabled())
         {
             return;
         }
 
         ModifyTarget(equipment, modifierData, operand);
 
-        DisposeFromHand();
+        currentModifiedUnitsCount++;
+
+        if (currentModifiedUnitsCount >= modifiedUnitsCount)
+        {
+            DisposeFromHand();
+            EventManager.onEquipmentSelectedEvent.RemoveListener(OnEquipmentTargetSelected);
+
+            currentModifiedUnitsCount = 0;
+            modifiedUnitsCount = 0;
+        }
     }
 
     private bool IsTargetCorrect(ModifierTarget current, ModifierTarget correct)

@@ -705,6 +705,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: StartBlock
       objectReference: {fileID: 0}
+    - target: {fileID: 6034568755760224155, guid: e70a91f328f6c984fbee73ebeb091a27,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6143026751571720380, guid: e70a91f328f6c984fbee73ebeb091a27,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8294841682658950506, guid: e70a91f328f6c984fbee73ebeb091a27,
         type: 3}
       propertyPath: m_LocalPosition.x

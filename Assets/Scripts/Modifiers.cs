@@ -113,7 +113,7 @@ public class Modifiers
     public class ModifiableData<T> where T : INumeric
     {
         public T baseValueContainer;
-        private T modifiedValueContainer;
+        public T modifiedValueContainer;
         public List<ModifyOperation<T>> operations = new List<ModifyOperation<T>>();
 
         private int newRevision = 0;

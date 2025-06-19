@@ -68,7 +68,7 @@ public class Block : MonoBehaviour, IHoverable
 
             Equipment equipment = EquipmentGO.GetComponentInChildren<Equipment>();
 
-            equipment.equipmentData = equipmentSO.equipmentData;    
+            equipment.equipmentData = new EquipmentData( equipmentSO.baseData, equipmentSO.givenName);    
             
             equipment.blockOwner = this;
 

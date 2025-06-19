@@ -6,13 +6,35 @@ using static Modifiers;
 
 
 [Serializable]
-public class EquipmentData
+public struct BaseEquipmentData
+{
+    public float baseAttackDamage;
+    public float baseAttackRange;
+    public float baseAttackSpeed;
+}
+
+[Serializable]
+public struct EquipmentData
 {
     public ModifiableData<ModifiableFloat> damage;
     public ModifiableData<ModifiableFloat> attackRange;
     public ModifiableData<ModifiableFloat> attackSpeed;
 
     public string givenName;
+
+    public EquipmentData(BaseEquipmentData baseData, string name)
+    {
+        damage = new ModifiableData<ModifiableFloat>();
+        damage.baseValueContainer.value = baseData.baseAttackDamage;
+
+        attackRange = new ModifiableData<ModifiableFloat>();
+        attackRange.baseValueContainer.value = baseData.baseAttackRange;
+
+        attackSpeed = new ModifiableData<ModifiableFloat>();
+        attackSpeed.baseValueContainer.value = baseData.baseAttackSpeed;
+
+        givenName = name;
+    }
 }
 
 public class Equipment : MonoBehaviour, IHoverable
