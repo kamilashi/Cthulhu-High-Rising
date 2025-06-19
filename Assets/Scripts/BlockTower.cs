@@ -6,6 +6,7 @@ public class BlockTower : MonoBehaviour
 {
     [Header("Setup")]
     public GameObject blockPrefab;
+    public Transform startBlock;
 
     [Header("Testing")]
     public BlockSO blockScriptableObject; // should come from the card
@@ -14,7 +15,6 @@ public class BlockTower : MonoBehaviour
     public List<Block> blocks = new List<Block>();
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -49,8 +49,12 @@ public class BlockTower : MonoBehaviour
 
         block.Initialize();
 
-
         blocks.Add(block);
+
+        // Move startBlock up with each new block
+        Vector3 pos = startBlock.position;
+        pos.y += block.data.height * block.transform.localScale.y;
+        startBlock.position = pos;
     }
 
     [ContextMenu("AddBlock")]
