@@ -137,7 +137,7 @@ MonoBehaviour:
   - {fileID: 2438449911952740745}
   data:
     blockType: 0
-    height: 1
+    height: 1.8
     givenName: 
   equipmentList: []
   regularColor: {r: 0, g: 0, b: 0, a: 0}
@@ -163,10 +163,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.79
-  m_Height: 2.7
+  m_Radius: 0.5
+  m_Height: 2.33
   m_Direction: 1
-  m_Center: {x: 0.00000014901161, y: 1.0005114, z: 0.00000017881393}
+  m_Center: {x: 0, y: 1.0005114, z: 0}
 --- !u!1 &7890655387852921868
 GameObject:
   m_ObjectHideFlags: 0
