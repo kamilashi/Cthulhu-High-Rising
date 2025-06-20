@@ -8,5 +8,7 @@ public abstract class CardSO : ScriptableObject
     public Material material;
 
     public CardType cardType;
+
+    public CardData cardData;
 }
 

@@ -62,8 +62,8 @@ public class DeckView : MonoBehaviour
             cardObject.deckView = this;
             cardObject.transform.position = position;
 
-            cardObject.nameText.text = cards[i].cardType.ToString();
-            cardObject.descriptionText.text = GetDescriptionText(cards[i]);
+            cardObject.nameText.text = GetCardName(cards[i]);
+            cardObject.descriptionText.text = GetCardDescription(cards[i]);
 
             cardObject.meshRenderer.material = cards[i].material;
 
@@ -101,8 +101,30 @@ public class DeckView : MonoBehaviour
 #endif
     }
 
-    // this is temporary and needs to be replaced with something proper
-    public string GetDescriptionText(Card card)
+    private void ProcessUninitializedText(ref string text)
+    {
+        if (text == "")
+        {
+            text = "Please set the text in the scriptable object.";
+        }
+    }
+
+    private string GetCardDescription(Card card)
+    {
+        string desc = card.GetDescription();
+
+        ProcessUninitializedText(ref desc);
+
+        return card.GetDescription();
+    }
+    private string GetCardName(Card card)
+    {
+        string name = card.GetName();
+        ProcessUninitializedText(ref name);
+        return name;
+    }
+
+    private string GetDebugDescriptionText(Card card)
     {
         string text = "";
 
