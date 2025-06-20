@@ -126,6 +126,7 @@ public class CanonController : MonoBehaviour
             if (enemyhealth.currentHealth <= 0)
             {
                 enemies.Remove(bestTarget.transform);
+                bestTarget = null;
             }
         }
     }
