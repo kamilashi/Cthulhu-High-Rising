@@ -1,5 +1,54 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6944590317515294660
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6163685142300711013}
+  - component: {fileID: 2178234443104242582}
+  m_Layer: 0
+  m_Name: StatusEffectReceiver
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6163685142300711013
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944590317515294660}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.014500003}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 64798530355904129}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2178234443104242582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6944590317515294660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0c86556d9b9586448b94867070e97e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  receiverRigidbody: {fileID: 769465820490594831}
+  receiverCollider: {fileID: 3724764526092195291}
+  enemyHealth: {fileID: 3973001434292359830}
+  enemyControler: {fileID: 253192214879063611}
+  dotTimer: -1
 --- !u!1 &8791935100734633394
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,6 +166,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1211854604058143296}
+  - {fileID: 6163685142300711013}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &3724764526092195291
@@ -186,7 +236,13 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   GroundPos: {fileID: 0}
-  moveSpeed: 0.75
+  modifiableMovementSpeed:
+    baseValueContainer:
+      value: 0
+    modifiedValueContainer:
+      value: 0
+    operations: []
+  startMoveSpeed: 0.75
   rotationSpeed: 10
   Index: 0
 --- !u!114 &3973001434292359830
