@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8a7c7faa55278541b9ee1b331144bdc, type: 3}
   m_Name: RangeEquipmentModifierCardSO
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: 5f12681b9939f3d4d8faafbfc30c825f, type: 2}
+  material: {fileID: 2100000, guid: 233e9cd2d31f14b4bb40d534441e17e1, type: 2}
   cardType: 2
   cardData:
     name: Range Equipment Modifier Card

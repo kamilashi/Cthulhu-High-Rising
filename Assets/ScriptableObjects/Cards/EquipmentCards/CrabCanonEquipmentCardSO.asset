@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bee68e50bcf55e4d85cc50200d16771, type: 3}
   m_Name: CrabCanonEquipmentCardSO
   m_EditorClassIdentifier: 
-  material: {fileID: -1874768075243587665, guid: 52c8611d37a374e439f3edc0a2c9c575,
-    type: 3}
+  material: {fileID: 2100000, guid: 84c9e880bd26ca94ebf0aab92a293f70, type: 2}
   cardType: 1
   cardData:
     name: Crab Canon Card
