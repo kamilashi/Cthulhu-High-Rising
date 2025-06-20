@@ -207,7 +207,7 @@ public class GameManager : MonoBehaviour
 
     public void OnCardSelected(CardObject cardObject)
     {
-        cardObject.card.Play();
+        cardObject.card.OnSelected();
 
         EventManager.onCardSelectedEvent.Invoke(cardObject);
         EventManager.onObjectSelectedEvent.Invoke(Selectables.Card, cardObject.gameObject);

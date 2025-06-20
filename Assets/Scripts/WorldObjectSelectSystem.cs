@@ -53,6 +53,11 @@ public class WorldObjectSelectSystem : MonoBehaviour
 
     void Update()
     {
+        if(gameManager.gamePhase == GamePhase.Combat)
+        {
+            return;
+        }
+
         ProcessHovering();
         ProcessSelection();
     }
