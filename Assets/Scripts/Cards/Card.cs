@@ -23,8 +23,16 @@ public enum ModifierTarget
     None
 }
 
+[Serializable]
+public struct CardData
+{
+    public string name;
+    public string description;
+}
+
 public abstract class Card
 {
+    public CardData cardData;
     public GameManager gameManager;
     public CardType cardType;
     public bool shouldBeDiscarded = false;
@@ -49,6 +57,15 @@ public abstract class Card
     {
         gameManager.deckSystem.DisCardToGraveyard(this);
         shouldBeDiscarded = true;
+    }
+
+    public string GetDescription()
+    {
+        return cardData.description;
+    }
+    public string GetName()
+    {
+        return cardData.name;
     }
 }
 

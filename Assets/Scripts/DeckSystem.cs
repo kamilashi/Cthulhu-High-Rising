@@ -61,15 +61,7 @@ public class DeckSystem : MonoBehaviour
         {
             for(int j = 0;  j < deckData.modifierCardCounts[i].count; j++)
             {
-                ModifierTarget modifierTarget = deckData.modifierCardCounts[i].cardSO.modifierData.target;
-                if (modifierTarget == ModifierTarget.Block)
-                {
-                    cardDeck.Add(CreateBlockModifierCard(deckData.modifierCardCounts[i].cardSO));
-                }
-                else if(modifierTarget == ModifierTarget.Equipment)
-                {
-                    cardDeck.Add(CreateEquipmentModifierCard(deckData.modifierCardCounts[i].cardSO));
-                }
+                cardDeck.Add(CreateModifierCard(deckData.modifierCardCounts[i].cardSO));
             }
         }
     }
@@ -79,6 +71,8 @@ public class DeckSystem : MonoBehaviour
         BlockCard card = new BlockCard();
         card.material = cardSO.material;
         card.gameManager = gameManager;
+        card.cardData = cardSO.cardData;
+
         card.blockSO = cardSO.blockSO;
 
         return card;
@@ -89,42 +83,26 @@ public class DeckSystem : MonoBehaviour
         EquipmentCard card = new EquipmentCard();
         card.gameManager = gameManager;
         card.material = cardSO.material;
+        card.cardData = cardSO.cardData;
+
         card.equipmentSO = cardSO.equipmentSO;
 
         return card;
     }
 
     // todo: combine CreateBlockModifierCard and CreateEquipmentModifierCard into CreateModifierCard!
-    private ModifierCard CreateBlockModifierCard(ModifierCardSO cardSO)
+    private ModifierCard CreateModifierCard(ModifierCardSO cardSO)
     {
         ModifierCard card = new ModifierCard();
         card.gameManager = gameManager;
-        card.modifierData = cardSO.modifierData;
+        card.cardData = cardSO.cardData;
         card.material = cardSO.material;
+
+        card.modifierData = cardSO.modifierData;
 
         object operandConverted = cardSO.operand;
 
         if (cardSO.modifierData.modifiablePropertyType.GetType() == typeof(ModifiableInt))
-        {
-            Debug.Assert(cardSO.operand - Mathf.Floor(cardSO.operand) != 0.0f, "please, define a fractionless operand for " + cardSO.name);
-
-            operandConverted = Mathf.FloorToInt(cardSO.operand);
-        }
-
-        card.operand = cardSO.operand;
-
-        return card;
-    }
-    private ModifierCard CreateEquipmentModifierCard(ModifierCardSO cardSO)
-    {
-        ModifierCard card = new ModifierCard();
-        card.gameManager = gameManager;
-        card.modifierData = cardSO.modifierData;
-        card.material = cardSO.material;
-
-        object operandConverted = cardSO.operand;
-
-        if(cardSO.modifierData.modifiablePropertyType.GetType() == typeof(ModifiableInt))
         {
             Debug.Assert(cardSO.operand - Mathf.Floor(cardSO.operand) != 0.0f, "please, define a fractionless operand for " + cardSO.name);
 
