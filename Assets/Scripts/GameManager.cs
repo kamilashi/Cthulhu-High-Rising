@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GamePhase.Build:
-                if (deckSystem.hand.Count == 0 || continueNextPhase)
+                if (continueNextPhase)
                 {
                     DiscardHand();
                     gamePhase = GamePhase.Combat;
@@ -113,7 +113,6 @@ public class GameManager : MonoBehaviour
             case GamePhase.Combat:
                 if(combatResult != null)
                 {
-
                     //TODO MS -> wait for rewards
 
                     gamePhase = GamePhase.Draw;
