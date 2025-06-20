@@ -80,8 +80,6 @@ public class CanonController : MonoBehaviour
         EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null) 
         {
-            Debug.Log("enemy in range");
-            //addEnemy(other.transform);
             enemies.Add(other.transform);
            
         }
@@ -91,10 +89,7 @@ public class CanonController : MonoBehaviour
     {
         EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null)
-        {
-            Debug.Log("enemy out of range");
-            
-          
+        { 
             enemies.Remove(other.transform);
         }
     }
