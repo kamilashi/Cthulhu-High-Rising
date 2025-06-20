@@ -101,26 +101,18 @@ public class DeckView : MonoBehaviour
 #endif
     }
 
-    private void ProcessUninitializedText(ref string text)
-    {
-        if (text == "")
-        {
-            text = "Please set the text in the scriptable object.";
-        }
-    }
-
     private string GetCardDescription(Card card)
     {
         string desc = card.GetDescription();
 
-        ProcessUninitializedText(ref desc);
+        Helpers.ProcessUninitializedText(ref desc);
 
         return card.GetDescription();
     }
     private string GetCardName(Card card)
     {
         string name = card.GetName();
-        ProcessUninitializedText(ref name);
+        Helpers.ProcessUninitializedText(ref name);
         return name;
     }
 
