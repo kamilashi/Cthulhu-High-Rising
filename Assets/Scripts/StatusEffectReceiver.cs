@@ -77,8 +77,11 @@ public class StatusEffectReceiver : MonoBehaviour
     {
         if(effect.effectType == StatusEffectType.Slowdown)
         {
-            effect.SetModifiableFieldRefernce(enemyControler.modifiableMovementSpeed);
-            effect.modifiableFloatFieldReference.AddModifier(effect.floatOperation);
+            //effect.SetModifiableFieldRefernce(enemyControler.modifiableMovementSpeed);
+            //effect.modifiableFloatFieldReference.AddModifier(effect.floatOperation);
+
+            effect.floatOperation.Apply(ref enemyControler.modifiableMovementSpeed.baseValueContainer);
+
             Debug.Log("Added slowed status effect");
         }
         else if(effect.effectType == StatusEffectType.DoTEverySecond)
@@ -92,7 +95,7 @@ public class StatusEffectReceiver : MonoBehaviour
     {
         if (!effect.isActiveThisFrame)
         {
-            effect.modifiableFloatFieldReference.AddModifier(effect.floatOperation);
+            //effect.modifiableFloatFieldReference.RemoveModifier(effect.floatOperation);
             RemoveActiveStatusEffect(effect.effectType);
             Debug.Log("Removed slowed status effect");
             return;

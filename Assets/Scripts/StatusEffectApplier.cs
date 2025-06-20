@@ -32,6 +32,7 @@ public class StatusEffect : StatusEffectTemplate
         effectType = template.effectType;
         damageOverTimeValue = template.damageOverTimeValue;
         floatOperation = template.floatOperation;
+        floatOperation.operand = slowDownFactor;
 
         isActiveThisFrame = true;   
     }

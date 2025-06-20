@@ -92,14 +92,14 @@ public class Modifiers
             operation = op;
             operand = opnd;
         }
-        public void Apply(T baseValue) // to be read from in runtime
+        public void Apply(ref T baseValue) // to be read from in runtime
         {
-            Operate(baseValue, operation, operand);
+            Operate(ref baseValue, operation, operand);
 
             Debug.LogWarning("Unsupported modifiable type " + baseValue.GetType().Name + "!");
         }
 
-        private void Operate(T baseOpnd, ModifyOperationType optn, object secondOpnd)
+        private void Operate(ref T baseOpnd, ModifyOperationType optn, object secondOpnd)
         {
             switch(optn)
             {
@@ -149,7 +149,7 @@ public class Modifiers
             T modifiedV = baseV;
             for (int i = 0; i < operations.Count; i++)
             {
-                operations[i].Apply(modifiedV);
+                operations[i].Apply(ref modifiedV);
             }
 
             return modifiedV;
