@@ -11,6 +11,7 @@ public class CardWobble : MonoBehaviour
 
     private Vector3 localEuler;
     private Vector3 localPos;
+    private Vector3 localScale;
 
     private float random;
 
@@ -24,6 +25,7 @@ public class CardWobble : MonoBehaviour
         tf = GetComponent<Transform>();
         localEuler = tf.localEulerAngles;
         localPos = tf.localPosition;
+        localScale = tf.localScale;
     }
 
 // Update is called once per frame
@@ -45,6 +47,7 @@ void Update()
 
         tf.localEulerAngles = new Vector3(xFactor, yFactor, zFactor) + localEuler;
         tf.localPosition = new Vector3(0, 0.1f * hoverValue.x, 0) + localPos;
+        tf.localScale = new Vector3(hoverValue.x * 0.2f, hoverValue.x * 0.2f, hoverValue.x * 0.2f) + localScale;
     }
 
     public void SetHoverState(bool hovered)

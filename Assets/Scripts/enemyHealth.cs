@@ -15,6 +15,8 @@ public class EnemyHealth : MonoBehaviour
 
     bool isDead = false;
 
+    public MaterialValueAdjust materialValueAdjust;
+
     void OnEnable()
     {
         currentHealth = maxHealth;
@@ -29,6 +31,9 @@ public class EnemyHealth : MonoBehaviour
     public void getHit(int Damage) 
     {
         currentHealth -= Damage;
+
+        materialValueAdjust.HightlightFlash(Color.red);
+
         if (currentHealth <= 0)
         {
             Die();

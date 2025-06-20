@@ -10,6 +10,7 @@ public class EnemySpawner : MonoBehaviour
     {
         public EnemyHealth enemyPrefab;
         public int spawnCount;
+        public Transform spawnLocation;
         [HideInInspector] public IObjectPool<EnemyHealth> pool;
     }
 
@@ -105,15 +106,15 @@ public class EnemySpawner : MonoBehaviour
                 yield return new WaitForSeconds(spawnInterval);
 
                 var enemy = enemyData.pool.Get();
-                SpawnEnemy(enemy);
+                SpawnEnemy(enemy, enemyData.spawnLocation.position);
                 Debug.Log($"Spawned {enemyData.enemyPrefab.name}");
             }
         }
     }
 
-    void SpawnEnemy(EnemyHealth enemy)
+    void SpawnEnemy(EnemyHealth enemy, Vector3 spawnLocation)
     {
-        Vector3 spawnPosition = transform.position + new Vector3(
+        Vector3 spawnPosition = spawnLocation + new Vector3(
             Random.Range(-spawnRadius, spawnRadius),
             0,
             Random.Range(-spawnRadius, spawnRadius)
@@ -125,10 +126,6 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SpawnEnemy(enemyTypes[0].pool.Get());
-        }
     }
 
     public void RegisterEnemy(EnemyHealth enemy)
@@ -158,8 +155,6 @@ public class EnemySpawner : MonoBehaviour
 
             EventManager.onAllEnemiesDefeatedEvent.Invoke();
         }
-
-        
     }
 
     void HandleOnReachedTop(EnemyController enemy)

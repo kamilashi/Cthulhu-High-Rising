@@ -46,7 +46,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Cubemap:
-        m_Texture: {fileID: 8900000, guid: fbd430e539a8e0d428845e65afc84a17, type: 2}
+        m_Texture: {fileID: 8900000, guid: 3c3fc18f44e958b469e7891f1413b0bc, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -135,7 +135,7 @@ Material:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 0, g: 0, b: 0, a: 1}
     - _ColorDissolve: {r: 0, g: 0.9683549, b: 1, a: 0}
-    - _ColorShift: {r: 0.9883274, g: 0.4894485, b: 2.1176138, a: 0}
+    - _ColorShift: {r: 6.498019, g: 6.498019, b: 6.498019, a: 0}
     - _Color_1: {r: 1, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}

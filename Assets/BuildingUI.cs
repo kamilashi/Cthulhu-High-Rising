@@ -27,7 +27,7 @@ public class BuildingUI : MonoBehaviour
 
     }
 
-    private void Update()
+    void Update()
     {
         MainCanvas.enabled = GameManager.gamePhase == GamePhase.Build;
 

@@ -875,38 +875,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 884094203}
-  - component: {fileID: 884094202}
   m_Layer: 0
-  m_Name: EnemySpawner3
+  m_Name: EnemySpawnLocation3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &884094202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 884094201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb17d66448a76b4eaf39e66c753ba29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTypes:
-  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
-      type: 3}
-    spawnCount: 1
-  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
-      type: 3}
-    spawnCount: 1
-  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
-      type: 3}
-    spawnCount: 1
-  spawnRadius: 1
-  spawnInterval: 1
 --- !u!4 &884094203
 Transform:
   m_ObjectHideFlags: 0
@@ -932,38 +907,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179290234}
-  - component: {fileID: 1179290233}
   m_Layer: 0
-  m_Name: EnemySpawner1
+  m_Name: EnemySpawnLocation1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1179290233
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1179290232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb17d66448a76b4eaf39e66c753ba29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTypes:
-  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
-      type: 3}
-    spawnCount: 1
-  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
-      type: 3}
-    spawnCount: 1
-  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
-      type: 3}
-    spawnCount: 1
-  spawnRadius: 1
-  spawnInterval: 1
 --- !u!4 &1179290234
 Transform:
   m_ObjectHideFlags: 0
@@ -1153,38 +1103,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1472642441}
-  - component: {fileID: 1472642440}
   m_Layer: 0
-  m_Name: EnemySpawner2
+  m_Name: EnemySpawnLocation2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1472642440
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1472642439}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: adb17d66448a76b4eaf39e66c753ba29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyTypes:
-  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
-      type: 3}
-    spawnCount: 1
-  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
-      type: 3}
-    spawnCount: 1
-  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
-      type: 3}
-    spawnCount: 1
-  spawnRadius: 1
-  spawnInterval: 1
 --- !u!4 &1472642441
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,6 +1254,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1852130004}
+  - component: {fileID: 1852130005}
   m_Layer: 0
   m_Name: EnemySpawner
   m_TagString: Untagged
@@ -1354,6 +1280,57 @@ Transform:
   - {fileID: 884094203}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852130005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852130003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adb17d66448a76b4eaf39e66c753ba29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyTypes:
+  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 1179290234}
+  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 1179290234}
+  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 1179290234}
+  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 1472642441}
+  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 1472642441}
+  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 1472642441}
+  - enemyPrefab: {fileID: 4781544091103790172, guid: bc7175b922772a94a8893c43a405637e,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 884094203}
+  - enemyPrefab: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 884094203}
+  - enemyPrefab: {fileID: 2605056433262814441, guid: 7740f7cbe023e66439b0d2823fb1024e,
+      type: 3}
+    spawnCount: 1
+    spawnLocation: {fileID: 884094203}
+  spawnRadius: 1
+  spawnInterval: 1
 --- !u!1001 &1863808155
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -99,6 +99,11 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 3973001434292359830, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: materialValueAdjust
+      value: 
+      objectReference: {fileID: 2789710877532313232}
     - target: {fileID: 4907766735849464133, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: movementSpeed
@@ -118,7 +123,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 1c59e0856bb6ba645a2202b42dca4b2f, type: 2}
+      objectReference: {fileID: 2100000, guid: d53cc8a64cf27f4449f2f1c696dcdd27, type: 2}
     - target: {fileID: 8791935100734633394, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Layer
@@ -139,3 +144,15 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07ae9e7297876b446bb90a8d24224fc6, type: 3}
+--- !u!114 &2789710877532313232 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6038924156980576346, guid: 07ae9e7297876b446bb90a8d24224fc6,
+    type: 3}
+  m_PrefabInstance: {fileID: 8464967146777155274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1caf8463eca1e9840b6744798cf37a55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

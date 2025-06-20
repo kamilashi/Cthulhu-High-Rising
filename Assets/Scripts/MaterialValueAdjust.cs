@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class MaterialValueAdjust : MonoBehaviour
     public List<SkinnedMeshRenderer> skinnedMeshRenderer;
     public List<Material> materials;
     public Vector3 dissolveValue = new Vector3(1, 0, 0.5f); // current value, target value, timeFactor;
+    public Vector3 highlightValue = new Vector3(1, 0, 10f); // current value, target value, timeFactor;
 
     void Start()
     {
@@ -35,9 +37,19 @@ public class MaterialValueAdjust : MonoBehaviour
             dissolveValue.y, 
             dissolveValue.z);
 
-        foreach(Material mat in materials)
+        highlightValue = new Vector3(
+            Mathf.Lerp(highlightValue.x, highlightValue.y, Time.deltaTime * highlightValue.z),
+            highlightValue.y,
+            highlightValue.z);
+
+        foreach (Material mat in materials)
         {
             mat.SetFloat("_dissolveValue", dissolveValue.x);
+        }
+
+        foreach (Material mat in materials)
+        {
+            mat.SetFloat("_HighlightValue", highlightValue.x);
         }
     }
 
@@ -55,5 +67,23 @@ public class MaterialValueAdjust : MonoBehaviour
         {
             mat.SetColor("_ColorHighlight", _color);
         }
+
+        highlightValue = new Vector3(
+            highlightValue.x,
+            1,
+            highlightValue.z);
+    }
+
+    public void HightlightFlash(Color _color)
+    {
+        foreach (Material mat in materials)
+        {
+            mat.SetColor("_ColorHighlight", _color);
+        }
+
+        highlightValue = new Vector3(
+            4,
+            0,
+            highlightValue.z);
     }
 }
