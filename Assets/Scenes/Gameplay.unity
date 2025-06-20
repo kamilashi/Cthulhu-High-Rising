@@ -733,7 +733,7 @@ MonoBehaviour:
     type: 3}
   distanceFromCamera: 0.5
   basePadding: 0.2
-  heightOffset: 0.5
+  heightOffset: 0.35
   mainCamera: {fileID: 0}
   cardObjects: []
 --- !u!114 &727973388
