@@ -532,6 +532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   topBlock: {fileID: 328488006}
+  startBlock: {fileID: 11400000, guid: 4a802ae9dfa371240b9068462adc96b0, type: 2}
   blockScriptableObject: {fileID: 11400000, guid: 165c79de15d7a18429567caff2b1fa15,
     type: 2}
   blocks: []

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dac2a87bdd252b944a9e4521e3262668, type: 3}
-  m_Name: TurretEquipment
+  m_Name: CrystalCanonEquipmentSO
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6562604598940603689, guid: 4d592236c9081834ab5b45d2d16c5a06, type: 3}
+  prefab: {fileID: 3583286396769263687, guid: ab5a5e961e3e84e47946b7c07810d833, type: 3}
   baseData:
     baseAttackDamage: 1
     baseAttackRange: 2

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using static Modifiers;
 
@@ -40,7 +41,7 @@ public struct EquipmentData
 public class Equipment : MonoBehaviour, IHoverable
 {
     [Header("Setup in Prefab")]
-    public List<MeshRenderer> meshRenderers = new List<MeshRenderer>(); // temporary
+    public MaterialValueAdjust material;
 
     [Header("Auto Setup")]
     public EquipmentData equipmentData;
@@ -48,29 +49,19 @@ public class Equipment : MonoBehaviour, IHoverable
 
     // temporary
     [Header("Debug View")]
-    public List<Color> regularColors = new List<Color>();
-    public Color hoveredColor = Color.blue;
+    public Color hoveredColor = Color.white;
     public List<Material> sharedMaterials = new List<Material>();
 
     public bool isHovered = false;
     public void Initialize()
     {
-        // this is temporary, until a better on hovered solution is implemented
-        for(int i = 0; i<meshRenderers.Count; i++)
-        {
-            regularColors.Add(meshRenderers[i].material.color);
-            sharedMaterials.Add(meshRenderers[i].sharedMaterial);
-        }
 
     }
     public void OnStartHover()
     {
         if (isHovered) { return; }
 
-        for (int i = 0; i < meshRenderers.Count; i++)
-        {
-            sharedMaterials[i].color = hoveredColor;
-        }
+        material.SetColor(hoveredColor);
 
         isHovered = true;
     }
@@ -79,10 +70,7 @@ public class Equipment : MonoBehaviour, IHoverable
     {
         if (!isHovered) { return; }
 
-        for (int i = 0; i < meshRenderers.Count; i++)
-        {
-            sharedMaterials[i].color = regularColors[i];
-        }
+        material.SetColor(Color.black);
 
         isHovered = false;
     }

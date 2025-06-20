@@ -35,7 +35,7 @@ public class Block : MonoBehaviour, IHoverable
     public List<Equipment> equipmentList = new List<Equipment>(); // may change how equipment is stored
 
     // public Color regularColor;
-    public Color hoveredColor = Color.blue;
+    public Color hoveredColor = Color.white;
     // public Material sharedMaterial;
 
     public MaterialValueAdjust material;
@@ -58,7 +58,7 @@ public class Block : MonoBehaviour, IHoverable
         // regularColor = meshRenderer.material.color;
         // sharedMaterial = meshRenderer.sharedMaterial;
 
-        Debug.Assert(availableSlotCount > 0 && slots.Count != 0, "Please, assign slots in the prefab of " + this.name);
+        Debug.Assert(availableSlotCount == 0 || slots.Count != 0, "Please, assign slots in the prefab of " + this.name);
     }
 
     public void CreateEquipment(EquipmentSO equipmentSO)

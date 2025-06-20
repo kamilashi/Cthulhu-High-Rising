@@ -6,6 +6,7 @@ public class BlockTower : MonoBehaviour
 {
     [Header("Setup")]
     public Transform topBlock;
+    public BlockSO startBlock; 
 
     [Header("Testing")]
     public BlockSO blockScriptableObject; // should come from the card
@@ -14,6 +15,7 @@ public class BlockTower : MonoBehaviour
     public List<Block> blocks = new List<Block>();
     void Start()
     {
+        CreateBlock(startBlock);
     }
 
     // Update is called once per frame
