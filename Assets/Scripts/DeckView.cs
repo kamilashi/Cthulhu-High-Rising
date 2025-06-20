@@ -10,6 +10,7 @@ public class DeckView : MonoBehaviour
     public GameObject cardObjectPrefab; // Later might be different prefabs
     public float distanceFromCamera;
     public float basePadding = 1.0f;
+    public float heightOffset = 0.5f;
 
     [Header("Auto Setup")]
     public Camera mainCamera;
@@ -56,6 +57,7 @@ public class DeckView : MonoBehaviour
             position += mainCamera.transform.forward * distanceFromCamera;
             position += GetVectorToScreenBottom(distanceFromCamera, position, mainCamera.transform, mainCamera.fieldOfView); // snap the pivot to the bottom of the screen
             position += mainCamera.transform.right * horizontalOffset;
+            position += mainCamera.transform.up * heightOffset;
 
             cardObject.card = cards[i];
             cardObject.gameManager = gameManager;
@@ -101,26 +103,18 @@ public class DeckView : MonoBehaviour
 #endif
     }
 
-    private void ProcessUninitializedText(ref string text)
-    {
-        if (text == "")
-        {
-            text = "Please set the text in the scriptable object.";
-        }
-    }
-
     private string GetCardDescription(Card card)
     {
         string desc = card.GetDescription();
 
-        ProcessUninitializedText(ref desc);
+        Helpers.ProcessUninitializedText(ref desc);
 
         return card.GetDescription();
     }
     private string GetCardName(Card card)
     {
         string name = card.GetName();
-        ProcessUninitializedText(ref name);
+        Helpers.ProcessUninitializedText(ref name);
         return name;
     }
 

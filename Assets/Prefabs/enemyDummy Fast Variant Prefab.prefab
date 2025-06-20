@@ -78,6 +78,12 @@ PrefabInstance:
       propertyPath: m_CollisionDetection
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1836746781903267599, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 4939644719572163550, guid: 941ba2be0e737aa4b819ec1209e02db5,
+        type: 3}
     - target: {fileID: 2552788356925987312, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Layer

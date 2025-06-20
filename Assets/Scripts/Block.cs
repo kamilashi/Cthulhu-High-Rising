@@ -18,7 +18,9 @@ public struct BlockData
 
     public float height;
 
-    public string givenName;
+    public string name;
+
+    public string description;
 }
 
 public class Block : MonoBehaviour, IHoverable
@@ -32,11 +34,9 @@ public class Block : MonoBehaviour, IHoverable
     public int availableSlotCount;
 
     [Header("Debug View")]
-    public List<Equipment> equipmentList = new List<Equipment>(); // may change how equipment is stored
+    public List<Equipment> equipmentList = new List<Equipment>(); // how the equipment is stored may change later down the line
 
-    // public Color regularColor;
     public Color hoveredColor = Color.white;
-    // public Material sharedMaterial;
 
     public MaterialValueAdjust material;
 
@@ -53,10 +53,6 @@ public class Block : MonoBehaviour, IHoverable
 
     public void Initialize()
     {
-        // this is temporary, until a better on hovered solution is implemented
-        // MeshRenderer meshRenderer = this.gameObject.GetComponent<MeshRenderer>();
-        // regularColor = meshRenderer.material.color;
-        // sharedMaterial = meshRenderer.sharedMaterial;
 
         Debug.Assert(availableSlotCount == 0 || slots.Count != 0, "Please, assign slots in the prefab of " + this.name);
     }
@@ -97,11 +93,19 @@ public class Block : MonoBehaviour, IHoverable
         return availableSlotCount > 0; 
     }
 
+    public string GetName()
+    {
+        return data.name;
+    }
+    public string GetDescription()
+    {
+        return data.description;
+    }
+
     public void OnStartHover()
     {
         if (isHovered) { return; }
 
-        // sharedMaterial.color = hoveredColor;
         material.SetColor(hoveredColor);
         isHovered = true;
     }
@@ -110,7 +114,6 @@ public class Block : MonoBehaviour, IHoverable
     {
         if (!isHovered) { return; }
 
-        // sharedMaterial.color = regularColor;
         material.SetColor(Color.black);
         isHovered = false;
     }
