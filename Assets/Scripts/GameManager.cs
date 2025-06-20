@@ -28,8 +28,10 @@ public static class EventManager
 
     public static UnityEvent<GamePhase> onGamePhaseChangedEvent = new UnityEvent<GamePhase>();
 
-    public static UnityEvent onAllEnemiesDefeatedEvent = new UnityEvent();
-    public static UnityEvent onEnemiesReachedTopEvent = new UnityEvent();
+    public static UnityEvent onAllEnemiesDefeatedEvent = new();
+    public static UnityEvent onEnemiesReachedTopEvent = new();
+
+    public static UnityEvent onProceedEvent = new();
 }
     
 public class GameManager : MonoBehaviour
@@ -50,10 +52,13 @@ public class GameManager : MonoBehaviour
     public CombatResult? combatResult;
     public Selectables selectionMode;
 
+    bool continueNextPhase = false;
+
     //public static GameManager Instance { get; private set; }
 
     void OnEnable()
     {
+        EventManager.onProceedEvent.AddListener(OnProceedToNextPhase);
         EventManager.onAllEnemiesDefeatedEvent.AddListener(OnCombatVictory);
         EventManager.onEnemiesReachedTopEvent.AddListener(OnCombatLost);
     }
@@ -99,7 +104,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GamePhase.Build:
-                if (deckSystem.hand.Count == 0)
+                if (deckSystem.hand.Count == 0 || continueNextPhase)
                 {
                     gamePhase = GamePhase.Combat;
                 }
@@ -107,6 +112,9 @@ public class GameManager : MonoBehaviour
             case GamePhase.Combat:
                 if(combatResult != null)
                 {
+
+                    //TODO MS -> wait for rewards
+
                     gamePhase = GamePhase.Draw;
                     combatResult = null;
                 }
@@ -115,6 +123,8 @@ public class GameManager : MonoBehaviour
 
         if (currentPhase != gamePhase)
         {
+            continueNextPhase = false;
+
             EventManager.onGamePhaseChangedEvent.Invoke(gamePhase);
         }
 
@@ -219,5 +229,10 @@ public class GameManager : MonoBehaviour
             Debug.Log("Combat ended – enemies reached the top!");
             combatResult = CombatResult.Lost;
         }
+    }
+
+    void OnProceedToNextPhase()
+    {
+        continueNextPhase = true;
     }
 }
