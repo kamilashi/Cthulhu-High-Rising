@@ -15,6 +15,6 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 84c9e880bd26ca94ebf0aab92a293f70, type: 2}
   cardType: 1
   cardData:
-    name: Crab Canon Card
+    name: Crab Cannon Card
     description: Adds crab cannons to a block
   equipmentSO: {fileID: 11400000, guid: 4aefbfd92e5f6d84299a6e526805ed83, type: 2}
