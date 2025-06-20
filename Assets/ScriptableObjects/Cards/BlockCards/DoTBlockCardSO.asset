@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0036145fb5c335c45b4f909034e2d2f1, type: 3}
   m_Name: DoTBlockCardSO
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
   material: {fileID: -7980425033806457140, guid: 9b21550b475c03e4bb4d4628c90c1137,
     type: 3}
   cardType: 0
+  cardData:
+    name: DoT Block Card
+    description: Builds a DoT block
   blockSO: {fileID: 11400000, guid: 4138e73ac9a5fe94ca86635d36d25840, type: 2}

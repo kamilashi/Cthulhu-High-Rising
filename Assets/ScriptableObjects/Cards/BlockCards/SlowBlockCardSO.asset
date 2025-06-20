@@ -15,4 +15,7 @@ MonoBehaviour:
   material: {fileID: -7980425033806457140, guid: 9b21550b475c03e4bb4d4628c90c1137,
     type: 3}
   cardType: 0
+  cardData:
+    name: Slow Block Card
+    description: Builds a slowing block
   blockSO: {fileID: 11400000, guid: 165c79de15d7a18429567caff2b1fa15, type: 2}

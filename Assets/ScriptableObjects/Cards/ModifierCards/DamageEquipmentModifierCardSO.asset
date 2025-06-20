@@ -14,6 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 5f12681b9939f3d4d8faafbfc30c825f, type: 2}
   cardType: 2
+  cardData:
+    name: Damage Equipment Modifier Card
+    description: increases the damage of an equipment
   modifierData:
     target: 1
     modifiablePropertyType: 1

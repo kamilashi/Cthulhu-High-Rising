@@ -106,6 +106,7 @@ public class GameManager : MonoBehaviour
             case GamePhase.Build:
                 if (deckSystem.hand.Count == 0 || continueNextPhase)
                 {
+                    DiscardHand();
                     gamePhase = GamePhase.Combat;
                 }
                 break;

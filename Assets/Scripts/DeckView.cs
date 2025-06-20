@@ -10,6 +10,7 @@ public class DeckView : MonoBehaviour
     public GameObject cardObjectPrefab; // Later might be different prefabs
     public float distanceFromCamera;
     public float basePadding = 1.0f;
+    public float heightOffset = 0.5f;
 
     [Header("Auto Setup")]
     public Camera mainCamera;
@@ -56,6 +57,7 @@ public class DeckView : MonoBehaviour
             position += mainCamera.transform.forward * distanceFromCamera;
             position += GetVectorToScreenBottom(distanceFromCamera, position, mainCamera.transform, mainCamera.fieldOfView); // snap the pivot to the bottom of the screen
             position += mainCamera.transform.right * horizontalOffset;
+            position += mainCamera.transform.up * heightOffset;
 
             cardObject.card = cards[i];
             cardObject.gameManager = gameManager;

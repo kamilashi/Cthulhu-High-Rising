@@ -15,4 +15,7 @@ MonoBehaviour:
   material: {fileID: -1874768075243587665, guid: 52c8611d37a374e439f3edc0a2c9c575,
     type: 3}
   cardType: 1
+  cardData:
+    name: Crystal Cannon Card
+    description: Adds crystal cannons to a block
   equipmentSO: {fileID: 11400000, guid: 263a90802f020024e950cdcc1978b54c, type: 2}

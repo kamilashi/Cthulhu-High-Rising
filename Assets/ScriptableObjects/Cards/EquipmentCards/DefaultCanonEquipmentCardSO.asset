@@ -15,4 +15,7 @@ MonoBehaviour:
   material: {fileID: -1874768075243587665, guid: 52c8611d37a374e439f3edc0a2c9c575,
     type: 3}
   cardType: 1
+  cardData:
+    name: Default Cannon Card
+    description: adds a cannon to a block
   equipmentSO: {fileID: 11400000, guid: b0b2997c087ed6a4f8346980f0c546e1, type: 2}
