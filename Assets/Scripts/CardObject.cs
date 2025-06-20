@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -28,6 +29,10 @@ public class CardObject : MonoBehaviour, IHoverable
     [Header("Debug VIew")]
     public bool isSelected = false;
     public bool isHovered = false;
+
+    [Header("Card Visuals")]
+    public CardWobble cardWobble;
+    public MaterialValueAdjust materialValue;
 
     // change this to however you see fit with the new animations
     private bool animate = false;
@@ -63,11 +68,13 @@ public class CardObject : MonoBehaviour, IHoverable
     void EnterSelected()
     {
         isSelected = true;
+        materialValue.SetColor(Color.grey);
     }
 
     void ExitSelected()
     {
         isSelected = false;
+        materialValue.SetColor(Color.black);
     }
 
     void ProcessCardSelection(CardObject selectedCardObject)
@@ -91,6 +98,7 @@ public class CardObject : MonoBehaviour, IHoverable
 
         hoverOutline.SetActive(true);
         isHovered = true;
+        cardWobble.SetHoverState(true);
     }
 
     public void OnStopHover()
@@ -98,7 +106,8 @@ public class CardObject : MonoBehaviour, IHoverable
         if (!isHovered) { return; }
 
         hoverOutline.SetActive(false);
-
         isHovered = false;
+
+        cardWobble.SetHoverState(false);
     }
 }
