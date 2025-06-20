@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3996265929077875971}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.49999955, y: 0.5000006, z: 0.5000004, w: -0.4999994}
+  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
   m_LocalPosition: {x: 46.23003, y: -0.000113248825, z: 100.00563}
   m_LocalScale: {x: 100, y: 99.99998, z: 100}
   m_ConstrainProportionsScale: 0
@@ -55,8 +55,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4959895557386212286}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.6830127, y: -0.18301249, z: -0.1830126, w: -0.68301284}
-  m_LocalPosition: {x: -23.11499, y: 40.036438, z: 100.005615}
+  m_LocalRotation: {x: -0.6830127, y: -0.1830127, z: -0.1830127, w: -0.6830127}
+  m_LocalPosition: {x: -23.113333, y: 40.036495, z: 100.00581}
   m_LocalScale: {x: 99.99997, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -193,13 +193,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8817989611773721229}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.2126315, y: -0.6743796, z: -0.6743796, w: -0.21263167}
-  m_LocalPosition: {x: -23.11526, y: -40.036644, z: 100.00559}
+  m_LocalRotation: {x: -0.61237246, y: -0.35355335, z: -0.61237246, w: 0.35355335}
+  m_LocalPosition: {x: -23.118553, y: -40.0527, z: 100.01596}
   m_LocalScale: {x: 100.000015, y: 100, z: 100.000015}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2175381252609691492}
-  m_LocalEulerAnglesHint: {x: -125, y: 270, z: -90}
+  m_LocalEulerAnglesHint: {x: -120, y: -90, z: 0}
 --- !u!1001 &1853856612195051663
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ PrefabInstance:
     - target: {fileID: 5122612635249793312, guid: 1bc5cec1ff7dc654faf1c5680eaf358c,
         type: 3}
       propertyPath: m_Name
-      value: DefaultBlockPrefab Slow Variant
+      value: SlowBlockPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 7472887735431394257, guid: 1bc5cec1ff7dc654faf1c5680eaf358c,
         type: 3}

@@ -3,17 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public enum BlockType
 {
-    Ice,
-    Spikes,
-    Eco
-}
+    Default,
+    Slow,
+    DoT
+}*/
 
 [Serializable]
 public struct BlockData
 {
-    public BlockType blockType;
+    //public BlockType blockType;
 
     public float height;
 
@@ -28,6 +29,8 @@ public class Block : MonoBehaviour, IHoverable
     [Header("Auto Setup")]
     public BlockData data;
 
+    public int availableSlotCount;
+
     [Header("Debug View")]
     public List<Equipment> equipmentList = new List<Equipment>(); // may change how equipment is stored
 
@@ -41,7 +44,6 @@ public class Block : MonoBehaviour, IHoverable
 
     void Awake()
     {
-        Debug.Assert(slots.Count != 0, "Please, assign slots in the prefab of " + this.name);
     }
 
     void Update()
@@ -55,14 +57,17 @@ public class Block : MonoBehaviour, IHoverable
         // MeshRenderer meshRenderer = this.gameObject.GetComponent<MeshRenderer>();
         // regularColor = meshRenderer.material.color;
         // sharedMaterial = meshRenderer.sharedMaterial;
+
+        Debug.Assert(availableSlotCount > 0 && slots.Count != 0, "Please, assign slots in the prefab of " + this.name);
     }
 
     public void CreateEquipment(EquipmentSO equipmentSO)
     {
-        int freeSlots = slots.Count - equipmentList.Count;
-        int takenSlots = slots.Count - freeSlots;
+        int freeSlotsCount = slots.Count - equipmentList.Count;
+        int freeSlotsStart = slots.Count - freeSlotsCount;
+        int filledSlots = 0;
 
-        for (int i = takenSlots; i < slots.Count; i++)
+        for (int i = freeSlotsStart; i < slots.Count; i++)
         {
             GameObject EquipmentGO = Instantiate<GameObject>(equipmentSO.prefab, slots[i]);
 
@@ -75,12 +80,21 @@ public class Block : MonoBehaviour, IHoverable
             equipment.Initialize();
 
             equipmentList.Add(equipment);
+
+            filledSlots++;
+
+            if (filledSlots >= availableSlotCount) 
+            {
+                break;
+            }
         }
+
+        availableSlotCount -= filledSlots;
     }
 
     public bool HasFreeEquipmentSlots()
     {
-        return equipmentList.Count < slots.Count; 
+        return availableSlotCount > 0; 
     }
 
     public void OnStartHover()

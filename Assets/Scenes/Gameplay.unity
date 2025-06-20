@@ -403,7 +403,7 @@ MonoBehaviour:
   cardObjectPrefab: {fileID: 3052913614238606603, guid: c864e79175edd7f479174b19c02d9761,
     type: 3}
   distanceFromCamera: 0.5
-  basePadding: 1
+  basePadding: 0.2
   mainCamera: {fileID: 0}
   cardObjects: []
 --- !u!114 &727973388

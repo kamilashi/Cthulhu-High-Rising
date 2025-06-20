@@ -10,11 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9ad9eb74c8dc20446a99a92a4218cd4d, type: 3}
-  m_Name: IceBlock
+  m_Name: SlowBlock
   m_EditorClassIdentifier: 
-  blockPrefab: {fileID: 5122612635249793312, guid: 1bc5cec1ff7dc654faf1c5680eaf358c,
+  blockPrefab: {fileID: 3044288905065478323, guid: b2f20126be0e8a74da4952e7d6d084b4,
     type: 3}
   blockData:
     blockType: 0
     height: 2
     givenName: 
+  startSlotCount: 3

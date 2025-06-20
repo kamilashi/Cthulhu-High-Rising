@@ -10,4 +10,6 @@ public class BlockSO : ScriptableObject
     public GameObject blockPrefab;
 
     public BlockData blockData;
+
+    public int startSlotCount;
 }

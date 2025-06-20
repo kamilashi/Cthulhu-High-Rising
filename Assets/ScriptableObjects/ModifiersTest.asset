@@ -16,6 +16,10 @@ MonoBehaviour:
     blockCardCounts:
     - cardSO: {fileID: 11400000, guid: 863c690fcb803594daf4ba6d9acf53dc, type: 2}
       count: 1
+    - cardSO: {fileID: 11400000, guid: 73d01431103896f4ca8a3e5c7bca2e3d, type: 2}
+      count: 1
+    - cardSO: {fileID: 11400000, guid: 975d16f446d74b24c974ff84eab0c030, type: 2}
+      count: 1
     equipmentCardCounts:
     - cardSO: {fileID: 11400000, guid: 4e94b5d589f83984cbd01b4392f9f15b, type: 2}
       count: 1

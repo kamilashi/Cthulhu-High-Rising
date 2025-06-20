@@ -41,6 +41,8 @@ public class BlockTower : MonoBehaviour
 
         block.data = blockTemplate.blockData;
 
+        block.availableSlotCount = blockTemplate.startSlotCount;
+
         block.Initialize();
 
         blocks.Add(block);
