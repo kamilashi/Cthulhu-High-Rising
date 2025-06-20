@@ -38,7 +38,7 @@ public class EnemyController : MonoBehaviour
 
             float PointDistance = (Nodes[Index].transform.position - transform.position).magnitude;
 
-            if (PointDistance <= 0.2f)
+            if (PointDistance <= 0.1f)
             {
                 if (Index == 0)
                 {
