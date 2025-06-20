@@ -36,6 +36,7 @@ public class Modifiers
     {
         void Add(object value);
         void Multiply(object value);
+        object GetValue();
     }
 
     [Serializable]
@@ -52,6 +53,11 @@ public class Modifiers
         {
             value *= (int)second;
         }
+
+        public object GetValue()
+        {
+            return value;   
+        }
     }
 
     [Serializable]
@@ -67,6 +73,10 @@ public class Modifiers
         public void Multiply(object second)
         {
             value *= (float)second;
+        }
+        public object GetValue()
+        {
+            return value;
         }
     }
 
@@ -119,11 +129,11 @@ public class Modifiers
         private int newRevision = 0;
         private int oldRevision = -1;
 
-        public T GetBadeValue() // to be read from in runtime
+        public object GetBaseValue() // to be read from in runtime
         {
-            return baseValueContainer;
+            return baseValueContainer.GetValue();
         }
-        public T GetAndStoreValue() // to be read from in runtime
+        public object GetAndStoreValue() // to be read from in runtime
         {
             if(newRevision != oldRevision)
             {
@@ -131,7 +141,7 @@ public class Modifiers
                 oldRevision = newRevision;
             }
 
-            return modifiedValueContainer;
+            return modifiedValueContainer.GetValue();
         }
 
         private T ApplyAllOperations(T baseV)
@@ -150,9 +160,15 @@ public class Modifiers
             operations.Add(newOperation);
             newRevision++;
         }
+
         public void ClearAllModifiers()
         {
             operations.Clear();
+            newRevision++;
+        }
+        public void RemoveModifier(ModifyOperation<T> operationReference)
+        {
+            operations.Remove(operationReference);
             newRevision++;
         }
     }

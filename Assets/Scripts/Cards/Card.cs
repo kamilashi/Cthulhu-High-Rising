@@ -81,7 +81,11 @@ public class BlockCard : Card
     public override void Play()
     {
         IsDisabled();
-        gameManager.TryPlaceBlock(blockSO);
+
+        if (!gameManager.TryPlaceBlock(blockSO))
+        { 
+            return; 
+        }
 
         DisposeFromHand();
     }
@@ -115,9 +119,13 @@ public class EquipmentCard : Card
             return;
         }
 
-        gameManager.TryPlaceEquipment(block, equipmentSO);
-
         EventManager.onBlockSelectedEvent.RemoveListener(OnBlockTargetSelected);
+
+        if (!gameManager.TryPlaceEquipment(block, equipmentSO))
+        { 
+            return; 
+        }
+
         DisposeFromHand();
     }
 }

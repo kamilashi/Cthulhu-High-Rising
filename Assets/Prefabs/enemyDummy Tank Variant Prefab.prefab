@@ -68,6 +68,11 @@ PrefabInstance:
       propertyPath: moveSpeed
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 253192214879063611, guid: 07ae9e7297876b446bb90a8d24224fc6,
+        type: 3}
+      propertyPath: startMoveSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 769465820490594831, guid: 07ae9e7297876b446bb90a8d24224fc6,
         type: 3}
       propertyPath: m_Interpolate

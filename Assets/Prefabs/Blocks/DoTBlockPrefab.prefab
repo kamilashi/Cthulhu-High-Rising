@@ -1,5 +1,83 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3844676617738247477
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6680708062403059142}
+  - component: {fileID: 8972516264423908759}
+  - component: {fileID: 3974326604054496387}
+  m_Layer: 0
+  m_Name: StatusEffectApplier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6680708062403059142
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844676617738247477}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2765720770259061344}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8972516264423908759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844676617738247477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 528fe79c61a9716419fa7a7762b42845, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerCollider: {fileID: 3974326604054496387}
+  receiverMask:
+    serializedVersion: 2
+    m_Bits: 128
+  appliedStatusEffect:
+    effectType: 1
+    damageOverTimeValue: 1
+    slowDownFactor: 0
+    floatOperation:
+      operation: 0
+--- !u!136 &3974326604054496387
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3844676617738247477}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.8
+  m_Height: 2.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8332608824978073686
 GameObject:
   m_ObjectHideFlags: 0
@@ -168,7 +246,7 @@ PrefabInstance:
     - target: {fileID: 3044288905065478323, guid: b2f20126be0e8a74da4952e7d6d084b4,
         type: 3}
       propertyPath: m_Name
-      value: DefaultBlockPrefab Damage Variant
+      value: DoTBlockPrefab
       objectReference: {fileID: 0}
     - target: {fileID: 3224593439910926228, guid: b2f20126be0e8a74da4952e7d6d084b4,
         type: 3}
@@ -194,6 +272,7 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 1547920050359899614, guid: b2f20126be0e8a74da4952e7d6d084b4, type: 3}
     - {fileID: 5376999676629084429, guid: b2f20126be0e8a74da4952e7d6d084b4, type: 3}
+    - {fileID: 982091985010269226, guid: b2f20126be0e8a74da4952e7d6d084b4, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 764862487763358274, guid: b2f20126be0e8a74da4952e7d6d084b4,
         type: 3}
@@ -203,6 +282,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 419342651508668556}
+    - targetCorrespondingSourceObject: {fileID: 764862487763358274, guid: b2f20126be0e8a74da4952e7d6d084b4,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6680708062403059142}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2f20126be0e8a74da4952e7d6d084b4, type: 3}
 --- !u!4 &2765720770259061344 stripped

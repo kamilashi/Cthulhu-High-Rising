@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using static Modifiers;
 
 
 //MS: Having the enemyController and the enemyHealth build so seperatly like this is really bad. Especially because of the pooling system.
@@ -13,7 +14,10 @@ public class EnemyController : MonoBehaviour
     [SerializeField] List<Transform> Nodes;
     [SerializeField] LayerMask FistNodeLayer;
     [SerializeField] Transform GroundPos;
-    [SerializeField] float moveSpeed;
+
+    [SerializeField] public ModifiableData<ModifiableFloat> modifiableMovementSpeed = new ModifiableData<ModifiableFloat>();
+
+    [SerializeField] float startMoveSpeed;
     [SerializeField] float rotationSpeed;
 
     public int Index;
@@ -21,13 +25,15 @@ public class EnemyController : MonoBehaviour
     void Awake()
     {
             Physics.IgnoreLayerCollision(7, 7);
+
+            modifiableMovementSpeed.baseValueContainer.value = startMoveSpeed;
     } 
 
     void FixedUpdate()
     {
         if(Index <= Nodes.Count -1)
         {
-            transform.position = Vector3.MoveTowards(transform.position, Nodes[Index].transform.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, Nodes[Index].transform.position, (float) modifiableMovementSpeed.GetAndStoreValue() * Time.deltaTime);
 
             Vector3 direction = Nodes[Index].position - transform.position;
             if (direction.sqrMagnitude > 0.001f)

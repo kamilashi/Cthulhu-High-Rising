@@ -46,14 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6621aa0ec0122e3429b3d21e08a0738e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slots:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  slots: []
   data:
-    blockType: 0
     height: 1.8
-    givenName: 
+    name: 
+    description: 
+  availableSlotCount: 0
   equipmentList: []
   hoveredColor: {r: 1, g: 1, b: 1, a: 1}
   material: {fileID: 1670418044453726591}
@@ -95,5 +93,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshRenderer:
   - {fileID: 0}
+  skinnedMeshRenderer: []
   materials: []
   dissolveValue: {x: 1, y: 0, z: 0.5}
