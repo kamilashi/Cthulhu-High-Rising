@@ -1417,6 +1417,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3814198914260960935, guid: deefbe410cd735b49855d2ee7a6ff5d8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 727973385}
     - target: {fileID: 4214795217044980037, guid: deefbe410cd735b49855d2ee7a6ff5d8,
         type: 3}
       propertyPath: GameManager
@@ -1432,6 +1437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameplayUI
       objectReference: {fileID: 0}
+    - target: {fileID: 5131870493816611618, guid: deefbe410cd735b49855d2ee7a6ff5d8,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 727973385}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

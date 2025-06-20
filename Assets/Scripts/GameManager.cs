@@ -52,7 +52,11 @@ public class GameManager : MonoBehaviour
     public CombatResult? combatResult;
     public Selectables selectionMode;
 
+    int currentWaveNumber = 0;
+
     bool continueNextPhase = false;
+
+    public int getCurrentWave() => currentWaveNumber;
 
     //public static GameManager Instance { get; private set; }
 
@@ -107,16 +111,25 @@ public class GameManager : MonoBehaviour
                 if (continueNextPhase)
                 {
                     DiscardHand();
+
+                    currentWaveNumber++;
+
                     gamePhase = GamePhase.Combat;
                 }
                 break;
             case GamePhase.Combat:
                 if(combatResult != null)
                 {
-                    //TODO MS -> wait for rewards
+                    if (continueNextPhase)
+                    {
+                        if(combatResult == CombatResult.Lost)
+                        {
+                            currentWaveNumber = 0;
+                        }
 
-                    gamePhase = GamePhase.Draw;
-                    combatResult = null;
+                        gamePhase = GamePhase.Draw;
+                        combatResult = null;
+                    }
                 }
                 break;
         }
@@ -231,7 +244,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void OnProceedToNextPhase()
+    public void OnProceedToNextPhase()
     {
         continueNextPhase = true;
     }

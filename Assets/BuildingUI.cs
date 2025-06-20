@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,6 +6,8 @@ public class BuildingUI : MonoBehaviour
 {
     public WorldObjectSelectSystem WorldObjectSelectSystem;
     public GameManager GameManager;
+
+    public Canvas MainCanvas;
 
     public int overallCost;
     public TMP_Text overallCostBody;
@@ -29,6 +29,8 @@ public class BuildingUI : MonoBehaviour
 
     private void Update()
     {
+        MainCanvas.enabled = GameManager.gamePhase == GamePhase.Build;
+
         if(WorldObjectSelectSystem.hoveredObject != null )
         {
 
@@ -74,13 +76,10 @@ public class BuildingUI : MonoBehaviour
 
     public void StartWave()
     {
-       
         if (GameManager.gamePhase == GamePhase.Build) 
         {
             Debug.Log("StartBattle");
-            this.gameObject.SetActive(false);
             EventManager.onProceedEvent.Invoke();
-
         }
     }
 

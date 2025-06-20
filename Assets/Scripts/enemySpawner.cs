@@ -14,14 +14,18 @@ public class EnemySpawner : MonoBehaviour
     }
 
     [Header("Enemy Types")]
-    [SerializeField] List<EnemySpawnData> enemyTypes = new List<EnemySpawnData>();
+    [SerializeField] List<EnemySpawnData> enemyTypes = new();
 
     [Header("Settings")]
     [SerializeField] float spawnRadius = 5f;
     [SerializeField] float spawnInterval = 1f;
 
-    int activeEnemies = 0;
+    readonly List<EnemyHealth> enemies = new();
+
+    float spawnMultiplier = 1.0f;
+    
     bool isActive = false;
+    
     Coroutine spawnRoutine;
 
     void OnEnable()
@@ -94,7 +98,9 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach (var enemyData in enemyTypes)
         {
-            for (int i = 0; i < enemyData.spawnCount; i++)
+            int numberOfEnemiesToSpawn = (int) (spawnMultiplier * enemyData.spawnCount);
+
+            for (int i = 0; i < numberOfEnemiesToSpawn; i++)
             {
                 yield return new WaitForSeconds(spawnInterval);
 
@@ -127,7 +133,6 @@ public class EnemySpawner : MonoBehaviour
 
     public void RegisterEnemy(EnemyHealth enemy)
     {
-        activeEnemies++;
         enemy.OnDeath += HandleEnemyDeath;
 
         EnemyController enemyController = enemy.GetComponent<EnemyController>();
@@ -136,22 +141,37 @@ public class EnemySpawner : MonoBehaviour
         {
             enemyController.OnReachedGoal += HandleOnReachedTop;
         }
+
+        enemies.Add(enemy);
     }
 
     void HandleEnemyDeath(EnemyHealth enemy)
     {
-        activeEnemies--;
+        enemies.Remove(enemy);
         enemy.OnDeath -= HandleEnemyDeath;
 
-        if (activeEnemies <= 0)
+        if (enemies.Count == 0)
         {
             Debug.Log("All enemies defeated!");
+
+            spawnMultiplier += 1.0f;
+
             EventManager.onAllEnemiesDefeatedEvent.Invoke();
         }
+
+        
     }
 
     void HandleOnReachedTop(EnemyController enemy)
     {
+        foreach(EnemyHealth e in enemies)
+        {
+            e.Release();
+        }
+        enemies.Clear();
+
+        spawnMultiplier = 1.0f;
+
         EventManager.onEnemiesReachedTopEvent.Invoke();
     }
 }

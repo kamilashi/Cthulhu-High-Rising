@@ -45,4 +45,9 @@ public class EnemyHealth : MonoBehaviour
             Pool?.Release(this);
         }
     }
+
+    public void Release()
+    {
+        Pool?.Release(this);
+    }
 }
