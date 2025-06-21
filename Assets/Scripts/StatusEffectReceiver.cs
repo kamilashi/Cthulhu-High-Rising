@@ -15,7 +15,8 @@ public class StatusEffectReceiver : MonoBehaviour
     public float dotTimer = -1.0f; // temporary hack
 
     public Dictionary<StatusEffectType, StatusEffect> activeStatusEffects = new Dictionary<StatusEffectType, StatusEffect>();
-
+    public List<StatusEffect> newEffects = new List<StatusEffect>();
+    public List<StatusEffect> inactiveEffects = new List<StatusEffect>();
     
 
     void Awake()
@@ -24,29 +25,28 @@ public class StatusEffectReceiver : MonoBehaviour
         Debug.Assert(receiverCollider != null);
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        CommitInactiveEffects();
+        CommitActiveEffects();
         ProcessStatusEffects();
+        RemoveInactiveEffects();
     }
 
     public void AddOrUpdateStatusEffect(StatusEffectTemplate effectTemplate)
     {
-        StatusEffect effect;
-
         if (activeStatusEffects.ContainsKey(effectTemplate.effectType))
         {
-            effect = activeStatusEffects[effectTemplate.effectType];
-            effect.isActiveThisFrame = true;
+            StatusEffect effect = activeStatusEffects[effectTemplate.effectType];
+            effect.isActive = true;
         }
         else
         {
             StatusEffect newEffect = new StatusEffect(effectTemplate);
-            activeStatusEffects.Add(effectTemplate.effectType, newEffect);
-            effect = newEffect;
-        }
+            newEffects.Add(newEffect);
 
-        ProcessEffectInitialization(effect);
+            ProcessEffectInitialization(newEffect);
+        }
     }
 
     private void ProcessStatusEffects()
@@ -70,17 +70,48 @@ public class StatusEffectReceiver : MonoBehaviour
                 break;
         }
 
-        effect.isActiveThisFrame = false;
+        effect.isActive = false;
+    }
+
+    private void CommitActiveEffects()
+    {
+        foreach (StatusEffect effect in newEffects)
+        {
+            activeStatusEffects.Add(effect.effectType, effect);
+        }
+        newEffects.Clear();
+    }
+
+    private void CommitInactiveEffects()
+    {
+        foreach (StatusEffect effect in activeStatusEffects.Values)
+        {
+            if(!effect.isActive)
+            {
+                inactiveEffects.Add(effect);
+                Debug.Log("Effect in queue for removal " + effect.effectType.ToString());
+            }
+        }
+    }
+
+    private void RemoveInactiveEffects()
+    {
+        foreach(StatusEffect effect in inactiveEffects)
+        {
+            Debug.Log("Removed status effect: " + effect.effectType.ToString());
+            RemoveActiveStatusEffect(effect.effectType);
+        }
+        inactiveEffects.Clear();
     }
 
     private void ProcessEffectInitialization(StatusEffect effect)
     {
         if(effect.effectType == StatusEffectType.Slowdown)
         {
-            //effect.SetModifiableFieldRefernce(enemyControler.modifiableMovementSpeed);
-            //effect.modifiableFloatFieldReference.AddModifier(effect.floatOperation);
+            effect.SetModifiableFieldRefernce(enemyControler.modifiableMovementSpeed);
+            effect.modifiableFloatFieldReference.AddModifier(effect.floatOperation);
 
-            effect.floatOperation.Apply(ref enemyControler.modifiableMovementSpeed.baseValueContainer);
+            //effect.floatOperation.Apply(ref enemyControler.modifiableMovementSpeed.baseValueContainer);
 
             Debug.Log("Added slowed status effect");
         }
@@ -93,27 +124,21 @@ public class StatusEffectReceiver : MonoBehaviour
 
     private void ProcessSlowDown(StatusEffect effect)
     {
-        if (!effect.isActiveThisFrame)
+        if (!effect.isActive)
         {
-            //effect.modifiableFloatFieldReference.RemoveModifier(effect.floatOperation);
-            RemoveActiveStatusEffect(effect.effectType);
-            Debug.Log("Removed slowed status effect");
+            if(effect.modifiableFloatFieldReference != null) // this check should not be needed, because if the carrier is despawned this script will be as well
+            {
+                effect.modifiableFloatFieldReference.RemoveModifier(effect.floatOperation);
+            }
             return;
         }
     }
 
     private void ProcessDamageOverTime(StatusEffect effect)
     {
-        if (!effect.isActiveThisFrame)
+        if (!effect.isActive)
         {
-            if(effect.floatOperation != null)
-            {
-                effect.modifiableFloatFieldReference.RemoveModifier(effect.floatOperation);
-            }
-
             dotTimer = -1.0f;
-            RemoveActiveStatusEffect(effect.effectType);
-            Debug.Log("Stopped DoT");
             return;
         }
 

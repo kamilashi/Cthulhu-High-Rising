@@ -118,7 +118,7 @@ public class DeckSystem : MonoBehaviour
     {
         int handSize = handCount;
 
-        if (cardDeck.Count == 0)
+        if (cardDeck.Count < handCount)
         {
             RestockFromGraveyard();
         }

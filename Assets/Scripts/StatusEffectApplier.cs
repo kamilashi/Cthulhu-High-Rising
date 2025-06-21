@@ -24,17 +24,18 @@ public class StatusEffectTemplate
 [Serializable]
 public class StatusEffect : StatusEffectTemplate
 {
-    public bool isActiveThisFrame;
+    public bool isActive;
     public ModifiableData<ModifiableFloat> modifiableFloatFieldReference;
 
     public StatusEffect(StatusEffectTemplate template)
     {
         effectType = template.effectType;
         damageOverTimeValue = template.damageOverTimeValue;
-        floatOperation = template.floatOperation;
-        floatOperation.operand = slowDownFactor;
+        slowDownFactor = template.slowDownFactor;
 
-        isActiveThisFrame = true;   
+        floatOperation = new ModifyOperation<ModifiableFloat>(template.floatOperation.operation, slowDownFactor);
+
+        isActive = true;   
     }
 
     public void SetModifiableFieldRefernce(ModifiableData<ModifiableFloat> fieldToModify)

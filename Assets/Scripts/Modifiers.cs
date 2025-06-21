@@ -96,7 +96,7 @@ public class Modifiers
         {
             Operate(ref baseValue, operation, operand);
 
-            Debug.LogWarning("Unsupported modifiable type " + baseValue.GetType().Name + "!");
+            Debug.Assert(baseValue.GetValue().GetType() == operand.GetType(), "The types of the operands should be the same!");
         }
 
         private void Operate(ref T baseOpnd, ModifyOperationType optn, object secondOpnd)
@@ -106,12 +106,12 @@ public class Modifiers
                 case ModifyOperationType.Multiply:
                     {
                         baseOpnd.Multiply(secondOpnd);
-                        break;
+                        return;
                     }
                 case ModifyOperationType.Add:
                     {
                         baseOpnd.Add(secondOpnd);
-                        break;
+                        return;
                     }
             }
 
