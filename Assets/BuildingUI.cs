@@ -4,82 +4,71 @@ using TMPro;
 
 public class BuildingUI : MonoBehaviour
 {
-    public WorldObjectSelectSystem WorldObjectSelectSystem;
-    public GameManager GameManager;
+    [Header("Setup in Prefab")]
+    public Canvas buildingScreenCanvas;
 
-    public Canvas MainCanvas;
+    public TMP_Text overallCostText;
+    public TMP_Text oneTimeCostText;
+    public TMP_Text cardDescriptionText;
 
+    public Button startWaveButton;
+
+    [Header("Debug View")]
+    public int oneTimeCost;
     public int overallCost;
-    public TMP_Text overallCostBody;
-    public int OneTimeCost;
-    public TMP_Text OneTimeCostBody;
-    public TMP_Text cardDescriptionBody;
-    public int TotalOverallCost;
-    public TMP_Text TotalOverallCostBody;
+    public int totalOverallCost;
 
-    public Button startWave;
-    private CardObject hoveredObject;
-
-    // Start is called before the first frame update
-    void OnEnable()
+    void Awake()
     {
-        startWave.onClick.AddListener(StartWave);
-
+        startWaveButton.onClick.AddListener(OnStartWaveClicked);
+        EventManager.onCardSelectedEvent.AddListener(UpdateCardDescription);
+        EventManager.onGamePhaseChangedEvent.AddListener(OnGamePhaseChanged);
+        HideBuildingScreen();
+    }
+    void OnGamePhaseChanged(GamePhase newPhase)
+    {
+        if(newPhase == GamePhase.Build)
+        {
+            ResetCardDescription();
+            ShowBuildingScreen();
+        }
     }
 
-    void Update()
+    void ShowBuildingScreen()
     {
-        MainCanvas.enabled = GameManager.gamePhase == GamePhase.Build;
-
-        if(WorldObjectSelectSystem.hoveredObject != null )
-        {
-
-            hoveredObject = WorldObjectSelectSystem.hoveredObject.GetComponent<CardObject>();
-            if (hoveredObject!= null && cardDescriptionBody.text != hoveredObject.descriptionText.text )
-            {
-
-                UpdateCardDescription();
-            }
-            
-        }
-        else
-        {
-            hoveredObject = null;
-            cardDescriptionBody.text = null;
-            return;
-        }  
-        
-
+        buildingScreenCanvas.enabled = true;
+    }
+    void HideBuildingScreen()
+    {
+        buildingScreenCanvas.enabled = false;
+    }
+    void ResetCardDescription()
+    {
+        cardDescriptionText.text = "";
     }
 
-    // Update is called once per frame
-    void UpdateCardDescription()
+    void UpdateCardDescription(CardObject selectedCardOvject)
     {
-        cardDescriptionBody.text = hoveredObject.descriptionText.text;
-        if(hoveredObject == null)
-        {
-            cardDescriptionBody.text = null;
-        }
+        cardDescriptionText.text = selectedCardOvject.descriptionText.text;
     }
 
     void UpdateOverallCost()
     {
-        overallCostBody.text = overallCost.ToString();
-
+        overallCostText.text = overallCost.ToString();
     }
 
     void UpdateOneTimeCost()
     {
-        OneTimeCostBody.text = OneTimeCost.ToString();
-
+        oneTimeCostText.text = oneTimeCost.ToString();
     }
 
-    public void StartWave()
+    public void OnStartWaveClicked()
     {
-        if (GameManager.gamePhase == GamePhase.Build) 
+        //if (gameManager.gamePhase == GamePhase.Build) 
         {
             Debug.Log("StartBattle");
             EventManager.onProceedEvent.Invoke();
+            HideBuildingScreen();
         }
     }
 

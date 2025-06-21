@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
     bool continueNextPhase = false;
 
     public int getCurrentWave() => currentWaveNumber;
+    public int getBlocksCount() => blockTower.blocks.Count;
 
     //public static GameManager Instance { get; private set; }
 

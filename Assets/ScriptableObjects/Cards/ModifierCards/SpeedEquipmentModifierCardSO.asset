@@ -15,8 +15,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 233e9cd2d31f14b4bb40d534441e17e1, type: 2}
   cardType: 2
   cardData:
-    name: Speed Equipment Modifier Card
-    description: increases the attackspeed of an equipment
+    name: Equipment Speed Modifier Card
+    description: + 10 % equipment attack speed
   modifierData:
     target: 1
     modifiablePropertyType: 2

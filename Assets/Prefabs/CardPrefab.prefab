@@ -134,7 +134,7 @@ MonoBehaviour:
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 256
+  m_VerticalAlignment: 1024
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0.090643704, y: 0, z: 0.2334688, w: 0}
+  m_margin: {x: 0.090643704, y: -0.2997477, z: 0.2334688, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   _SortingLayer: 0
@@ -318,6 +318,7 @@ MonoBehaviour:
   skinnedMeshRenderer: []
   materials: []
   dissolveValue: {x: 1, y: 0, z: 0.5}
+  highlightValue: {x: 1, y: 0, z: 10}
 --- !u!1 &5141328036741837490
 GameObject:
   m_ObjectHideFlags: 0
