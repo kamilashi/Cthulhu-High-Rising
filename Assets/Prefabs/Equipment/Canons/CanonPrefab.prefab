@@ -114,6 +114,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: e269098e91663b94e9c2fd3148b7a630, type: 2}
+    - target: {fileID: 263830323592577568, guid: c8ff2fd993ece8b4f839cf4c9084a4fb,
+        type: 3}
+      propertyPath: m_Name
+      value: SkinnedMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c8ff2fd993ece8b4f839cf4c9084a4fb,
         type: 3}
       propertyPath: m_Name
@@ -189,6 +194,11 @@ PrefabInstance:
       propertyPath: skinnedMeshRenderer.Array.data[0]
       value: 
       objectReference: {fileID: 4479661126836006414}
+    - target: {fileID: 3041332474034146947, guid: 153dd41b53a829849a306f5b12aaa4db,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonController
+      objectReference: {fileID: 0}
     - target: {fileID: 4697583499359717680, guid: 153dd41b53a829849a306f5b12aaa4db,
         type: 3}
       propertyPath: material
@@ -259,6 +269,22 @@ PrefabInstance:
       propertyPath: CanonBody
       value: 
       objectReference: {fileID: 552343424249898304}
+    - target: {fileID: 5318458426624858744, guid: 153dd41b53a829849a306f5b12aaa4db,
+        type: 3}
+      propertyPath: equipment
+      value: 
+      objectReference: {fileID: 6973203274741358682}
+    - target: {fileID: 5318458426624858744, guid: 153dd41b53a829849a306f5b12aaa4db,
+        type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 3069294433452561261}
+    - target: {fileID: 5318458426624858744, guid: 153dd41b53a829849a306f5b12aaa4db,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 7254907025905155245, guid: e131887394c86c3468d3489f3ee1d05f,
+        type: 3}
     - target: {fileID: 6562604598940603689, guid: 153dd41b53a829849a306f5b12aaa4db,
         type: 3}
       propertyPath: m_Name
@@ -271,6 +297,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1358107752488646689}
+    - targetCorrespondingSourceObject: {fileID: 4759927195658369366, guid: 153dd41b53a829849a306f5b12aaa4db,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6289482528259068350}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 153dd41b53a829849a306f5b12aaa4db, type: 3}
 --- !u!114 &2326852986663736847 stripped
@@ -285,9 +315,116 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1caf8463eca1e9840b6744798cf37a55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6973203274741358682 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4697583499359717680, guid: 153dd41b53a829849a306f5b12aaa4db,
+    type: 3}
+  m_PrefabInstance: {fileID: 2446826938759522666}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f85cccf8cfc82a147a2eced524326f9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &7204150490696650812 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4759927195658369366, guid: 153dd41b53a829849a306f5b12aaa4db,
     type: 3}
   m_PrefabInstance: {fileID: 2446826938759522666}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4049876817464483435
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 7204150490696650812}
+    m_Modifications:
+    - target: {fileID: 2286147650120586570, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: CanonBody
+      value: 
+      objectReference: {fileID: 552343424249898304}
+    - target: {fileID: 2286147650120586570, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: equipment
+      value: 
+      objectReference: {fileID: 6973203274741358682}
+    - target: {fileID: 2286147650120586570, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: firePoint
+      value: 
+      objectReference: {fileID: 3069294433452561261}
+    - target: {fileID: 2286147650120586570, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 7254907025905155245, guid: e131887394c86c3468d3489f3ee1d05f,
+        type: 3}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8953166139845378481, guid: 07e0a3f125cb7014996190ca5799a579,
+        type: 3}
+      propertyPath: m_Name
+      value: CannonPrefab
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 07e0a3f125cb7014996190ca5799a579, type: 3}
+--- !u!4 &6289482528259068350 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8033496545265913813, guid: 07e0a3f125cb7014996190ca5799a579,
+    type: 3}
+  m_PrefabInstance: {fileID: 4049876817464483435}
   m_PrefabAsset: {fileID: 0}

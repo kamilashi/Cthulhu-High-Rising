@@ -9,24 +9,28 @@ using UnityEngine.UIElements;
 public class CanonController : MonoBehaviour
 {
 
-    SphereCollider SphereCollider;
-    public List<Transform> enemies;
-    [SerializeField] private GameObject closestEnemy;
-    [SerializeField] private LayerMask enemyLayer;
-    public float AttackRange;
-    public float AttackSpeed;
+    [Header("Setup in Prefab")]
+    public Equipment equipment;
+    public LayerMask enemyLayer;
+    public Projectile projectilePrefab;
+    public Transform firePoint;
+    public Transform CanonBody;
+
+    [Header("Auto Setup")]
+    public SphereCollider SphereCollider;
+
+    [Header("Debug View")]
+    public float attackRange;
+    public float attackSpeed;
     public int damage;
 
-    public Transform CanonBody;
-    bool enemyInRange;
+    public GameObject closestEnemy;
     public GameObject bestTarget;
-    private int arrayLength = 1;
+
+    List<Transform> enemies;
 
     bool isShooting = false;
     IEnumerator shooting;
-
-    public Projectile projectilePrefab;
-    public Transform firePoint;
 
     IObjectPool<Projectile> projectilePool;
 
@@ -35,9 +39,11 @@ public class CanonController : MonoBehaviour
     {
        enemies = new List<Transform>();
        shooting = Shoot();
-        SphereCollider = this.GetComponent<SphereCollider>();
-        SphereCollider.radius = AttackRange;
+       SphereCollider = this.GetComponent<SphereCollider>();
 
+       UpdateEquipmentProperties();
+
+       EventManager.onGamePhaseChangedEvent.AddListener(OnPhaseChangedEvent);
     }
 
     // Update is called once per frame
@@ -75,6 +81,28 @@ public class CanonController : MonoBehaviour
 
     }
 
+    private void OnDestroy()
+    {
+        EventManager.onGamePhaseChangedEvent.RemoveListener(OnPhaseChangedEvent);
+    }
+
+    void OnPhaseChangedEvent(GamePhase newPhase)
+    {
+        if(newPhase == GamePhase.Combat)
+        {
+            UpdateEquipmentProperties();
+        }
+    }
+
+    void UpdateEquipmentProperties()
+    {
+        attackRange = equipment.equipmentData.attackRange.GetAndStoreValue<float>();
+        attackSpeed = equipment.equipmentData.attackSpeed.GetAndStoreValue<float>();
+        damage = equipment.equipmentData.damage.GetAndStoreValue<int>();
+
+        SphereCollider.radius = attackRange;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         EnemyController enemy = other.GetComponent<EnemyController>();
@@ -93,8 +121,6 @@ public class CanonController : MonoBehaviour
             enemies.Remove(other.transform);
         }
     }
-
-
 
     void findClosestEnemy()
     {
@@ -119,7 +145,7 @@ public class CanonController : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(1/AttackSpeed);
+            yield return new WaitForSeconds(1/attackSpeed);
 
             EnemyHealth enemyhealth = bestTarget.GetComponent<EnemyHealth>();
             enemyhealth.getHit(damage);

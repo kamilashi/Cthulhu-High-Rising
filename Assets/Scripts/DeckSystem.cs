@@ -102,14 +102,15 @@ public class DeckSystem : MonoBehaviour
 
         object operandConverted = cardSO.operand;
 
-        if (cardSO.modifierData.modifiablePropertyType.GetType() == typeof(ModifiableInt))
+        if (Modifiers.GetModifierType(card.modifierData.modifiablePropertyType) == typeof(int))
         {
-            Debug.Assert(cardSO.operand - Mathf.Floor(cardSO.operand) != 0.0f, "please, define a fractionless operand for " + cardSO.name);
+            Debug.Assert(cardSO.operand - Mathf.Floor(cardSO.operand) == 0.0f, "please, define a fractionless operand for " + cardSO.name);
 
-            operandConverted = Mathf.FloorToInt(cardSO.operand);
+            int intOperand = Mathf.FloorToInt(cardSO.operand);
+            operandConverted = intOperand;
         }
 
-        card.operand = cardSO.operand;
+        card.operand = operandConverted;
 
         return card;
     }

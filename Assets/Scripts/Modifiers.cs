@@ -4,9 +4,31 @@ using System.Collections.Generic;
 using System.Numerics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions;
 
-public class Modifiers 
+public class Modifiers
 {
+    public static Type GetModifierType(ModifiablePropertyType propertyType)
+    {
+        switch(propertyType)
+        {
+            case ModifiablePropertyType.EquipmentDamage:
+                {
+                    return typeof(int);
+                }
+            case ModifiablePropertyType.EquipmentSpeed:
+                {
+                    return typeof(float);
+                }
+            case ModifiablePropertyType.EquipmentRange:
+                {
+                    return typeof(float);
+                }
+        }
+
+        Debug.LogError("Unknown property type! Please include it in the switch case");
+        return typeof(float);
+    }
     public enum ModifiablePropertyType
     {
         NONE_BlockModCount,
@@ -129,11 +151,11 @@ public class Modifiers
         private int newRevision = 0;
         private int oldRevision = -1;
 
-        public object GetBaseValue() // to be read from in runtime
+        public object GetBaseValue()
         {
             return baseValueContainer.GetValue();
         }
-        public object GetAndStoreValue() // to be read from in runtime
+        public object GetAndStoreValue() 
         {
             if(newRevision != oldRevision)
             {
@@ -142,6 +164,10 @@ public class Modifiers
             }
 
             return modifiedValueContainer.GetValue();
+        }
+        public TNumeric GetAndStoreValue<TNumeric>() 
+        {
+            return (TNumeric) GetAndStoreValue();
         }
 
         private T ApplyAllOperations(T baseV)
@@ -186,23 +212,25 @@ public class Modifiers
             Debug.LogAssertion("Unsupported modifiable property for " + target.GetType().Name + "!");
             return;
         }
-        ModifyOperation<ModifiableFloat> damageModifyOperation = new ModifyOperation<ModifiableFloat>(modifierData.operation, operand);
 
         switch (modifierData.modifiablePropertyType)
         {
             case ModifiablePropertyType.EquipmentDamage:
                 {
-                    target.equipmentData.damage.AddModifier(damageModifyOperation);
+                    ModifyOperation<ModifiableInt> modifyOperation = new ModifyOperation<ModifiableInt>(modifierData.operation, operand);
+                    target.equipmentData.damage.AddModifier(modifyOperation);
                     break;
                 }
             case ModifiablePropertyType.EquipmentRange:
                 {
-                    target.equipmentData.attackRange.AddModifier(damageModifyOperation);
+                    ModifyOperation<ModifiableFloat> modifyOperation = new ModifyOperation<ModifiableFloat>(modifierData.operation, operand);
+                    target.equipmentData.attackRange.AddModifier(modifyOperation);
                     break;
                 }
             case ModifiablePropertyType.EquipmentSpeed:
                 {
-                    target.equipmentData.attackSpeed.AddModifier(damageModifyOperation);
+                    ModifyOperation<ModifiableFloat> modifyOperation = new ModifyOperation<ModifiableFloat>(modifierData.operation, operand);
+                    target.equipmentData.attackSpeed.AddModifier(modifyOperation);
                     break;
                 }
         }

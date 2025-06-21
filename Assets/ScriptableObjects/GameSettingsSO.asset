@@ -15,17 +15,19 @@ MonoBehaviour:
   defaultCardDeck:
     blockCardCounts:
     - cardSO: {fileID: 11400000, guid: 863c690fcb803594daf4ba6d9acf53dc, type: 2}
-      count: 2
+      count: 5
     - cardSO: {fileID: 11400000, guid: 73d01431103896f4ca8a3e5c7bca2e3d, type: 2}
-      count: 3
+      count: 5
     - cardSO: {fileID: 11400000, guid: 975d16f446d74b24c974ff84eab0c030, type: 2}
-      count: 4
+      count: 5
     equipmentCardCounts:
     - cardSO: {fileID: 11400000, guid: 4e94b5d589f83984cbd01b4392f9f15b, type: 2}
-      count: 10
+      count: 3
+    - cardSO: {fileID: 11400000, guid: 93eea4f1040b5d545af865285dc94bf2, type: 2}
+      count: 3
+    - cardSO: {fileID: 11400000, guid: 31045e306b7673e4c883c5785570dc26, type: 2}
+      count: 3
     modifierCardCounts:
-    - cardSO: {fileID: 11400000, guid: cdc1d464ab1e1b843aaf3a115ea26ecb, type: 2}
-      count: 0
     - cardSO: {fileID: 11400000, guid: 03de0798d1e84db45bc14a9ac6205ea4, type: 2}
       count: 5
     - cardSO: {fileID: 11400000, guid: 1112c22b928c1464ea6bea6593d67e15, type: 2}

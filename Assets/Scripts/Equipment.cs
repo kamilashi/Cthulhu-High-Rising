@@ -9,7 +9,7 @@ using static Modifiers;
 [Serializable]
 public struct BaseEquipmentData
 {
-    public float baseAttackDamage;
+    public int baseAttackDamage;
     public float baseAttackRange;
     public float baseAttackSpeed;
 }
@@ -17,7 +17,7 @@ public struct BaseEquipmentData
 [Serializable]
 public struct EquipmentData
 {
-    public ModifiableData<ModifiableFloat> damage;
+    public ModifiableData<ModifiableInt> damage;
     public ModifiableData<ModifiableFloat> attackRange;
     public ModifiableData<ModifiableFloat> attackSpeed;
 
@@ -25,7 +25,7 @@ public struct EquipmentData
 
     public EquipmentData(BaseEquipmentData baseData, string name)
     {
-        damage = new ModifiableData<ModifiableFloat>();
+        damage = new ModifiableData<ModifiableInt>();
         damage.baseValueContainer.value = baseData.baseAttackDamage;
 
         attackRange = new ModifiableData<ModifiableFloat>();
@@ -46,6 +46,7 @@ public class Equipment : MonoBehaviour, IHoverable
     [Header("Auto Setup")]
     public EquipmentData equipmentData;
     public Block blockOwner;
+    public GameManager gameManager;
 
     // temporary
     [Header("Debug View")]
