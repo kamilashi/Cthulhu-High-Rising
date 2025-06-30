@@ -117,4 +117,9 @@ public class Block : MonoBehaviour, IHoverable
         material.SetColor(Color.black);
         isHovered = false;
     }
+
+    public void ClearEquipment()
+    {
+
+    }
 }

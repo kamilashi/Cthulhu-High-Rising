@@ -29,15 +29,17 @@ public class EnemySpawner : MonoBehaviour
     
     Coroutine spawnRoutine;
 
-    void OnEnable()
+    //void OnEnable() // K.S. I am not sure why it was done like that.
+    void Awake()
     {
         EventManager.onGamePhaseChangedEvent.AddListener(OnGamePhaseChanged);
     }
 
+/*
     void OnDisable()
     {
         EventManager.onGamePhaseChangedEvent.RemoveListener(OnGamePhaseChanged);
-    }
+    }*/
 
     void Start()
     {

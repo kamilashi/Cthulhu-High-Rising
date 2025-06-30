@@ -32,6 +32,7 @@ public static class EventManager
     public static UnityEvent onEnemiesReachedTopEvent = new();
 
     public static UnityEvent onProceedEvent = new();
+    public static UnityEvent onRestartEvent = new();
 }
     
 public class GameManager : MonoBehaviour
@@ -61,18 +62,21 @@ public class GameManager : MonoBehaviour
 
     //public static GameManager Instance { get; private set; }
 
-    void OnEnable()
+    //void OnEnable() // K.S. I am not sure why it was done like that.
+    void ActivateEvents()
     {
         EventManager.onProceedEvent.AddListener(OnProceedToNextPhase);
+        EventManager.onRestartEvent.AddListener(StartGame);
         EventManager.onAllEnemiesDefeatedEvent.AddListener(OnCombatVictory);
         EventManager.onEnemiesReachedTopEvent.AddListener(OnCombatLost);
     }
 
+/*
     void OnDisable()
     {
         EventManager.onAllEnemiesDefeatedEvent.RemoveListener(OnCombatVictory);
         EventManager.onEnemiesReachedTopEvent.AddListener(OnCombatLost);
-    }
+    }*/
 
     void Awake()
     {
@@ -86,14 +90,19 @@ public class GameManager : MonoBehaviour
 
         deckSystem.gameManager = this;
 
+        ActivateEvents();
+
+        StartGame();
+    }
+
+    void StartGame()
+    {
         InitializeDeck();
 
         gamePhase = GamePhase.Draw;
         selectionMode = Selectables.None;
-    }
 
-    void Start()
-    {
+        //blockTower.ClearBlocks();
     }
 
     void Update()
@@ -248,5 +257,11 @@ public class GameManager : MonoBehaviour
     public void OnProceedToNextPhase()
     {
         continueNextPhase = true;
+    }
+
+    public void StartBuildPhase()
+    {
+        Debug.Log("StartBuilding");
+        EventManager.onProceedEvent.Invoke();
     }
 }

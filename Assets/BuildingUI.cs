@@ -4,6 +4,9 @@ using TMPro;
 
 public class BuildingUI : MonoBehaviour
 {
+    [Header("Setup")]
+    GameManager gameManager;
+    
     [Header("Setup in Prefab")]
     public Canvas buildingScreenCanvas;
 
@@ -64,11 +67,10 @@ public class BuildingUI : MonoBehaviour
 
     public void OnStartWaveClicked()
     {
-        //if (gameManager.gamePhase == GamePhase.Build) 
+        //if (gamePhase == GamePhase.Build)
         {
-            Debug.Log("StartBattle");
-            EventManager.onProceedEvent.Invoke();
             HideBuildingScreen();
+            EventManager.onProceedEvent.Invoke();
         }
     }
 

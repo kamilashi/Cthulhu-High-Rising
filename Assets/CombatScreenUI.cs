@@ -2,43 +2,51 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatScreenUI : MonoBehaviour
 {
     [Header("Setup")]
-    public GameManager GameManager;
+    public GameManager gameManager;
 
     [Header("Setup in Prefab")]
-    public GameObject VictoryScreen;
-    public GameObject DefeatScreen;
+    public GameObject victoryScreen;
+    public GameObject defeatScreen;
 
-    public Canvas CombatEndCanvas;
-    public TextMeshProUGUI DefeatWaveText;
-    public TextMeshProUGUI HeightReachedText;
+    public Button restartButton;
+    public Button continueButton;
+
+    public Canvas combatScreenCanvas;
+    public TextMeshProUGUI defeatWaveText;
+    public TextMeshProUGUI heightReachedText;
 
     private void Awake()
     {
         HideCombatEndScreen();
         ResetScreens();
-        EventManager.onGamePhaseChangedEvent.AddListener(OnGamePhaseChanged);
+        //EventManager.onGamePhaseChangedEvent.AddListener(OnGamePhaseChanged);
         EventManager.onEnemiesReachedTopEvent.AddListener(ShowDefeatScreen);
         EventManager.onAllEnemiesDefeatedEvent.AddListener(ShowVictoryScreen);
+
+        restartButton.onClick.AddListener(OnRestartGamePressed);
+        continueButton.onClick.AddListener(OnContinueGamePressed);
     }
 
     void ShowVictoryScreen()
     {
-        VictoryScreen.SetActive(true);
+        victoryScreen.SetActive(true);
         ShowCombatEndScreen();
     }
 
     void ShowDefeatScreen()
     {
-        DefeatWaveText.SetText("Waves Cleared: " + (GameManager.getCurrentWave() - 1));
-        HeightReachedText.SetText("Blocks placed: " + (GameManager.getBlocksCount()));
-        DefeatScreen.SetActive(true);
+        defeatWaveText.SetText("Waves Cleared: " + (gameManager.getCurrentWave() - 1));
+        heightReachedText.SetText("Blocks placed: " + (gameManager.getBlocksCount()));
+        defeatScreen.SetActive(true);
         ShowCombatEndScreen();
     }
 
+/*
     void OnGamePhaseChanged(GamePhase gamePhase)
     {
         if(gamePhase == GamePhase.Draw)
@@ -46,19 +54,32 @@ public class CombatScreenUI : MonoBehaviour
             HideCombatEndScreen();
             ResetScreens();
         }
-    }
+    }*/
 
     void ResetScreens()
     {
-        VictoryScreen.SetActive(false);
-        DefeatScreen.SetActive(false);
+        victoryScreen.SetActive(false);
+        defeatScreen.SetActive(false);
     }
     void HideCombatEndScreen()
     {
-        CombatEndCanvas.enabled = false;
+        combatScreenCanvas.enabled = false;
     }
     void ShowCombatEndScreen()
     {
-        CombatEndCanvas.enabled = true;
+        combatScreenCanvas.enabled = true;
+    }
+
+    void OnContinueGamePressed()
+    {
+        HideCombatEndScreen();
+        ResetScreens();
+        EventManager.onProceedEvent?.Invoke();
+    }
+    void OnRestartGamePressed()
+    {
+        HideCombatEndScreen();
+        ResetScreens();
+        EventManager.onRestartEvent?.Invoke();
     }
 }

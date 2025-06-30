@@ -62,10 +62,12 @@ public class BlockTower : MonoBehaviour
     }
 
     [ContextMenu("ClearBlocks")]
-    void ClearBlocks()
+    public void ClearBlocks()
     {
         foreach (Block block in blocks)
         {
+            block.ClearEquipment();
+
 #if UNITY_EDITOR
             DestroyImmediate(block.gameObject);
 #else
