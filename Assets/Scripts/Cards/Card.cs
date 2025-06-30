@@ -156,6 +156,7 @@ public class EquipmentCard : Card
 
         EventManager.onCardSelectedEvent.AddListener(OnOtherObjectSelected);
         EventManager.onEquipmentSelectedEvent.AddListener(OnOtherObjectSelected);
+        EventManager.onBlockSelectedEvent.AddListener(OnOtherObjectSelected);
 
 
         SetWasSelected(true);
@@ -163,7 +164,12 @@ public class EquipmentCard : Card
     public override void OnDeselected()
     {
         EventManager.onBlockSelectedEvent.RemoveListener(OnBlockTargetSelected);
-        Debug.Log("Removed Equipment Card Listener");
+
+        EventManager.onCardSelectedEvent.RemoveListener(OnOtherObjectSelected);
+        EventManager.onEquipmentSelectedEvent.RemoveListener(OnOtherObjectSelected);
+        EventManager.onBlockSelectedEvent.RemoveListener(OnOtherObjectSelected);
+
+        Debug.Log("Deselected Equipment Card: Removed All Listeners");
     }
 
     public void OnBlockTargetSelected(Block block)
@@ -223,6 +229,8 @@ public class ModifierCard : Card
 
             EventManager.onCardSelectedEvent.AddListener(OnOtherObjectSelected);
             EventManager.onEquipmentSelectedEvent.AddListener(OnOtherObjectSelected);
+
+            //EventManager.onBlockSelectedEvent.AddListener(OnOtherObjectSelected);
         }
         else
         {
@@ -233,6 +241,8 @@ public class ModifierCard : Card
 
             EventManager.onCardSelectedEvent.AddListener(OnOtherObjectSelected);
             EventManager.onBlockSelectedEvent.AddListener(OnOtherObjectSelected);
+
+            //EventManager.onEquipmentSelectedEvent.AddListener(OnOtherObjectSelected);
         }
 
         SetWasSelected(true);
@@ -242,13 +252,19 @@ public class ModifierCard : Card
         if(modifierData.target == ModifierTarget.Block)
         {
             EventManager.onBlockSelectedEvent.RemoveListener(OnBlockTargetSelected);
+
+            EventManager.onEquipmentSelectedEvent.RemoveListener(OnOtherObjectSelected);
             Debug.Log("Removed Block Modifier Listener");
         }
         else if(modifierData.target == ModifierTarget.Equipment)
         {
             EventManager.onEquipmentSelectedEvent.RemoveListener(OnEquipmentTargetSelected);
+
+            EventManager.onBlockSelectedEvent.RemoveListener(OnOtherObjectSelected);
             Debug.Log("Removed Equipment Modifier Listener");
         }
+
+        EventManager.onCardSelectedEvent.RemoveListener(OnOtherObjectSelected);
     }
 
     public override void CleanUpListeners()
