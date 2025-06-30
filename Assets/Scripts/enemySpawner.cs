@@ -89,7 +89,8 @@ public class EnemySpawner : MonoBehaviour
 
         if (isActive)
         {
-            spawnRoutine = StartCoroutine(SpawnEnemies());
+            SpawnAllEnemies();
+            //spawnRoutine = StartCoroutine(SpawnEnemiesCoroutine());
         }
         else if (spawnRoutine != null)
         {
@@ -97,7 +98,7 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    IEnumerator SpawnEnemies()
+    IEnumerator SpawnEnemiesCoroutine()
     {
         foreach (var enemyData in enemyTypes)
         {
@@ -110,6 +111,21 @@ public class EnemySpawner : MonoBehaviour
                 var enemy = enemyData.pool.Get();
                 SpawnEnemy(enemy, enemyData.spawnLocation.position);
                 Debug.Log($"Spawned {enemyData.enemyPrefab.name}");
+            }
+        }
+    }
+
+    void SpawnAllEnemies()
+    {
+        foreach (var enemyData in enemyTypes)
+        {
+            int numberOfEnemiesToSpawn = (int) (spawnMultiplier * enemyData.spawnCount);
+
+            for (int i = 0; i < numberOfEnemiesToSpawn; i++)
+            {
+                var enemy = enemyData.pool.Get();
+                SpawnEnemy(enemy, enemyData.spawnLocation.position);
+                //Debug.Log($"Spawned {enemyData.enemyPrefab.name}");
             }
         }
     }
