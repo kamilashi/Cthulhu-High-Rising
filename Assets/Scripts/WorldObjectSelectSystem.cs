@@ -102,7 +102,9 @@ public class WorldObjectSelectSystem : MonoBehaviour
 
     private void OnEquipmentBlockHover(GameObject hovered)
     {
-        Block ownerBlockObject = hovered.GetComponent<Equipment>().blockOwner;
+        Equipment equipmentObject = hovered.GetComponent<Equipment>();
+        Block ownerBlockObject = equipmentObject.blockOwner;
+
         for (int i = 0; i < ownerBlockObject.equipmentList.Count; i++) 
         {
             ownerBlockObject.equipmentList[i].OnStartHover();
@@ -110,7 +112,9 @@ public class WorldObjectSelectSystem : MonoBehaviour
     }
     private void OnEquipmentBlockStopHover(GameObject hovered)
     {
-        Block ownerBlockObject = hovered.GetComponent<Equipment>().blockOwner;
+        Equipment equipmentObject = hovered.GetComponent<Equipment>();
+        Block ownerBlockObject = equipmentObject.blockOwner;
+
         for (int i = 0; i < ownerBlockObject.equipmentList.Count; i++)
         {
             ownerBlockObject.equipmentList[i].OnStopHover();

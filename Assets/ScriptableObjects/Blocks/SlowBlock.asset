@@ -15,7 +15,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 3044288905065478323, guid: b2f20126be0e8a74da4952e7d6d084b4,
     type: 3}
   blockData:
-    blockType: 0
     height: 2
-    givenName: 
+    givenName: Slow Down Block
+    description: Block that applies a slow-down effect
   startSlotCount: 3

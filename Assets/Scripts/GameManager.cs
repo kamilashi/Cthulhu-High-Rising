@@ -26,13 +26,22 @@ public static class EventManager
 
     public static UnityEvent<Selectables, GameObject> onObjectSelectedEvent = new UnityEvent<Selectables, GameObject>(); // not used really
 
+    public static UnityEvent<Block> onBlockHoverStartEvent = new UnityEvent<Block>();
+    public static UnityEvent<Equipment> onEquipmentHoverStartEvent = new UnityEvent<Equipment>();
+
+    public static UnityEvent<Block> onBlockModifiedEvent = new UnityEvent<Block>();
+    public static UnityEvent<Equipment> onEquipmentModifiedEvent = new UnityEvent<Equipment>();
+
+    public static UnityEvent<Block> onBlockHoverEndEvent = new UnityEvent<Block>();
+    public static UnityEvent<Equipment> onEquipmentHoverEndEvent = new UnityEvent<Equipment>();
+
     public static UnityEvent<GamePhase> onGamePhaseChangedEvent = new UnityEvent<GamePhase>();
 
-    public static UnityEvent onAllEnemiesDefeatedEvent = new();
-    public static UnityEvent onEnemiesReachedTopEvent = new();
+    public static UnityEvent onAllEnemiesDefeatedEvent = new UnityEvent();
+    public static UnityEvent onEnemiesReachedTopEvent = new UnityEvent();
 
-    public static UnityEvent onProceedEvent = new();
-    public static UnityEvent onRestartEvent = new();
+    public static UnityEvent onProceedEvent = new UnityEvent();
+    public static UnityEvent onRestartEvent = new UnityEvent();
 }
     
 public class GameManager : MonoBehaviour

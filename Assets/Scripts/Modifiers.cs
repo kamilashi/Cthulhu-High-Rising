@@ -202,6 +202,8 @@ public class Modifiers
     public static void ModifyTarget(Block target, ModifierData modifierData, object operand)
     {
         Debug.Assert(modifierData.modifiablePropertyType < ModifiablePropertyType.NONE_EquipmentModCount, "Unsupported modifiable property for " + target.GetType().Name + "!");
+
+        EventManager.onBlockModifiedEvent.Invoke(target);
     }
     public static void ModifyTarget(Equipment target, ModifierData modifierData, object operand)
     {
@@ -234,5 +236,7 @@ public class Modifiers
                     break;
                 }
         }
+
+        EventManager.onEquipmentModifiedEvent.Invoke(target);
     }
 }

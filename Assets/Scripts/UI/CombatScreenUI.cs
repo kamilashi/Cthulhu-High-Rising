@@ -24,7 +24,7 @@ public class CombatScreenUI : MonoBehaviour
     {
         HideCombatEndScreen();
         ResetScreens();
-        //EventManager.onGamePhaseChangedEvent.AddListener(OnGamePhaseChanged);
+
         EventManager.onEnemiesReachedTopEvent.AddListener(ShowDefeatScreen);
         EventManager.onAllEnemiesDefeatedEvent.AddListener(ShowVictoryScreen);
 
@@ -45,16 +45,6 @@ public class CombatScreenUI : MonoBehaviour
         defeatScreen.SetActive(true);
         ShowCombatEndScreen();
     }
-
-/*
-    void OnGamePhaseChanged(GamePhase gamePhase)
-    {
-        if(gamePhase == GamePhase.Draw)
-        {
-            HideCombatEndScreen();
-            ResetScreens();
-        }
-    }*/
 
     void ResetScreens()
     {

@@ -15,6 +15,7 @@ MonoBehaviour:
   blockPrefab: {fileID: 487508764585959569, guid: 355749099d9b93b41a78f2149aa3ec16,
     type: 3}
   blockData:
-    blockType: 1
     height: 2
-    givenName: 
+    givenName: Damage Over Time Block
+    description: Block that applies damage every second
+  startSlotCount: 0

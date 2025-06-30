@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 /*
 public enum BlockType
@@ -18,7 +19,7 @@ public struct BlockData
 
     public float height;
 
-    public string name;
+    public string givenName;
 
     public string description;
 }
@@ -86,6 +87,9 @@ public class Block : MonoBehaviour, IHoverable
         }
 
         availableSlotCount -= filledSlots;
+
+
+        EventManager.onBlockModifiedEvent.Invoke(this);
     }
 
     public bool HasFreeEquipmentSlots()
@@ -95,7 +99,7 @@ public class Block : MonoBehaviour, IHoverable
 
     public string GetName()
     {
-        return data.name;
+        return data.givenName;
     }
     public string GetDescription()
     {
@@ -108,6 +112,8 @@ public class Block : MonoBehaviour, IHoverable
 
         material.SetColor(hoveredColor);
         isHovered = true;
+
+        EventManager.onBlockHoverStartEvent.Invoke(this);
     }
 
     public void OnStopHover()
@@ -116,6 +122,8 @@ public class Block : MonoBehaviour, IHoverable
 
         material.SetColor(Color.black);
         isHovered = false;
+
+        EventManager.onBlockHoverEndEvent.Invoke(this);
     }
 
     public void ClearEquipment()

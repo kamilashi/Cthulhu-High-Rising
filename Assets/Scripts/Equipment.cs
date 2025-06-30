@@ -64,6 +64,8 @@ public class Equipment : MonoBehaviour, IHoverable
 
         material.SetColor(hoveredColor);
 
+        EventManager.onEquipmentHoverStartEvent.Invoke(this);
+
         isHovered = true;
     }
 
@@ -72,6 +74,8 @@ public class Equipment : MonoBehaviour, IHoverable
         if (!isHovered) { return; }
 
         material.SetColor(Color.black);
+
+        EventManager.onEquipmentHoverEndEvent.Invoke(this);
 
         isHovered = false;
     }
