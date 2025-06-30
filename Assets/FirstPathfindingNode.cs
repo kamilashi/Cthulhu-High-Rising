@@ -17,7 +17,7 @@ public class FirstPathfindingNode : MonoBehaviour
         EnemyController enemy = other.GetComponent<EnemyController>();
         if (enemy != null)
         {
-            Debug.Log("enemy near node");
+            //Debug.Log("enemy near node");
             enemy.FindFirstPoint(this.transform);
         }
 
